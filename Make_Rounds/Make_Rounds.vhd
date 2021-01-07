@@ -28,9 +28,8 @@ architecture Main of Make_Rounds is
     end component;
     signal    x0: std_logic_vector (15 downto 0);
     signal    x1: std_logic_vector (15 downto 0);
-    signal    n : STD_LOGIC_VECTOR (0 to 3);
-    signal    i : STD_LOGIC_VECTOR (7 DOWNTO 0);
-    signal    Ld,Rst : std_logic;
+    signal    n_0,n_1 : STD_LOGIC_VECTOR (0 to 3) :="0000";
+    signal    Ld_0,Ld_1,Rst : std_logic;
     type estado is (s0, s1,s2,s3);
     signal presenteX0:estado:=s0;
     signal presenteX1:estado:=s0;
@@ -38,60 +37,74 @@ architecture Main of Make_Rounds is
 
 u_X0: MemBnk PORT MAP (RCin     => x0,
                         RCout   => RC0,
-                        Address => n,
+                        Address => n_0,
                         Rst     => Rst,
                         Clk     => CLK, 
-                        Load    => Ld    
+                        Load    => Ld_0 
 );
 u_X1: MemBnk PORT MAP (RCin     => x1,
                         RCout   => RC1,
-                        Address => n,
+                        Address => n_1,
                         Rst     => Rst,
                         Clk     => CLK, 
-                        Load    => Ld    
+                        Load    => Ld_1    
 );
     process (x0,x1, CLK,presenteX0, presenteX1)
+        variable  i_0, i_1 : natural range 0 to 16 := 0;
         begin
         if (CLK'event AND CLK = '1') then    
             if load = '1'then --El valor de Load se remplaza por el de n
                 x0 <= "11111110"& R(3 downto 0) & D(3 downto 0);
                 x1 <= "11111110"& R(3 downto 0) & D(3 downto 0);
-            elsif i< 16 then
-                case presenteX0 is
-                    when s0 =>
-                        i <= i + 1;
-                        Ld <= '0';
-                        if x0(15)='1'  then    
-                            presenteX0 <= s1;
-                            x0 <= x0(x0'LENGTH-2 downto 0) & '0';    
-                        else
+            else
+                if n_0 < R then 
+                    if i_0< 16 then
+                    case presenteX0 is
+                        when s0 =>
+                            i_0 := i_0 + 1;
+                            Ld_0 <= '0';
+                            if x0(15)='1'  then    
+                                presenteX0 <= s1;
+                                x0 <= x0(x0'LENGTH-2 downto 0) & '0';    
+                            else
+                                presenteX0 <= s0;
+                                x0 <= x0(x0'LENGTH-2 downto 0) & '0';
+                            end if;
+                        when s1 =>
                             presenteX0 <= s0;
-                            x0 <= x0(x0'LENGTH-2 downto 0) & '0';
-                        end if;
-                    when s1 =>
-                        presenteX0 <= s0;
-                        x0 <= x0(x0'LENGTH -1 downto 8) & (x0(7 downto 0)xor X"2D");
-                    when others => null;
-                end case;    
-                case presenteX1 is
-                    when s0 =>
-                        if x1(15)='1' then
-                            presenteX1 <= s1;
-                            x1 <= x1(x1'LENGTH-2 downto 0) & '0';
-                        else 
-                            presenteX1 <= s0;
-                            x1 <= x1(x1'LENGTH-2 downto 0) & '0';     
-                        end if;
-                    when s1 =>
-                        presenteX1 <= s0;
-                        x1 <= x1(x1'LENGTH -1 downto 8) & (x1(7 downto 0) xor X"53");
-                    when others => null;
+                            x0 <= x0(x0'LENGTH -1 downto 8) & (x0(7 downto 0)xor X"2D");
+                        when others => null;
                     end case;
-            else 
-                    i<=(OTHERS => '0');
-                    n <= n+1;
-                    Ld <= '1';
-
+                    else 
+                        i_0  :=0;
+                        n_0  <= n_0+1;
+                        Ld_0 <= '1';
+                    end if;
+                end if;
+                if n_1< R then
+                    if i_1 < 16 then   
+                    case presenteX1 is
+                        when s0 =>
+                            i_1 := i_1 + 1;
+                            Ld_1 <= '0';
+                            if x1(15)='1' then
+                                presenteX1 <= s1;
+                                x1 <= x1(x1'LENGTH-2 downto 0) & '0';
+                            else 
+                                presenteX1 <= s0;
+                                x1 <= x1(x1'LENGTH-2 downto 0) & '0';     
+                            end if;
+                        when s1 =>
+                            presenteX1 <= s0;
+                            x1 <= x1(x1'LENGTH -1 downto 8) & (x1(7 downto 0) xor X"53");
+                        when others => null;
+                    end case;
+                    else 
+                        i_1  :=0;
+                        n_1  <= n_1+1;
+                        Ld_1 <= '1';
+                    end if;
+                end if;
             end if;
         end if;
     end process;
