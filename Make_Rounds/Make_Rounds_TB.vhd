@@ -6,24 +6,26 @@ ENTITY Make_Rounds_TB IS
 END Make_Rounds_TB;
 
 ARCHITECTURE testbench OF Make_Rounds_TB IS
-
+--Declarate Components 
 COMPONENT Make_Rounds 
 PORT (
     RC0 : inout std_logic_vector(0 to 15);
     RC1 : inout std_logic_vector(0 to 15);
-    R   : in std_logic_vector (3 downto 0);
-    D   : in std_logic_vector (3 downto 0);
+    R   : in std_logic_vector (3  downto 0);
+    D   : in std_logic_vector (3  downto 0);
     clk : in std_logic;
     Load: in std_logic
-);
+    );
 END COMPONENT;
 
 TYPE estado is (s0, s1,s2,s3);
 SIGNAL presente:estado:=s0;
-
+--Signals Make Rounds 
 SIGNAL RC0,RC1  :STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL R,D      :STD_LOGIC_VECTOR(3 DOWNTO 0);
 SIGNAL clk,Load :STD_LOGIC := '0';
+--Signals "in" for MemBank_32 "xk, xb"
+--signal buf_key      :STD_LOGIC_VECTOR(15 DOWNTO 0);
 
 BEGIN
 -- Free running test clock
@@ -33,7 +35,7 @@ reloj:process
     wait for 12.5 ns;
     clk <= '1';
     wait for 12.5 ns;
-    end process reloj;
+end process reloj;
     
 -- Instance of design being tested
 u1: Make_Rounds PORT MAP (RC0 => RC0,
@@ -43,19 +45,20 @@ u1: Make_Rounds PORT MAP (RC0 => RC0,
                         clk  => clk, 
                         Load => Load    
                         );
+
 STAt: PROCESS (clk,presente) -- Defino los estados 
 
 BEGIN 
     
     if clk'event and clk='1' then  
         case presente is
-            when s0=>
-                presente<=S1; 
-                R    <= x"A";
-                D    <= x"6";
-                Load <= '1'; 
-            when s1=>
-                presente<=S1;  
+            when s0 =>
+                presente<=S1;
+                R       <= x"A";
+                D       <= x"6";
+                Load    <= '1'; 
+            when s1 =>
+                presente<=S0;  
                 R  <= x"A";
                 D  <= x"6";
                 Load<= '0';
