@@ -4,7 +4,7 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 entity Data_Generate is
     port (
-        Clk           :in  std_logic;
+        --Clk           :in  std_logic;
         Rd_En_K       :in  std_logic;
         Rd_En_B       :in  std_logic;
         Ena_Out       :out std_logic;
@@ -38,21 +38,21 @@ SIGNAL presente:estado:=s0;
 Signal Data_In            : STD_LOGIC_VECTOR(7 DOWNTO 0):=x"00";
 Signal Data_In_B            : STD_LOGIC_VECTOR(7 DOWNTO 0):=x"00";
 Signal Addr_In            : std_logic_vector (4 downto 0):="00000";
-Signal Addr_In_B            : std_logic_vector (4 downto 0):="00000";
+Signal Addr_In_B            : std_logic_vector (5 downto 0):="00000";
 signal Load,RSt           : std_logic;
 signal Wr_en_K            : std_logic;
 Signal Wr_en_B            : std_logic;
---signal clk                : std_logic;
+signal clk                : std_logic;
 
 begin
 
---reloj:process
---begin
---    clk <= '0';
---    wait for 12.5 ns;
---    clk <= '1';
-  --  wait for 12.5 ns;
---end process reloj;
+reloj:process
+begin
+    clk <= '0';
+    wait for 12.5 ns;
+    clk <= '1';
+    wait for 12.5 ns;
+end process reloj;
 
 uKey: MemBnk 
     generic map(w => 8,
@@ -96,22 +96,23 @@ begin
                         Wr_En_B  <= '0';
                         Rst      <= '1';
                         Addr_Aux := Addr_Aux + 1;
-                        if Addr_Aux= "100000" then
-                            Data_In_B<= x"80";
-                        else
-                            Data_In_B <= '0' & Data_In_B(Data_In'LENGTH-2 downto 5) & '0' & Addr_In(Addr_In'LENGTH-2 DOWNTO 0);
-                        end if;
                         Data_In  <= Data_In(Data_In'LENGTH-1 downto 5) & Addr_In(Addr_In'LENGTH-1 DOWNTO 0);
+                        Data_In_B <= '0' & Data_In_B(Data_In'LENGTH-2 downto 5) & '0' & Addr_In(Addr_In'LENGTH-2 DOWNTO 0);
+                        if Addr_Aux <= "10000" then 
+                            Finish_No := '1';
+                        else 
+                            Finish_No := '0';
+                        end if ;
+
                     when s1 =>
                         presente <= s0;
-                        Data_In_B<= '0' & Data_In(Data_In'LENGTH-2 downto 5) & '0'& Addr_In(Addr_In'LENGTH-2 DOWNTO 0);
                         Addr_In  <= Addr_Aux (Addr_Aux'LENGTH-2 downto 0);
                         Addr_In_B  <= Addr_Aux (Addr_Aux'LENGTH-2 downto 0);
                         Wr_En_K  <= '1';
                         Wr_En_B  <= '1';
                         Rst      <= '1';
                         Data_In  <= Data_In(Data_In'LENGTH-1 downto 5) & Addr_In(Addr_In'LENGTH-1 DOWNTO 0);
-                        
+                        Data_In_B<= '0' & Data_In(Data_In'LENGTH-2 downto 5) & '0'& Addr_In(Addr_In'LENGTH-2 DOWNTO 0);
                 end case;
             else 
                 Ena_Out  <='1';
