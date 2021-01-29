@@ -78,7 +78,7 @@ u_X1: MemBnk
                 Data_in  =>x1,
                 Data_Out =>RC1
     );
-    process (x0,x1, clk,presenteX0, presenteX1)
+process (x0,x1, clk,presenteX0, presenteX1)
         variable i_0, i_1 : natural range 0 to 16 := 0;
         variable nAux_0, nAux_1 : natural range 0 to 31 := 0;
         begin

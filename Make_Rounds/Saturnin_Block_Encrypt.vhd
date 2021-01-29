@@ -41,9 +41,9 @@ port(
     );
 end component; 
 
-TYPE estado is (s0, s1,s2);
+TYPE estado is (s0, s1,s2,s3,s4,s5);
 SIGNAL presente:estado:=s0;
-
+signal presente_XOR :estado:=s0;
 signal clk : std_logic;
 -- Signals for Generate Data
 signal Rd_En_DGK        : std_logic:= '0';
@@ -146,21 +146,77 @@ STat: process(clk,presente)
                         Addr_Aux:=Addr_Aux+1;
                         Addr_Rd_DGK<=Addr_Aux(Addr_Aux'length -2 downto 0)&'0';
                         Addr_Rd_DGB<=Addr_Aux(Addr_Aux'length -2 downto 0)&'0';
+                    when others => null;
                 end case;
             elsif presente = s0 and Enable_generate ='1' then 
                 presente  <= s1;
                 Rd_En_DGK <= '0';
                 Rd_En_DGB <= '0';
+                --Incio XOR_Key
+                --Rd_En_B   <= '0'; -- Lectura Banco Buff
+                --Rd_En_K   <= '0'; -- Lectura Banco Key 
+                --Wr_En_B   <= '0'; -- Escritura Banco Buff
+
                 Data_In_K <= Data_In_DGK & Data_In_k(7 downto 0);
                 Data_In_B <= Data_In_DGB & Data_In_B(7 downto 0); 
-                Rd_En_B   <= '0';
-                Rd_En_K   <= '0';
-                Addr_Rd_B <= x"F";
-                Addr_Rd_k <= x"F";
                 
-            else 
-                XOR_Key(Data_Out_SB ,Data_Out_Sk, State_Out);
-
+            else   
+                if Enable_Generate = '1' then  
+                    case presente_XOR is 
+                    when s0 =>-- STAR 
+                        presente_XOR <= s1;
+                        Addr_Rd_B <= x"0";
+                        Addr_Rd_k <= x"0";
+                        Addr_Wr_B <= x"0";
+                        Addr_Wr_B <= x"0";
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '1';
+                        Wr_En_k   <= '1';
+                    when s1 =>
+                        if Addr_Rd_B<="1111" then
+                            presente_XOR <= s2;
+                            Rd_En_B   <= '0';
+                            Rd_En_K   <= '0';
+                            Wr_En_B   <= '1';
+                            Wr_En_k   <= '1';
+                        end if;
+                    when s2 =>
+                        presente_XOR <= s3;
+                        XOR_Key(Data_Out_SB,Data_Out_Sk,state_Out);                        
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '1';
+                        Wr_En_k   <= '1';
+                    when s3 =>
+                        presente_XOR <= s4;
+                        XOR_Key(Data_Out_SB,Data_Out_Sk,state_Out); 
+                        Data_In_B <=state_Out;
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '1';
+                        Wr_En_k   <= '1';
+                    when s4 =>
+                        presente_XOR <= s5;
+                        XOR_Key(Data_Out_SB,Data_Out_Sk,state_Out); 
+                        Data_In_B <=state_Out;
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '0';
+                        Wr_En_k   <= '1';
+                    when s5 =>
+                        presente_XOR <= s1;
+                        Addr_Rd_B <= Addr_Rd_B + 1;
+                        Addr_Rd_k <= Addr_Rd_k + 1;
+                        Addr_Wr_B <= Addr_Wr_B + 1;                        
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '1';
+                        Wr_En_k   <= '1';
+                    when others => null;
+                    end case;
+                end if;
+                
             end if;
         end if;
     end process STat;
