@@ -8,96 +8,105 @@ use work.all;
 entity S_Box is
     port(
         --Verificar entradas tipo arreglo 
-        state_0 : inout std_logic_vector(15 downto 0);
-        state_1 : inout std_logic_vector(15 downto 0);
-        state_2 : inout std_logic_vector(15 downto 0);
-        state_3 : inout std_logic_vector(15 downto 0);
-        state_4 : inout std_logic_vector(15 downto 0);
-        state_5 : inout std_logic_vector(15 downto 0);
-        state_6 : inout std_logic_vector(15 downto 0);
-        state_7 : inout std_logic_vector(15 downto 0);
-        state_8 : inout std_logic_vector(15 downto 0);
-        state_9 : inout std_logic_vector(15 downto 0);
-        state_10: inout std_logic_vector(15 downto 0);
-        state_11: inout std_logic_vector(15 downto 0);
-        state_12: inout std_logic_vector(15 downto 0);
-        state_13: inout std_logic_vector(15 downto 0);
-        state_14: inout std_logic_vector(15 downto 0);
-        state_15: inout std_logic_vector(15 downto 0);
-        load    : in std_logic;
-        clk     : in std_logic
+        a0_in   : in  std_logic_vector(15 downto 0);
+        a1_in   : in  std_logic_vector(15 downto 0);
+        b0_in   : in  std_logic_vector(15 downto 0);
+        b1_in   : in  std_logic_vector(15 downto 0);
+        c0_in   : in  std_logic_vector(15 downto 0);
+        c1_in   : in  std_logic_vector(15 downto 0);
+        d0_in   : in  std_logic_vector(15 downto 0);
+        d1_in   : in  std_logic_vector(15 downto 0);
+        a0_out  : out std_logic_vector(15 downto 0);
+        a1_out  : out std_logic_vector(15 downto 0);
+        b0_out  : out std_logic_vector(15 downto 0);
+        b1_out  : out std_logic_vector(15 downto 0);
+        c0_out  : out std_logic_vector(15 downto 0);
+        c1_out  : out std_logic_vector(15 downto 0);
+        d0_out  : out std_logic_vector(15 downto 0);
+        d1_out  : out std_logic_vector(15 downto 0);
+        En_SBox_in : in  std_logic;
+        En_SBox_out : out  std_logic:= '1';
+        clk     : in  std_logic
     );
 end S_Box;
 architecture Main of S_Box is 
-    signal a0   : std_logic_vector(15 downto 0);
-    signal a1   : std_logic_vector(15 downto 0);
-    signal b0   : std_logic_vector(15 downto 0);
-    signal b1   : std_logic_vector(15 downto 0);
-    signal c0   : std_logic_vector(15 downto 0);
-    signal c1   : std_logic_vector(15 downto 0);
-    signal d0   : std_logic_vector(15 downto 0);
-    signal d1   : std_logic_vector(15 downto 0);
+    
     type estado is (s0,s1,s2,s3,s4,s5,s6,s7,s8);
     signal presente:estado:=s0;
     
     begin
-    ASM: process (a0,b0,c0,d0,
-            a1,b1,c1,d1,
+    ASM: process (a0_in,b0_in,c0_in,d0_in,
+            a1_in,b1_in,c1_in,d1_in,
             clk,presente)
+    variable a0_in_aux,b0_in_aux,c0_in_aux,d0_in_aux,
+            a1_in_aux,b1_in_aux,c1_in_aux,d1_in_aux : std_logic_vector(15 downto 0);
     begin
         if (CLK'event AND CLK = '1') then
-            case presente is 
-                when s0=>
-                    presente <= s1;
-                    if load = '1' then-------n=--0--8
-                        a0 <= state_0;-- [n] n+0=0--8 
-                        b0 <= state_1;-- [n] n+1=1--9
-                        c0 <= state_2;-- [n] n+2=2--10
-                        d0 <= state_3;-- [n] n+3=3--11
-                        a1 <= state_4;-- [n] n+4=4--12
-                        b1 <= state_5;-- [n] n+5=5--13
-                        c1 <= state_6;-- [n] n+6=6--14
-                        d1 <= state_7;-- [n] n+7=7--15
-                    else 
-                        presente <= s8;
-                    end if;
-                when s1=>
-                    presente <= s2;
-                    a0 <= a0 xor (b0 AND c0);
-                    a1 <= a1 xor (b1 AND c1);
-                when s2=>
-                    presente <= s3;
-                    b0 <= b0 xor (a0 or d0);
-                    b1 <= b1 xor (a1 or d1);
-                when s3=>
-                    presente <= s4;
-                    d0 <= d0 xor (b0 or c0);
-                    d1 <= d1 xor (b1 or c1);
-                when s4=>
-                    presente <= s5;
-                    c0 <= c0 xor (b0 and d0);
-                    c1 <= c1 xor (b1 and d1);
-                when s5=>
-                    presente <= s6;
-                    b0 <= b0 xor (a0 or c0);
-                    b1 <= b1 xor (a1 or c1);
-                when s6=>
-                    presente <= s7;
-                    a0 <= a0 xor (b0 or d0);
-                    a1 <= a1 xor (b1 or d1);
-                when s7=>
-                    presente <=s0;
-                    state_0  <=b0;
-                    state_1  <=c0;
-                    state_2  <=d0;
-                    state_3  <=a0;                    
-                    state_4  <=d1;
-                    state_5  <=b1;
-                    state_6  <=a1;
-                    state_7  <=c1;
-                    
-                when others => null;
-            end case;
+        if En_SBox_in='0' then 
+                case presente is 
+                    when s0=>
+                        presente <= s1;
+                        En_SBox_out <= '1';
+                        a0_in_aux   :=a0_in;
+                        a1_in_aux   :=a1_in;
+                        b0_in_aux   :=b0_in;
+                        b1_in_aux   :=b1_in;
+                        c0_in_aux   :=c0_in;
+                        c1_in_aux   :=c1_in;
+                        d0_in_aux   :=d0_in;
+                        d1_in_aux   :=d1_in;
+                    when s1=>
+                        presente <= s2;
+                        En_SBox_out <= '1';
+                        a0_in_aux := a0_in_aux xor (b0_in_aux AND c0_in_aux);
+                        a1_in_aux := a1_in_aux xor (b1_in_aux AND c1_in_aux);
+                    when s2=>
+                        presente <= s3;
+                        En_SBox_out <= '1';
+                        a0_out   <=a0_in_aux;
+                        a1_out   <=a1_in_aux;
+                        b0_in_aux := b0_in_aux xor (a0_in_aux or d0_in_aux);
+                        b1_in_aux := b1_in_aux xor (a1_in_aux or d1_in_aux);
+                    when s3=>
+                        presente <= s4;
+                        En_SBox_out <= '1';
+                        b0_out  <=b0_in_aux;
+                        b1_out  <=b1_in_aux;
+                        d0_in_aux := d0_in_aux xor (b0_in_aux or c0_in_aux);
+                        d1_in_aux := d1_in_aux xor (b1_in_aux or c1_in_aux);
+                    when s4=>
+                        presente <= s5;
+                        En_SBox_out <= '1';
+                        d0_out   <=d0_in_aux;
+                        d1_out   <=d1_in_aux;
+                        c0_in_aux := c0_in_aux xor (b0_in_aux and d0_in_aux);
+                        c1_in_aux := c1_in_aux xor (b1_in_aux and d1_in_aux);
+                    when s5=>
+                        presente <= s6;
+                        En_SBox_out <= '1';
+                        c0_out <=c0_in_aux;
+                        c1_out <=c1_in_aux;
+                        b0_in_aux := b0_in_aux xor (a0_in_aux or c0_in_aux);
+                        b1_in_aux := b1_in_aux xor (a1_in_aux or c1_in_aux);
+                    when s6=>
+                        presente <= s7;
+                        En_SBox_out <= '1';
+                        a0_in_aux := a0_in_aux xor (b0_in_aux or d0_in_aux);
+                        a1_in_aux := a1_in_aux xor (b1_in_aux or d1_in_aux);
+                    when s7=>
+                        presente <=s0;
+                        a0_out <= a0_in_aux;
+                        a1_out <= a1_in_aux;
+                        b0_out <= b0_in_aux;
+                        b1_out <= b1_in_aux;
+                        c0_out <= c0_in_aux;
+                        c1_out <= c1_in_aux;
+                        d0_out <= d0_in_aux;
+                        d1_out <= d1_in_aux;
+                        En_SBox_out <= '0';
+                    when others => null;
+                end case;
+            end if;
         end if;
     end process ASM;
 end Main;
