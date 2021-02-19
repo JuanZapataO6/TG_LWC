@@ -81,7 +81,7 @@ component S_Box
         clk     : in     std_logic
     );
 end component S_Box;
-TYPE estado is (s0, s1,s2,s3,s4,s5,s6);
+TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal presente_XOR :estado:=s0;
 signal presente_SBOX :estado:=s0;
@@ -240,7 +240,7 @@ STat: process(clk,presente)
     variable Addr_Aux :std_logic_vector (4 DOWNTO 0):="00000";
     variable Establish:std_logic_vector (4 DOWNTO 0):="00000";
     variable En_SBox :std_logic;
-    variable SBox_Addr :std_logic;
+    variable En_SBox_In_Aux :std_logic;
     begin
         if clk 'event and clk = '1' then 
             if Enable_generate ='1' and Addr_Aux <= "1111" then
@@ -362,21 +362,21 @@ STat: process(clk,presente)
                 if Enable_Generate = '1' then  
                     case presente_SBOX is 
                     when s0 =>-- STAR 
-                   -- if Establish < "00001" then 
-                     --   presente_SBOX <= s0;
+                    if Establish < "00001" then 
+                        presente_SBOX <= s0;
                         Rd_En_B   <= '0';
                         Rd_En_K   <= '1';
                         Wr_En_B   <= '1';
                         Wr_En_k   <= '1';
                         Establish := Establish+1;
-                    --else 
+                    else 
                         presente_SBOX <= s1;
-                    --    Rd_En_B   <= '1';
-                    --    Rd_En_K   <= '1';
-                    --    Wr_En_B   <= '1';
-                    --    Wr_En_k   <= '1';
+                        Rd_En_B   <= '1';
+                        Rd_En_K   <= '1';
+                        Wr_En_B   <= '1';
+                        Wr_En_k   <= '1';
                         Establish := "00000";
-                    --end if;
+                    end if;
                     when s1 =>                        
                         presente_SBOX <= s1;
                         case Addr_Rd_B(Addr_Rd_B'length-2 downto 0) is
@@ -494,7 +494,7 @@ STat: process(clk,presente)
                                     c1_in <= state_Out_B;
                                     Addr_Rd_B <= Addr_Rd_B + 1;
                                     presente_SBOX <= s1;
-                                    Rd_En_B   <= '1';
+                                    Rd_En_B   <= '0';
                                     Rd_En_K   <= '1';
                                     Wr_En_B   <= '1';
                                     Wr_En_k   <= '1';
@@ -510,8 +510,15 @@ STat: process(clk,presente)
                                 else
                                     d1_in <= state_Out_B;
                                     Addr_Rd_B <= Addr_Rd_B + 1;
+                                    if Addr_Rd_B(3) = '0' then                                     
+                                        Addr_Wr_B <=x"0" ;
+                                    else 
+                                        Addr_Wr_B <=x"8" ;
+                                    end if;                                        --Addr_Rd_B <=x"0";
                                     En_SBox_in <= '0';
                                     presente_SBOX <= s2;
+                                    --En_SBox_in <= '1';
+                                    --En_SBox_In_Aux <= '1';
                                     Rd_En_B   <= '1';
                                     Rd_En_K   <= '1';
                                     Wr_En_B   <= '1';
@@ -520,51 +527,134 @@ STat: process(clk,presente)
                                 end if;
                             when others => null;
                         end case;
-                        --Rd_En_B   <= '0';
-                        --Rd_En_K   <= '0';
-                        --Wr_En_B   <= '1';
-                        --Wr_En_k   <= '1';                        
                     when s2 =>
-                        if En_SBox_out ='0' then
-                            
-                            if Addr_Rd_B(3)='1' then     
-                                presente_SBOX <= s0;
-                                En_SBox_in <= '1';
-                                Addr_Rd_B <= x"8";
-                                Addr_Rd_k <= x"8";
-                                Addr_Wr_B <= x"8";
-                                Addr_Wr_B <= x"8";
-                            else 
-                                presente_SBOX <= s3;
-                                En_SBox_in <= '1';
-                                Addr_Rd_B <= x"0";
-                                Addr_Rd_k <= x"0";
-                                Addr_Wr_B <= x"0";
-                                Addr_Wr_B <= x"0";
-                            end if;
-                                
-                        else
-                            --En_SBox := '0';                 
-                            Rd_En_B   <= '1';
-                            Rd_En_K   <= '1';
-                            Wr_En_B   <= '1';
-                            Wr_En_k   <= '1';
-                        end if; 
+                    if En_SBox_out ='0' then
+                        En_SBox_in <= '1';
+                        En_SBox_In_Aux := '1';
+                        --if En_SBox_In_Aux = '1' then                         
+                        presente_SBOX <= s3; 
+                        --else
+                        --    presente_SBOX <= s2;                           
+                    end if; 
+                    --else 
+                       -- En_SBox_In_Aux := '0';
+                    --end if;
+
                     when s3 =>
-                        presente_SBOX <= s4;
+                        --if En_SBox_out ='0' then
+                          --  if En_SBox_In_Aux = '1' then 
+                                case Addr_Wr_B(Addr_Wr_B'length-2 downto 0) is
+                                    when "000" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= b0_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "001" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= c0_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "010" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= d0_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "011" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= a0_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "100" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= d1_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "101" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= b1_out;
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "110" =>
+                                        presente_SBOX <= s3;
+                                        En_SBox_in <= '1';
+                                        En_SBox_In_Aux := '1';
+                                        Data_RIn_B <= a1_out;                                        
+                                        Rd_En_B    <= '1';
+                                        Rd_En_K    <= '1';
+                                        Wr_En_B    <= '0';
+                                        Wr_En_k    <= '1';
+                                        Addr_Wr_B <= Addr_Wr_B + 1;
+                                    when "111" =>
+                                        if Addr_Rd_B(3)='1' then
+                                            presente_SBOX <= s0;                                                                                        
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';
+                                            Data_RIn_B <= c1_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Addr_Wr_B  <= Addr_Wr_B + 1;
+                                        else 
+                                            presente_SBOX <= s4;
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';
+                                            Addr_Rd_B <= x"0";
+                                            Addr_Rd_k <= x"0";
+                                            Addr_Wr_B <= x"0";
+                                            Addr_Wr_B <= x"0";
+                                        end if;
+                                    when others => null;
+                                end case; 
+                            --end if; 
+                        --else 
+                          --En_SBox_In_Aux := '1';                           
+                        --end if; 
+                    when s4 =>
+                        presente_SBOX <= s5;
                         --Data_In_B <=state_In_B;
                         Rd_En_B   <= '1';
                         Rd_En_K   <= '1';
                         Wr_En_B   <= '1';
                         Wr_En_k   <= '1';
-                    when s4 =>
-                        presente_SBOX <= s5;                        
+                    when s5 =>
+                        presente_SBOX <= s6;                        
                         Rd_En_B   <= '1';
                         Rd_En_K   <= '1';
                         Wr_En_B   <= '1';
                         Wr_En_k   <= '1';
-                    when s5 =>
-                        presente_SBOX <= s6;
+                    when s6 =>
+                        presente_SBOX <= s7;
                         --Data_In_B <=state_In_B;
                         --Addr_Rd_B <= Addr_Rd_B + 1;
                         --Addr_Rd_k <= Addr_Rd_k + 1;
@@ -574,7 +664,7 @@ STat: process(clk,presente)
                         Wr_En_B   <= '1';
                         Wr_En_k   <= '1';
                         En_SBox := '1';
-                    when s6 =>
+                    when s7 =>
                         presente_SBOX <= s1;
                         --Data_In_B <=state_In_B;
                         Addr_Rd_B <= Addr_Rd_B + 1;
