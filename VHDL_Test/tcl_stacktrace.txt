@@ -1,0 +1,15 @@
+Wed Mar 31 9:19:41 a. m. Hora est. Pacífico, Sudamérica 2021
+Trace back: invalid command name ".main_pane.wave.saveformat.f.e"
+    while executing
+"$w insert insert $s"
+    (procedure "tk::EntryInsert" line 12)
+    invoked from within
+"tk::EntryInsert .main_pane.wave.saveformat.f.e \r"
+    invoked from within
+"if { $key ne "Tab" } {
+	     tk::CancelRepeat
+		 tk::EntryInsert .main_pane.wave.saveformat.f.e \r
+	}"
+    (command bound to event)
+  <2: ::tkerror {invalid command name ".main_pane.wave.saveformat.f.e"}
+  <1: ::bgerror {invalid command name ".main_pane.wave.saveformat.f.e"}

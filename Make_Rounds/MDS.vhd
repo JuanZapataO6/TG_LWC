@@ -6,7 +6,25 @@ use ieee.std_logic_misc.all;
 use work.all;
 entity MDS is 
     port (
-        state : inout std_logic_vector (0 to 255 
+        X0_in   : in  std_logic_vector(15 downto 0);
+        X1_in   : in  std_logic_vector(15 downto 0);
+        X2_in   : in  std_logic_vector(15 downto 0);
+        X3_in   : in  std_logic_vector(15 downto 0);
+        X4_in   : in  std_logic_vector(15 downto 0);
+        X5_in   : in  std_logic_vector(15 downto 0);
+        X6_in   : in  std_logic_vector(15 downto 0);
+        X7_in   : in  std_logic_vector(15 downto 0);        
+        X0_out  : out std_logic_vector(15 downto 0);
+        X1_out  : out std_logic_vector(15 downto 0);
+        X2_out  : out std_logic_vector(15 downto 0);
+        X3_out  : out std_logic_vector(15 downto 0);
+        X4_out  : out std_logic_vector(15 downto 0);
+        X5_out  : out std_logic_vector(15 downto 0);
+        X6_out  : out std_logic_vector(15 downto 0);
+        X7_out  : out std_logic_vector(15 downto 0);
+        En_MDS_in : in  std_logic;
+        En_MDS_out : out  std_logic:= '1';
+        clk     : in  std_logic
     );
 end MDS;
 

@@ -2,6 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
+use work.Saturnin_Functions.all;
 
 entity Saturnin_Block_Encrypt is 
 end Saturnin_Block_Encrypt;
@@ -85,6 +86,7 @@ TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal presente_XOR :estado:=s0;
 signal presente_SBOX :estado:=s0;
+signal presente_MDS :estado:=s0;
 signal clk : std_logic;
 -- Signals for Generate Data
 signal Rd_En_DGK        : std_logic:= '0';
@@ -124,6 +126,17 @@ signal a1_in,b1_in,c1_in,d1_in   : std_logic_vector (15 DOWNTO 0):=x"7777";
 signal En_SBox_in,En_SBox_out    : std_logic := '1' ;
 signal a0_out,b0_out,c0_out,d0_out   : std_logic_vector (15 DOWNTO 0):=x"7777";
 signal a1_out,b1_out,c1_out,d1_out   : std_logic_vector (15 DOWNTO 0):=x"7777";
+-- Signals for MDS
+signal X0_in,X1_in,X2_in,X3_in   : std_logic_vector (15 DOWNTO 0):=x"7777";--A
+signal X4_in,X5_in,X6_in,X7_in   : std_logic_vector (15 DOWNTO 0):=x"7777";--A
+signal X8_in,X9_in,XA_in,XB_in   : std_logic_vector (15 DOWNTO 0):=x"7777";--A
+signal XC_in,XD_in,XE_in,XF_in   : std_logic_vector (15 DOWNTO 0):=x"7777";--A
+signal a1_in,b1_in,c1_in,d1_in   : std_logic_vector (15 DOWNTO 0):=x"7777";
+
+signal En_SBox_in,En_SBox_out    : std_logic := '1' ;
+signal a0_out,b0_out,c0_out,d0_out   : std_logic_vector (15 DOWNTO 0):=x"7777";
+signal a1_out,b1_out,c1_out,d1_out   : std_logic_vector (15 DOWNTO 0):=x"7777";
+
 begin
 reloj:process
     begin
@@ -545,95 +558,167 @@ STat: process(clk,presente)
                           --  if En_SBox_In_Aux = '1' then 
                                 case Addr_Wr_B(Addr_Wr_B'length-2 downto 0) is
                                     when "000" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= b0_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "001" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= c0_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "010" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= d0_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "011" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= a0_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "100" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= d1_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "101" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= b1_out;
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "110" =>
-                                        presente_SBOX <= s3;
-                                        En_SBox_in <= '1';
-                                        En_SBox_In_Aux := '1';
-                                        Data_RIn_B <= a1_out;                                        
-                                        Rd_En_B    <= '1';
-                                        Rd_En_K    <= '1';
-                                        Wr_En_B    <= '0';
-                                        Wr_En_k    <= '1';
-                                        Addr_Wr_B <= Addr_Wr_B + 1;
-                                    when "111" =>
-                                        if Addr_Rd_B(3)='1' then
-                                            presente_SBOX <= s0;                                                                                        
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= b0_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;
                                             En_SBox_in <= '1';
-                                            En_SBox_In_Aux := '1';
-                                            Data_RIn_B <= c1_out;
+                                            En_SBox_In_Aux := '1';                                        
                                             Rd_En_B    <= '1';
                                             Rd_En_K    <= '1';
                                             Wr_En_B    <= '1';
                                             Wr_En_k    <= '1';
-                                            Addr_Wr_B  <= Addr_Wr_B + 1;
-                                        else 
-                                            presente_SBOX <= s4;
-                                            En_SBox_in <= '1';
-                                            En_SBox_In_Aux := '1';
-                                            Addr_Rd_B <= x"0";
-                                            Addr_Rd_k <= x"0";
-                                            Addr_Wr_B <= x"0";
-                                            Addr_Wr_B <= x"0";
+                                            Establish := "00000";
+                                            
                                         end if;
+                                    when "001" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= c0_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "010" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= d0_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "011" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= a0_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "100" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= d1_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "101" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= b1_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "110" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= a1_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            presente_SBOX <= s3;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                    when "111" =>
+                                        if Establish <= "00010" then 
+                                            Establish := Establish+1;
+                                            Data_RIn_B <= c1_out;
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '0';
+                                            Wr_En_k    <= '1';
+                                        else
+                                            if Addr_Rd_B(3)='1' then
+                                                presente_SBOX <= s0;
+                                            else 
+                                                presente_SBOX <= s4;
+                                                Addr_Rd_B <= x"0";
+                                                Addr_Rd_k <= x"0";
+                                                Addr_Wr_B <= x"0";
+                                                Addr_Wr_B <= x"0";
+                                            end if;
+                                            Addr_Wr_B <= Addr_Wr_B + 1;     
+                                            En_SBox_in <= '1';
+                                            En_SBox_In_Aux := '1';                                        
+                                            Rd_En_B    <= '1';
+                                            Rd_En_K    <= '1';
+                                            Wr_En_B    <= '1';
+                                            Wr_En_k    <= '1';
+                                            Establish := "00000";
+                                        end if;
+                                        
                                     when others => null;
                                 end case; 
                             --end if; 
@@ -682,6 +767,177 @@ STat: process(clk,presente)
                     end case;
                 end if;
                 
+            elsif En_MDS = '0' then 
+                if Enable_Generate = '1' then  
+                    case presente_SBOX is 
+                    when s0 =>-- STAR 
+                        if Establish < "00001" then 
+                            presente_SBOX <= s0;
+                            Rd_En_B   <= '0';
+                            Rd_En_K   <= '1';
+                            Wr_En_B   <= '1';
+                            Wr_En_k   <= '1';
+                            Establish := Establish+1;
+                        else 
+                            presente_SBOX <= s1;
+                            Rd_En_B   <= '1';
+                            Rd_En_K   <= '1';
+                            Wr_En_B   <= '1';
+                            Wr_En_k   <= '1';
+                            Establish := "00000";
+                        end if;
+                    when s1 =>                        
+                        presente_SBOX <= s1;
+                        case Addr_Rd_B(Addr_Rd_B'length-2 downto 0) is
+                            when "000" => 
+                                if Establish <= "00001" then  
+                                    a0_in <= state_Out_B;
+                                    --Addr_Rd_B <= Addr_Rd_B + 1;
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else 
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "001" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    b0_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "010" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;                                    
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    c0_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "011" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else                        
+                                    d0_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "100" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    a1_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "101" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    b1_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "110" =>
+                                if Establish <= "00001" then---Esto lo puedo convertir en una funcion 
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    c1_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    presente_SBOX <= s1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when "111" =>
+                                if Establish <= "00001" then
+                                    Establish := Establish+1;
+                                    Rd_En_B   <= '0';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                else
+                                    d1_in <= state_Out_B;
+                                    Addr_Rd_B <= Addr_Rd_B + 1;
+                                    if Addr_Rd_B(3) = '0' then                                     
+                                        Addr_Wr_B <=x"0" ;
+                                    else 
+                                        Addr_Wr_B <=x"8" ;
+                                    end if;                                        --Addr_Rd_B <=x"0";
+                                    En_SBox_in <= '0';
+                                    presente_SBOX <= s2;
+                                    --En_SBox_in <= '1';
+                                    --En_SBox_In_Aux <= '1';
+                                    Rd_En_B   <= '1';
+                                    Rd_En_K   <= '1';
+                                    Wr_En_B   <= '1';
+                                    Wr_En_k   <= '1';
+                                    Establish := "00000";
+                                end if;
+                            when others => null;
+                        end case;
+                    end case ;
+                end if;
             end if;
         end if;
     end process STat;

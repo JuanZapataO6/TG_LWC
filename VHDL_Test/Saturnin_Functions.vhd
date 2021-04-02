@@ -27,19 +27,6 @@ component MemBnk
         );
 end component MemBnk; 
 package body Saturnin_Functions is
-uBuff: MemBnk 
-    generic map(w => 16,
-                d => 16,
-                a => 4
-    )
-    Port Map (  Wr_En    => Wr_En_B,
-                Rd_En    => Rd_En_B,
-                Rst      => Rst_B,
-                Clk      => clk,
-                Addr_In  => Addr_Wr_B,
-                Addr_Out => Addr_Rd_B,
-                Data_in  => Data_In_B,
-                Data_out => Data_Out_SB
-    );
-    
+begin 
+procedure
 end Saturnin_Functions;

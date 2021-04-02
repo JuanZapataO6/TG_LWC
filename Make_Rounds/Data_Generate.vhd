@@ -36,9 +36,9 @@ TYPE estado is (s0, s1);
 SIGNAL presente:estado:=s0;
 
 Signal Data_In            : STD_LOGIC_VECTOR(7 DOWNTO 0):=x"00";
-Signal Data_In_B            : STD_LOGIC_VECTOR(7 DOWNTO 0):=x"00";
+Signal Data_In_B          : STD_LOGIC_VECTOR(7 DOWNTO 0):=x"00";
 Signal Addr_In            : std_logic_vector (4 downto 0):="00000";
-Signal Addr_In_B            : std_logic_vector (4 downto 0):="00000";
+Signal Addr_In_B          : std_logic_vector (4 downto 0):="00000";
 signal Load,RSt           : std_logic;
 signal Wr_en_K            : std_logic;
 Signal Wr_en_B            : std_logic;
