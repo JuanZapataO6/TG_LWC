@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1535409120 source:c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\genkat_aead.c
+	<stdio.h>
+	<string.h>
+	"crypto_aead.h"
+	"api.h"
+
+1535409120 c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\crypto_aead.h
+
+1555343892 c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\api.h
+
+1555343892 source:c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\aes.c
+	"saeaes.h"
+
+1555343892 c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\saeaes.h
+	"api.h"
+
+1555343892 source:c:\users\juan pablo\onedrive - correounivalle.edu.co\universidad\proyectodegrado\select_algoritms\saeaes - copia\implementations\crypto_aead\saeaes128a64t64v1\ref\encrypt.c
+	"crypto_aead.h"
+	"saeaes.h"
+

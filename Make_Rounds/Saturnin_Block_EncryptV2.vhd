@@ -112,7 +112,44 @@ component MuxLogic
         Data_Out        : out std_logic
     );
 end component MuxLogic;
-
+component DeMux
+    generic(    
+            w:integer--width of word    
+        );
+    port( 
+        Out_DataForce    : Out std_logic_vector (w-1 downto 0);
+        Out_XorKey       : Out std_logic_vector (w-1 downto 0);
+        Out_XorKeyRotated: Out std_logic_vector (w-1 downto 0);
+        Out_SBox         : Out std_logic_vector (w-1 downto 0);
+        Out_MDS          : Out std_logic_vector (w-1 downto 0);
+        Out_SRSheet      : Out std_logic_vector (w-1 downto 0);
+        Out_SRSlice      : Out std_logic_vector (w-1 downto 0);
+        Out_SRSheetInv   : Out std_logic_vector (w-1 downto 0);
+        Out_SRSliceInv   : Out std_logic_vector (w-1 downto 0);
+        clk              : in  std_logic;
+        Addr_Control     : in  std_logic_vector (3 downto 0);        
+        Data_In          : in  std_logic_vector (w-1 downto 0)
+    );
+end component DeMux;
+component XOR_key  
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Addr_Rd_K   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Rd_En_k     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        Data_Out_K  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component XOR_key;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
@@ -144,12 +181,16 @@ signal Wr_En_DFB          : std_logic;
 -----------------------------------------
 --signals from Xor_Key to several Mux--
 ----------------------------------------- 
-signal Data_In_DFK        : std_logic_vector (15 DOWNTO 0);
-signal Data_In_DFB        : std_logic_vector (15 DOWNTO 0);
-signal Addr_Wr_DFK        : std_logic_vector (3 DOWNTO 0);
-signal Addr_Wr_DFB        : std_logic_vector (3 DOWNTO 0);
-signal Wr_En_DFK          : std_logic;
-signal Wr_En_DFB          : std_logic;
+signal Addr_Wr_XKB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_XKB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_XKK        : std_logic_vector (3 DOWNTO 0);
+signal Addr_Rd_XKB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_XKB       : std_logic_vector (15 DOWNTO 0);
+signal Data_Out_XKK       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_XKB          : std_logic;
+signal Rd_En_XKB          : std_logic;
+signal Rd_En_XKK          : std_logic;
+signal Enable_XK          : std_logic;
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -173,6 +214,7 @@ signal Data_RIn_B   : std_logic_vector (15 DOWNTO 0);
 signal Data_In_B   : std_logic_vector (15 DOWNTO 0);
 -- Data Out with from bank with memory space 
 signal Data_Out_SB : std_logic_vector (15 DOWNTO 0);
+signal Data_ROut_SB : std_logic_vector (15 DOWNTO 0);
 ---------------------------------------------------
 ------- Signals For MemBnk_k With Registers In-----
 --------------------------------------------------- 
@@ -195,6 +237,7 @@ signal Data_RIn_k  :std_logic_vector (15 DOWNTO 0);
 signal Data_In_K   :std_logic_vector (15 DOWNTO 0);
 --
 signal Data_Out_Sk   :std_logic_vector (15 DOWNTO 0);
+signal Data_ROut_Sk   :std_logic_vector (15 DOWNTO 0);
 -- Signals Test Before
 signal Test_Before_Data   : std_logic_vector (15 DOWNTO 0):=x"3333";
 signal Test_Before_Adrr   : std_logic_vector (3 DOWNTO 0):=x"7";
@@ -222,6 +265,18 @@ RinB_MB :  Register_A
     DD_OUT => Data_In_B,
     Clk    => clk
     );
+---------------------------------------------
+--Out Register For Memory Bank on Buffer(Xb)--
+---------------------------------------------
+ROutB_MB :  Register_A 
+    generic map (
+        w => 16
+    ) 
+    Port map (
+    DD_IN  => Data_Out_SB,
+    DD_OUT => Data_ROut_SB,
+    Clk    => clk
+    );
 ------------------------------------------
 --In Register For Memory Bank on Key(Xk)--
 ------------------------------------------
@@ -232,6 +287,18 @@ RinK_MB :  Register_A
     Port map (
     DD_IN  => Data_RIn_k,
     DD_OUT => Data_In_K,
+    Clk    => clk
+    );
+---------------------------------------------
+--Out Register For Memory Bank on Buffer(Xb)--
+---------------------------------------------
+ROutK_MB :  Register_A 
+    generic map (
+        w => 16
+    ) 
+    Port map (
+    DD_IN  => Data_Out_Sk,
+    DD_OUT => Data_ROut_SK,
     Clk    => clk
     );
 ----------------------------------------------    
@@ -415,7 +482,7 @@ uMux_WrB: Mux
         )
     Port Map( 
         In_DataForce        =>Data_In_DFB,
-        In_XorKey           =>Test_Before_Data,
+        In_XorKey           =>Data_In_XKB,
         In_XorKeyRotated    =>Test_Before_Data,
         In_SBox             =>Test_Before_Data,
         In_MDS              =>Test_Before_Data,
@@ -435,7 +502,7 @@ uMuxAdrr_WrB: Mux
         )
     Port Map( 
         In_DataForce        =>Addr_Wr_DFB,
-        In_XorKey           =>Test_Before_Adrr,
+        In_XorKey           =>Addr_Wr_XKB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
@@ -452,7 +519,7 @@ uMuxAdrr_WrB: Mux
 uMuxWrB: MuxLogic
     Port Map( 
         In_DataForce        =>Wr_En_DFB,
-        In_XorKey           =>Test_Before_Logic,
+        In_XorKey           =>Wr_En_XKB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
@@ -463,6 +530,27 @@ uMuxWrB: MuxLogic
         Addr_Control        =>Addr_Control,
         Data_Out            =>Wr_REn_B--Data_Out_Mux  
     );
+--------------------------------------    
+--DeMux For Read from Memory Bank Xb--
+--------------------------------------
+uDeMux_RdB: DeMux
+    generic map(    
+            w =>16--width of word    
+        )
+    port map ( 
+        Out_DataForce    =>Test_Before_Data,
+        Out_XorKey       =>Data_Out_XKB,
+        Out_XorKeyRotated=>Test_Before_Data,
+        Out_SBox         =>Test_Before_Data,
+        Out_MDS          =>Test_Before_Data,
+        Out_SRSheet      =>Test_Before_Data,
+        Out_SRSlice      =>Test_Before_Data,
+        Out_SRSheetInv   =>Test_Before_Data,
+        Out_SRSliceInv   =>Test_Before_Data,
+        clk              => clk,
+        Addr_Control     =>Addr_Control,      
+        Data_In          =>Data_Out_SB
+    );
 --------------------------------------------------
 --Mux  For Address Point Read of the M. Bank xb--
 --------------------------------------------------
@@ -472,7 +560,7 @@ uMuxAdrr_RdB: Mux
         )
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
-        In_XorKey           =>Test_Before_Adrr,
+        In_XorKey           =>Addr_Rd_XKB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
@@ -489,7 +577,7 @@ uMuxAdrr_RdB: Mux
 uMuxRdB: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
-        In_XorKey           =>Test_Before_Logic,
+        In_XorKey           =>Rd_En_XKB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
@@ -557,6 +645,27 @@ uMuxWrk: MuxLogic
         Addr_Control        =>Addr_Control,
         Data_Out            =>Wr_REn_k--Data_Out_Mux  
     );
+--------------------------------------    
+--DeMux For Read from Memory Bank Xb--
+--------------------------------------
+uDeMux_RdK: DeMux
+    generic map(    
+            w => 16--width of word    
+        )
+    port map( 
+        Out_DataForce    =>Test_Before_Data,
+        Out_XorKey       =>Data_Out_XKK,
+        Out_XorKeyRotated=>Test_Before_Data,
+        Out_SBox         =>Test_Before_Data,
+        Out_MDS          =>Test_Before_Data,
+        Out_SRSheet      =>Test_Before_Data,
+        Out_SRSlice      =>Test_Before_Data,
+        Out_SRSheetInv   =>Test_Before_Data,
+        Out_SRSliceInv   =>Test_Before_Data,
+        clk              =>clk,
+        Addr_Control     =>Addr_Control,      
+        Data_In          =>Data_Out_Sk
+    );
 --------------------------------------------------
 --Mux  For Address Point Read of the M. Bank xk--
 --------------------------------------------------
@@ -566,7 +675,7 @@ uMuxAdrr_Rdk: Mux
         )
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
-        In_XorKey           =>Test_Before_Adrr,
+        In_XorKey           =>Addr_Rd_XKK,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
@@ -583,7 +692,7 @@ uMuxAdrr_Rdk: Mux
 uMuxRdk: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
-        In_XorKey           =>Test_Before_Logic,
+        In_XorKey           =>Rd_En_XKK,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
@@ -593,6 +702,27 @@ uMuxRdk: MuxLogic
         In_SRSliceInv       =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Rd_REn_k--Data_Out_Mux  
+    );
+---------------------
+--Component XOR_KEY--
+---------------------
+UXorKey: XOR_key
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_XKB,
+        Data_RIn_B  => Data_In_XKB,
+        Wr_En_B     => Wr_En_XKB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_XKB,
+        Addr_Rd_K   => Addr_Rd_XKK,
+        Rd_En_B     => Rd_En_XKB,
+        Rd_En_k     => Rd_En_XKK,
+        Data_Out_B  => Data_Out_XKB,
+        Data_Out_K  => Data_Out_XKK,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => Enable_DF,
+        En_Out      => Enable_XK        
     );
 STat: process(clk,presente)
 begin
@@ -608,7 +738,7 @@ begin
                             Addr_Control <="0000";
                         end if;
                     when  s1 =>
-                        if Enable_DF = '1' then 
+                        if Enable_XK = '1' then 
                             presente <= s2;
                             Addr_Control <="0010";
                         else
