@@ -383,7 +383,7 @@ R16
 !s100 PRR2Pg7TJWhT20f6iVgk:1
 !i10b 1
 Exor_key
-Z65 w1617485211
+Z65 w1617485752
 R2
 R3
 R4
@@ -400,7 +400,7 @@ VS=jXL;1DH5G_bB<@X_HA21
 R11
 32
 !i10b 1
-Z68 !s108 1617485228.287000
+Z68 !s108 1617485759.264000
 Z69 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
 Z70 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
 R15
@@ -415,8 +415,8 @@ R7
 Z71 DEx4 work 7 xor_key 0 22 S=jXL;1DH5G_bB<@X_HA21
 l31
 L27
-VVi=fK?h`Xc<RSfBGZBHgd0
-!s100 I99_TLDf`K^SKY=_F^NIj3
+VM<eRHX74NJOOaY1ZDCA3U2
+!s100 kHU49MAA@PjMY>cD7>DMz2
 R11
 32
 !i10b 1

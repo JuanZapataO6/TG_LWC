@@ -30,7 +30,7 @@ type estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 signal presente:estado:=s0;
 begin
 STat: process (Clk)
-variable Addr_Aux :std_logic_vector (3 DOWNTO 0):="0000";
+variable Addr_Aux :std_logic_vector (4 DOWNTO 0):="00000";
 begin
 if (CLK'event AND CLK = '1') then 
     if En_In = '1' then  
@@ -41,17 +41,15 @@ if (CLK'event AND CLK = '1') then
                     Addr_Rd_B <= x"0";
                     Addr_Rd_k <= x"0";
                     Addr_Wr_B <= x"0";
-                    Addr_Aux  := x"0";
+                    Addr_Aux  := "00000";
                     Rd_En_B   <= '0';
                     Rd_En_K   <= '0';
                     Wr_En_B   <= '1';
                 when s1 =>                        
                     presente <= s2;
                     Addr_Aux  := Addr_Aux +1;
-                    Addr_Rd_B <= Addr_Aux;
-                    --Addr_Wr_B <= Addr_Aux;
-                    Addr_Rd_k <= x"F";--Addr_Aux;
-                    --Addr_Wr_B <= x"0";
+                    Addr_Rd_B <= Addr_Aux(3 downto 0);
+                    Addr_Rd_k <= Addr_Aux(3 downto 0);
                     Rd_En_B   <= '0';
                     Rd_En_K   <= '0';
                     Wr_En_B   <= '1';                       
@@ -75,7 +73,7 @@ if (CLK'event AND CLK = '1') then
                                         
                 when s5 =>
                     presente <= s6;
-                    Addr_Wr_B <= Addr_Aux;
+                    Addr_Wr_B <= Addr_Aux(3 downto 0);
                     Data_RIn_B <=Data_Out_B XOR Data_Out_K;
                     Rd_En_B   <= '1';
                     Rd_En_K   <= '1';
@@ -84,8 +82,9 @@ if (CLK'event AND CLK = '1') then
                     presente <= s1;
                     --Data_RIn_B <=Data_Out_B XOR Data_Out_K;                       
                     Addr_Aux  := Addr_Aux +1;
-                    Addr_Rd_B <= Addr_Aux;
-                    Addr_Wr_B <= Addr_Aux;
+                    Addr_Rd_B <= Addr_Aux(3 downto 0);
+                    Addr_Rd_k <= Addr_Aux(3 downto 0);
+                    Addr_Wr_B <= Addr_Aux(3 downto 0);
                     Rd_En_B   <= '0';
                     Rd_En_K   <= '0';
                     Wr_En_B   <= '1';
