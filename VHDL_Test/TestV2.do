@@ -5,8 +5,10 @@ add wave -noupdate /saturnin_block_encryptv2/clk
 add wave -noupdate /saturnin_block_encryptv2/Enable_Generate
 add wave -noupdate /saturnin_block_encryptv2/Enable_DF
 add wave -noupdate /saturnin_block_encryptv2/Enable_XK
+add wave -noupdate /saturnin_block_encryptv2/Enable_SB
 add wave -noupdate /saturnin_block_encryptv2/Data_F/presente
 add wave -noupdate /saturnin_block_encryptv2/UXorKey/presente
+add wave -noupdate /saturnin_block_encryptv2/USBox/presente
 
 
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Addr_Rd_XKK
@@ -26,7 +28,19 @@ add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_Out_Sk
 
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_Out_XKB
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_Out_XKK
-add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/UXorKey/Data_RIn_B
+
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/Data_Out_SBB
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/Data_RIn_B
+add wave -noupdate -format Literal -color blue -radix hexadecimal /saturnin_block_encryptv2/USBox/Data_Out_B
+add wave -noupdate -format Literal -color brown -radix hexadecimal /saturnin_block_encryptv2/USBox/Establish
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/A0
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/B0
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/C0
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/D0
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/A1
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/B1
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/C1
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USBox/D1
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_RIn_B
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_In_B
 

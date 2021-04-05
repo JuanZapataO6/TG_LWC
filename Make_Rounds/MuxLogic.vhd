@@ -27,8 +27,8 @@ begin
 	with Addr_Control select
 		Data_Out <= In_DataForce     when "0000", 
 	                In_XorKey        when "0001",
-		            In_XorKeyRotated when "0010", 
-		            In_SBox          when "0011", 
+		            In_SBox          when "0010", 
+		            In_XorKeyRotated when "0011", 
 		            In_MDS           when "0100", 
 		            In_SRSheet       when "0101", 
 		            In_SRSlice       when "0110", 

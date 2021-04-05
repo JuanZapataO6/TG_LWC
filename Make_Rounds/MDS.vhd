@@ -5,63 +5,55 @@ use IEEE.std_logic_unsigned.all;
 use ieee.std_logic_misc.all;
 use work.all;
 entity MDS is 
-    port (
-        X0_in   : in  std_logic_vector(15 downto 0);
-        X1_in   : in  std_logic_vector(15 downto 0);
-        X2_in   : in  std_logic_vector(15 downto 0);
-        X3_in   : in  std_logic_vector(15 downto 0);
-        X4_in   : in  std_logic_vector(15 downto 0);
-        X5_in   : in  std_logic_vector(15 downto 0);
-        X6_in   : in  std_logic_vector(15 downto 0);
-        X7_in   : in  std_logic_vector(15 downto 0);        
-        X0_out  : out std_logic_vector(15 downto 0);
-        X1_out  : out std_logic_vector(15 downto 0);
-        X2_out  : out std_logic_vector(15 downto 0);
-        X3_out  : out std_logic_vector(15 downto 0);
-        X4_out  : out std_logic_vector(15 downto 0);
-        X5_out  : out std_logic_vector(15 downto 0);
-        X6_out  : out std_logic_vector(15 downto 0);
-        X7_out  : out std_logic_vector(15 downto 0);
-        En_MDS_in : in  std_logic;
-        En_MDS_out : out  std_logic:= '1';
-        clk     : in  std_logic
+        port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
     );
 end MDS;
 
 
 architecture Main of MDS is 
 --
-    signal x0: std_logic_vector (15 downto 0);
-    signal x1: std_logic_vector (15 downto 0);
-    signal x2: std_logic_vector (15 downto 0);
-    signal x3: std_logic_vector (15 downto 0);
-    signal x4: std_logic_vector (15 downto 0);
-    signal x5: std_logic_vector (15 downto 0);
-    signal x6: std_logic_vector (15 downto 0);
-    signal x7: std_logic_vector (15 downto 0);
-    --
-    signal x8: std_logic_vector (15 downto 0);
-    signal x9: std_logic_vector (15 downto 0);
-    signal xa: std_logic_vector (15 downto 0);
-    signal xb: std_logic_vector (15 downto 0);
-    signal xc: std_logic_vector (15 downto 0);
-    signal xd: std_logic_vector (15 downto 0);
-    signal xe: std_logic_vector (15 downto 0);
-    signal xf: std_logic_vector (15 downto 0);
-    type estado is (s0, s1,s2,s3);
-    signal presente:estado:=s0;
-    begin
-    process (x0,x1,x2,x3,x4,x5,x6,x7,
-                x8,x9,xa,xb,xc,xd,xe,xf
-                    CLK,presente)
-    begin
-    if (CLK'event AND CLK = '1') then 
-        case presente is
-            when s0 =>
-                presente <= s1;
-                x0 <= state(15 downto 0);
-                x1 <= state(31 downto 16);
-                x2 <= state(49 downto 32);
+signal x0: std_logic_vector (15 downto 0);
+signal x1: std_logic_vector (15 downto 0);
+signal x2: std_logic_vector (15 downto 0);
+signal x3: std_logic_vector (15 downto 0);
+signal x4: std_logic_vector (15 downto 0);
+signal x5: std_logic_vector (15 downto 0);
+signal x6: std_logic_vector (15 downto 0);
+signal x7: std_logic_vector (15 downto 0);
+--
+signal x8: std_logic_vector (15 downto 0);
+signal x9: std_logic_vector (15 downto 0);
+signal xa: std_logic_vector (15 downto 0);
+signal xb: std_logic_vector (15 downto 0);
+signal xc: std_logic_vector (15 downto 0);
+signal xd: std_logic_vector (15 downto 0);
+signal xe: std_logic_vector (15 downto 0);
+signal xf: std_logic_vector (15 downto 0);
+type estado is (Start,s0, s1,s2,s3);
+signal presente:estado:=s0;
+begin
+process (CLK,presente)
+begin
+if (CLK'event AND CLK = '1') then 
+    case presente is
+
+        when s0 =>
+        presente <= s1;
+        x0 <= state(15 downto 0);
+            x1 <= state(31 downto 16);
+            x2 <= state(49 downto 32);
                 x3 <= state(63 downto 48);
                 x4 <= state(79 downto 64);
                 x5 <= state(95 downto 80);

@@ -60,7 +60,6 @@ if (CLK'event AND CLK = '1') then
                     Wr_En_B   <= '1';
                 when s3 =>
                     presente <= s4;                        
-                    --Data_RIn_B <=Data_Out_B XOR Data_Out_K;
                     Rd_En_B   <= '1';
                     Rd_En_K   <= '1';
                     Wr_En_B   <= '1';
@@ -80,7 +79,6 @@ if (CLK'event AND CLK = '1') then
                     Wr_En_B   <= '0';                    
                 when s6 =>
                     presente <= s1;
-                    --Data_RIn_B <=Data_Out_B XOR Data_Out_K;                       
                     Addr_Aux  := Addr_Aux +1;
                     Addr_Rd_B <= Addr_Aux(3 downto 0);
                     Addr_Rd_k <= Addr_Aux(3 downto 0);
@@ -88,18 +86,8 @@ if (CLK'event AND CLK = '1') then
                     Rd_En_B   <= '0';
                     Rd_En_K   <= '0';
                     Wr_En_B   <= '1';
-                    --if Addr_Rd_B = "1111" then
-                    --    En_in_XK  <= '1';
-                    --    --En_SBox := '0';
-                    --    Addr_Rd_B <= x"0";
-                        --Addr_Rd_k <= x"0";
-                      --  Addr_Wr_B <= x"0";
-                        --Rd_En_B   <= '0';
-                    --end if;
                 when others => null;
             end case;
-                --state_out <= state XOR key;
-                --En_Out <='1';
         else 
                 En_Out <= '1';
         end if;

@@ -86,8 +86,8 @@ component Mux
     port( 
         In_DataForce    : in  std_logic_vector (w-1 downto 0);
         In_XorKey       : in  std_logic_vector (w-1 downto 0);
-        In_XorKeyRotated: in  std_logic_vector (w-1 downto 0);
         In_SBox         : in  std_logic_vector (w-1 downto 0);
+        In_XorKeyRotated: in  std_logic_vector (w-1 downto 0);
         In_MDS          : in  std_logic_vector (w-1 downto 0);
         In_SRSheet      : in  std_logic_vector (w-1 downto 0);
         In_SRSlice      : in  std_logic_vector (w-1 downto 0);
@@ -150,6 +150,22 @@ component XOR_key
         En_Out      : out std_logic        
     );
 end component XOR_key;
+component S_Box is
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component S_Box;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
@@ -191,6 +207,16 @@ signal Wr_En_XKB          : std_logic;
 signal Rd_En_XKB          : std_logic;
 signal Rd_En_XKK          : std_logic;
 signal Enable_XK          : std_logic;
+-----------------------------------------
+--signals from S_Box to several Mux--
+----------------------------------------- 
+signal Addr_Wr_SBB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_SBB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_SBB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_SBB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_SBB          : std_logic;
+signal Rd_En_SBB          : std_logic;
+signal Enable_SB          : std_logic;
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -214,7 +240,7 @@ signal Data_RIn_B   : std_logic_vector (15 DOWNTO 0);
 signal Data_In_B   : std_logic_vector (15 DOWNTO 0);
 -- Data Out with from bank with memory space 
 signal Data_Out_SB : std_logic_vector (15 DOWNTO 0);
-signal Data_ROut_SB : std_logic_vector (15 DOWNTO 0);
+--signal Data_ROut_SB : std_logic_vector (15 DOWNTO 0);
 ---------------------------------------------------
 ------- Signals For MemBnk_k With Registers In-----
 --------------------------------------------------- 
@@ -237,10 +263,10 @@ signal Data_RIn_k  :std_logic_vector (15 DOWNTO 0);
 signal Data_In_K   :std_logic_vector (15 DOWNTO 0);
 --
 signal Data_Out_Sk   :std_logic_vector (15 DOWNTO 0);
-signal Data_ROut_Sk   :std_logic_vector (15 DOWNTO 0);
+--signal Data_ROut_Sk   :std_logic_vector (15 DOWNTO 0);
 -- Signals Test Before
 signal Test_Before_Data   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Adrr   : std_logic_vector (3 DOWNTO 0):=x"7";
+signal Test_Before_Adrr   : std_logic_vector (3 DOWNTO 0):=x"3";
 signal Test_Before_Logic  : std_logic :='1';
 begin
 ------------------------------
@@ -265,18 +291,20 @@ RinB_MB :  Register_A
     DD_OUT => Data_In_B,
     Clk    => clk
     );
----------------------------------------------
+----------------------------------------------
 --Out Register For Memory Bank on Buffer(Xb)--
----------------------------------------------
-ROutB_MB :  Register_A 
-    generic map (
-        w => 16
-    ) 
-    Port map (
-    DD_IN  => Data_Out_SB,
-    DD_OUT => Data_ROut_SB,
-    Clk    => clk
-    );
+--------without use because the component-----
+--------------DeMux is Syncronus--------------
+----------------------------------------------
+--ROutB_MB :  Register_A 
+--    generic map (
+--    --    w => 16
+--    ) 
+--    Port map (
+--    DD_IN  => Data_Out_SB,
+--    DD_OUT => Data_ROut_SB,
+--    Clk--    => clk
+--    );
 ------------------------------------------
 --In Register For Memory Bank on Key(Xk)--
 ------------------------------------------
@@ -289,18 +317,20 @@ RinK_MB :  Register_A
     DD_OUT => Data_In_K,
     Clk    => clk
     );
----------------------------------------------
+----------------------------------------------
 --Out Register For Memory Bank on Buffer(Xb)--
----------------------------------------------
-ROutK_MB :  Register_A 
-    generic map (
-        w => 16
-    ) 
-    Port map (
-    DD_IN  => Data_Out_Sk,
-    DD_OUT => Data_ROut_SK,
-    Clk    => clk
-    );
+--------without use because the component-----
+--------------DeMux is Syncronus--------------
+----------------------------------------------
+--ROutK_MB :  Register_A 
+--    generic map (
+--    --    w => 16
+--    ) 
+--    Port map (
+--    DD_IN  => Data_Out_Sk,
+--    DD_OUT => Data_ROut_SK,
+--    Clk--    => clk
+--    );
 ----------------------------------------------    
 --Register In For Enable Write on M. Bank xb--
 ----------------------------------------------   
@@ -483,8 +513,8 @@ uMux_WrB: Mux
     Port Map( 
         In_DataForce        =>Data_In_DFB,
         In_XorKey           =>Data_In_XKB,
+        In_SBox             =>Data_In_SBB,
         In_XorKeyRotated    =>Test_Before_Data,
-        In_SBox             =>Test_Before_Data,
         In_MDS              =>Test_Before_Data,
         In_SRSheet          =>Test_Before_Data,
         In_SRSlice          =>Test_Before_Data,
@@ -503,8 +533,8 @@ uMuxAdrr_WrB: Mux
     Port Map( 
         In_DataForce        =>Addr_Wr_DFB,
         In_XorKey           =>Addr_Wr_XKB,
+        In_SBox             =>Addr_Wr_SBB,
         In_XorKeyRotated    =>Test_Before_Adrr,
-        In_SBox             =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
@@ -520,8 +550,8 @@ uMuxWrB: MuxLogic
     Port Map( 
         In_DataForce        =>Wr_En_DFB,
         In_XorKey           =>Wr_En_XKB,
+        In_SBox             =>Wr_En_SBB,
         In_XorKeyRotated    =>Test_Before_Logic,
-        In_SBox             =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
@@ -540,8 +570,8 @@ uDeMux_RdB: DeMux
     port map ( 
         Out_DataForce    =>Test_Before_Data,
         Out_XorKey       =>Data_Out_XKB,
+        Out_SBox         =>Data_Out_SBB,
         Out_XorKeyRotated=>Test_Before_Data,
-        Out_SBox         =>Test_Before_Data,
         Out_MDS          =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
         Out_SRSlice      =>Test_Before_Data,
@@ -561,8 +591,8 @@ uMuxAdrr_RdB: Mux
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
         In_XorKey           =>Addr_Rd_XKB,
+        In_SBox             =>Addr_Rd_SBB,
         In_XorKeyRotated    =>Test_Before_Adrr,
-        In_SBox             =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
@@ -578,8 +608,8 @@ uMuxRdB: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
         In_XorKey           =>Rd_En_XKB,
+        In_SBox             =>Rd_En_SBB,
         In_XorKeyRotated    =>Test_Before_Logic,
-        In_SBox             =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
@@ -598,8 +628,8 @@ uMux_WrK: Mux
     Port Map( 
         In_DataForce        =>Data_In_DFK,
         In_XorKey           =>Test_Before_Data,
-        In_XorKeyRotated    =>Test_Before_Data,
         In_SBox             =>Test_Before_Data,
+        In_XorKeyRotated    =>Test_Before_Data,
         In_MDS              =>Test_Before_Data,
         In_SRSheet          =>Test_Before_Data,
         In_SRSlice          =>Test_Before_Data,
@@ -618,8 +648,8 @@ uMuxAdrr_Wrk: Mux
     Port Map( 
         In_DataForce        =>Addr_Wr_DFK,
         In_XorKey           =>Test_Before_Adrr,
-        In_XorKeyRotated    =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
+        In_XorKeyRotated    =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
@@ -635,8 +665,8 @@ uMuxWrk: MuxLogic
     Port Map( 
         In_DataForce        =>Wr_En_DFK,
         In_XorKey           =>Test_Before_Logic,
-        In_XorKeyRotated    =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
+        In_XorKeyRotated    =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
@@ -655,8 +685,8 @@ uDeMux_RdK: DeMux
     port map( 
         Out_DataForce    =>Test_Before_Data,
         Out_XorKey       =>Data_Out_XKK,
-        Out_XorKeyRotated=>Test_Before_Data,
         Out_SBox         =>Test_Before_Data,
+        Out_XorKeyRotated=>Test_Before_Data,
         Out_MDS          =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
         Out_SRSlice      =>Test_Before_Data,
@@ -676,8 +706,8 @@ uMuxAdrr_Rdk: Mux
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
         In_XorKey           =>Addr_Rd_XKK,
-        In_XorKeyRotated    =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
+        In_XorKeyRotated    =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
@@ -693,8 +723,8 @@ uMuxRdk: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
         In_XorKey           =>Rd_En_XKK,
-        In_XorKeyRotated    =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
+        In_XorKeyRotated    =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
@@ -724,6 +754,24 @@ UXorKey: XOR_key
         En_In       => Enable_DF,
         En_Out      => Enable_XK        
     );
+---------------------
+--Component S_Box--
+---------------------
+USBox: S_Box
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_SBB,
+        Data_RIn_B  => Data_In_SBB,
+        Wr_En_B     => Wr_En_SBB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_SBB,
+        Rd_En_B     => Rd_En_SBB,
+        Data_Out_B  => Data_Out_SBB,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => Enable_XK,
+        En_Out      => Enable_SB        
+    );
 STat: process(clk,presente)
 begin
     if clk 'event and clk = '1' then 
@@ -744,6 +792,14 @@ begin
                         else
                             presente <= s1;
                             Addr_Control <="0001";
+                        end if;
+                    when  s2 =>
+                        if Enable_SB = '1' then 
+                            presente <= s3;
+                            Addr_Control <="0011";
+                        else
+                            presente <= s2;
+                            Addr_Control <="0010";
                         end if;
                     when others => null;
                 end case;
