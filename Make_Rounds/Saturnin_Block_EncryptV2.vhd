@@ -166,6 +166,22 @@ component S_Box is
         En_Out      : out std_logic        
     );
 end component S_Box;
+component MDS is 
+        port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component MDS;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
@@ -217,6 +233,18 @@ signal Data_Out_SBB       : std_logic_vector (15 DOWNTO 0);
 signal Wr_En_SBB          : std_logic;
 signal Rd_En_SBB          : std_logic;
 signal Enable_SB          : std_logic;
+signal En_SB_Main         : std_logic:='0';
+-----------------------------------------
+--signals from MDS to several Mux--
+----------------------------------------- 
+signal Addr_Wr_MDSB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_MDSB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_MDSB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_MDSB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_MDSB          : std_logic;
+signal Rd_En_MDSB          : std_logic;
+signal Enable_MDS          : std_logic;
+signal En_MDS_Main         : std_logic:='0';
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -514,8 +542,8 @@ uMux_WrB: Mux
         In_DataForce        =>Data_In_DFB,
         In_XorKey           =>Data_In_XKB,
         In_SBox             =>Data_In_SBB,
+        In_MDS              =>Data_In_MDSB,
         In_XorKeyRotated    =>Test_Before_Data,
-        In_MDS              =>Test_Before_Data,
         In_SRSheet          =>Test_Before_Data,
         In_SRSlice          =>Test_Before_Data,
         In_SRSheetInv       =>Test_Before_Data,
@@ -534,8 +562,8 @@ uMuxAdrr_WrB: Mux
         In_DataForce        =>Addr_Wr_DFB,
         In_XorKey           =>Addr_Wr_XKB,
         In_SBox             =>Addr_Wr_SBB,
+        In_MDS              =>Addr_Wr_MDSB,
         In_XorKeyRotated    =>Test_Before_Adrr,
-        In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
@@ -551,8 +579,8 @@ uMuxWrB: MuxLogic
         In_DataForce        =>Wr_En_DFB,
         In_XorKey           =>Wr_En_XKB,
         In_SBox             =>Wr_En_SBB,
+        In_MDS              =>Wr_En_MDSB,
         In_XorKeyRotated    =>Test_Before_Logic,
-        In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
@@ -571,8 +599,8 @@ uDeMux_RdB: DeMux
         Out_DataForce    =>Test_Before_Data,
         Out_XorKey       =>Data_Out_XKB,
         Out_SBox         =>Data_Out_SBB,
+        Out_MDS          =>Data_Out_MDSB,
         Out_XorKeyRotated=>Test_Before_Data,
-        Out_MDS          =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
         Out_SRSlice      =>Test_Before_Data,
         Out_SRSheetInv   =>Test_Before_Data,
@@ -592,8 +620,8 @@ uMuxAdrr_RdB: Mux
         In_DataForce        =>Test_Before_Adrr,
         In_XorKey           =>Addr_Rd_XKB,
         In_SBox             =>Addr_Rd_SBB,
+        In_MDS              =>Addr_Rd_MDSB,
         In_XorKeyRotated    =>Test_Before_Adrr,
-        In_MDS              =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
@@ -609,8 +637,8 @@ uMuxRdB: MuxLogic
         In_DataForce        =>Test_Before_Logic,
         In_XorKey           =>Rd_En_XKB,
         In_SBox             =>Rd_En_SBB,
+        In_MDS              =>Rd_En_MDSB,
         In_XorKeyRotated    =>Test_Before_Logic,
-        In_MDS              =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
@@ -769,8 +797,26 @@ USBox: S_Box
         Data_Out_B  => Data_Out_SBB,
         --Ports For Control Component 
         clk         => Clk, 
-        En_In       => Enable_XK,
+        En_In       => En_SB_Main,
         En_Out      => Enable_SB        
+    );
+---------------------
+--Component MDS--
+---------------------
+UMDS: MDS
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_MDSB,
+        Data_RIn_B  => Data_In_MDSB,
+        Wr_En_B     => Wr_En_MDSB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_MDSB,
+        Rd_En_B     => Rd_En_MDSB,
+        Data_Out_B  => Data_Out_MDSB,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => En_MDS_Main,
+        En_Out      => Enable_MDS        
     );
 STat: process(clk,presente)
 begin
@@ -788,6 +834,7 @@ begin
                     when  s1 =>
                         if Enable_XK = '1' then 
                             presente <= s2;
+                            En_SB_Main <= '1';
                             Addr_Control <="0010";
                         else
                             presente <= s1;
@@ -795,12 +842,35 @@ begin
                         end if;
                     when  s2 =>
                         if Enable_SB = '1' then 
+                            En_MDS_Main <= '1';
+                            En_SB_Main <= '0';
                             presente <= s3;
                             Addr_Control <="0011";
                         else
                             presente <= s2;
                             Addr_Control <="0010";
                         end if;
+                    when  s3 =>
+                        if Enable_MDS = '1' then
+                            En_SB_Main <= '1'; 
+                            presente <= s4;
+                            Addr_Control <="0010";
+                        else
+                            --En_MDS_Main <= '0';
+                            presente <= s3;
+                            Addr_Control <="0011";
+                        end if;
+                    when  s4 =>
+                        if Enable_SB = '1' then
+                            En_SB_Main <= '0'; 
+                            presente <= s5;
+                            Addr_Control <="0100";
+                        else
+                            En_MDS_Main <= '0';
+                            presente <= s4;
+                            Addr_Control <="0010";
+                        end if;
+                    
                     when others => null;
                 end case;
             end if;

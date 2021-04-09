@@ -47,6 +47,7 @@ if (CLK'event AND CLK = '1') then
                     presente  <= s1;
                     Addr_Aux  := '0'& x"0";
                     Addr_Rd_B <= Addr_Aux(3 downto 0);
+                    En_Out    <='0';
                     Rd_En_B   <= '0';
                     Addr_Wr_B <= x"0";
                     Wr_En_B   <= '1';                   
@@ -127,7 +128,7 @@ if (CLK'event AND CLK = '1') then
                     Addr_Wr_B <= Flag_Aux & Addr_Aux(2 downto 0);
                     Wr_En_B   <= '0';
                 when s9=>
-                    if Establish <= "01000" then 
+                    if Establish < "00111" then 
                         presente<= S9;
                         case Establish is
                             when "00000" => Data_RIn_B <= C0;
@@ -137,7 +138,7 @@ if (CLK'event AND CLK = '1') then
                             when "00100" => Data_RIn_B <= B1;
                             when "00101" => Data_RIn_B <= A1;
                             when "00110" => Data_RIn_B <= C1;
-                            --when "00111" => Data_RIn_B <= A1; 
+                            
                             when others => null;
                         end case; 
                         Addr_Aux  := Addr_Aux + 1;
@@ -149,6 +150,7 @@ if (CLK'event AND CLK = '1') then
                     else
                         if Flag_Aux = '1' then 
                             presente<=s11;
+                            Wr_En_B   <= '0';
                         else
                             presente  <= s10;
                         end if;
@@ -165,7 +167,15 @@ if (CLK'event AND CLK = '1') then
                         --Wr_En_B   <= '0';
                 when s11 =>
                     En_Out <= '1';
+                    presente <= s12;
+                    Addr_Aux :="00000";
+                when s12 =>
+                    En_Out <= '0';
                     presente <= s0;
+                    Addr_Aux :="00000";
+                    Establish <= "00000";
+                    Flag_Aux  := '0';
+                    Wr_En_B   <= '1'; 
                 when others => null;
             end case;
         else

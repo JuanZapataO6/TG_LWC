@@ -34,8 +34,8 @@ begin
             when "0000" => Out_DataForce <=Data_In; 
             when "0001" => Out_XorKey <=Data_In;
             when "0010" => Out_SBox <=Data_In; 
-            when "0011" => Out_XorKeyRotated <=Data_In; 
-            when "0100" => Out_MDS <=Data_In; 
+            when "0011" => Out_MDS <=Data_In; 
+            when "0100" => Out_XorKeyRotated <=Data_In; 
             when "0101" => Out_SRSheet <=Data_In; 
             when "0110" => Out_SRSlice <=Data_In; 
             when "0111" => Out_SRSheetInv <=Data_In;
