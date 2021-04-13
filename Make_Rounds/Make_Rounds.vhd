@@ -85,7 +85,7 @@ process (x0,x1, clk,presenteX0, presenteX1)
         if (clk'event AND clk = '1') then    
             
             if Load = '1'then --El valor de Load se remplaza por el de n
-                x0 <= "11111110"& R(3 downto 0) & D(3 downto 0);
+                x0 <= "11111110"&  R(3 downto 0) & D(3 downto 0);
                 x1 <= "11111110"& R(3 downto 0) & D(3 downto 0);
             else
                 if n_0 < R then 

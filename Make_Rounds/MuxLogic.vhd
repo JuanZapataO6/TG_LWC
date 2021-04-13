@@ -29,9 +29,9 @@ begin
 	                In_XorKey        when "0001",
 		            In_SBox          when "0010", 
 		            In_MDS           when "0011", 
-                    In_XorKeyRotated when "0100",		            
+                    In_SRSlice       when "0100",		            
 		            In_SRSheet       when "0101", 
-		            In_SRSlice       when "0110", 
+		            In_XorKeyRotated when "0110", 
 		            In_SRSheetInv    when "0111",
                     In_SRSheetInv    when  others ;
 end architecture RTL;
