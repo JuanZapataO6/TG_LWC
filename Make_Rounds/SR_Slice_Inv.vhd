@@ -5,7 +5,7 @@ use IEEE.std_logic_unsigned.all;
 use ieee.std_logic_misc.all;
 use work.all;
 --
-entity SR_Slice is
+entity SR_Slice_Inv is
     port (
         --Ports for Memory Bank Write Xb
         Addr_Wr_B   : out std_logic_vector(3 downto 0);
@@ -20,8 +20,8 @@ entity SR_Slice is
         En_In       : in std_logic;
         En_Out      : out std_logic        
     );
-end SR_Slice;
-architecture Main of SR_Slice is 
+end SR_Slice_Inv;
+architecture Main of SR_Slice_Inv is 
 signal Establish:std_logic_vector (4 DOWNTO 0):="00000";
 --
 signal x0: std_logic_vector (15 downto 0);

@@ -198,6 +198,20 @@ component SR_Slice is
         En_Out      : out std_logic        
     );
 end component SR_Slice;
+component Make_Rounds is 
+    port(
+        RC0         : out std_logic_vector(0 to 15);
+        RC1         : out std_logic_vector(0 to 15);
+        R           : in std_logic_vector (3 downto 0);
+        D           : in std_logic_vector (3 downto 0);
+        Addr_RRd_0  : in std_logic_vector (4 downto 0);
+        Addr_RRd_1  : in std_logic_vector (4 downto 0);
+        Rd_REn_0     : in std_logic;
+        Rd_REn_1     : in std_logic;
+        Load        : in std_logic;
+        clk         : in std_logic
+    );
+end component Make_Rounds;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
@@ -226,6 +240,19 @@ signal Addr_Wr_DFK        : std_logic_vector (3 DOWNTO 0);
 signal Addr_Wr_DFB        : std_logic_vector (3 DOWNTO 0);
 signal Wr_En_DFK          : std_logic;
 signal Wr_En_DFB          : std_logic;
+-------------------------------------------
+--signals from ControlPath to Make Rounds--
+------------------------------------------- 
+signal RC0         : std_logic_vector (0 to 15);
+signal RC1         : std_logic_vector (0 to 15);
+signal R_MR           : std_logic_vector (3 downto 0);
+signal D_MR           : std_logic_vector (3 downto 0);
+signal Addr_Rd_MR0 : std_logic_vector (4 downto 0);
+signal Addr_Rd_MR1 : std_logic_vector (4 downto 0);
+signal Rd_En_MR0   : std_logic;
+signal Rd_En_MR1   : std_logic;
+signal Load_MR        : std_logic;
+        
 -----------------------------------------
 --signals from Xor_Key to several Mux--
 ----------------------------------------- 
@@ -272,28 +299,7 @@ signal Wr_En_SRSB          : std_logic;
 signal Rd_En_SRSB          : std_logic;
 signal Enable_SRS          : std_logic;
 signal En_SRS_Main         : std_logic:='0';
------------------------------------------------------
-------- Signals For MemBnk_RC0 With Registers In-----
------------------------------------------------------ 
-signal Wr_En_RC0     : std_logic;
-signal Wr_REn_RC0     : std_logic;
---
-signal Rd_En_RC0     : std_logic;
-signal Rd_REn_RC0     : std_logic;
---
-signal Rst_RC0       : std_logic;
-signal Rst_Rk       : std_logic;
---
-signal Addr_Rd_RC0   :std_logic_vector (3 DOWNTO 0);
-signal Addr_RRd_RC0   :std_logic_vector (3 DOWNTO 0);
---
-signal Addr_Wr_RC0   :std_logic_vector (3 DOWNTO 0);
-signal Addr_RWr_RC0   :std_logic_vector (3 DOWNTO 0);
---
-signal Data_RIn_RC0  :std_logic_vector (15 DOWNTO 0);
-signal Data_In_RC0   :std_logic_vector (15 DOWNTO 0);
---
-signal Data_Out_Sk   :std_logic_vector (15 DOWNTO 0);
+
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -518,6 +524,23 @@ Data_F: Data_Force Port Map (
 
         Enable_DF      => Enable_DF
                 );
+
+-------------------------------------    
+--Port Map Component Make Rounds xb--
+-------------------------------------
+uMake_Rounds : Make_Rounds port map(
+        RC0         => RC0 ,
+        RC1         => RC1 ,
+        R           => R_MR ,
+        D           => D_MR,
+        Addr_RRd_0  => Addr_Rd_MR0,
+        Addr_RRd_1  => Addr_Rd_MR1,
+        Rd_REn_0     => Rd_En_MR0,
+        Rd_REn_1     => Rd_En_MR1,
+        Load        => Load_MR,
+        clk         => clk    
+    );
+
 -------------------------------------    
 --Port Map Component Memory Bank xb--
 -------------------------------------
@@ -896,13 +919,19 @@ begin
     if clk 'event and clk = '1' then 
             if Enable_generate ='1' then
                 case presente is
-                    when s0 =>
+                    when  s0 =>
                         if Enable_DF = '1' then --Finish Data Force
                             presente <= s1;
+                            R_MR <= x"A";
+                            D_MR <= x"6";
+                            Load_MR <= '1'; 
                             Addr_Control <="0001";
                         else
                             presente <= s0;
                             Addr_Control <="0000";
+                            Load_MR <= '1'; 
+                            R_MR <= x"A";
+                            D_MR <= x"6";
                         end if;
                     when  s1 =>
                         if Enable_XK = '1' then 
@@ -944,7 +973,28 @@ begin
                             presente <= s4;
                             Addr_Control <="0010";
                         end if;
-                    
+                    when  s5 =>
+                        if Enable_SRS = '1' then
+                            En_MDS_Main <= '1'; 
+                            En_SRS_Main <= '0';
+                            presente <= s6;
+                            Addr_Control <="0011";
+                        else
+                            --En_MDS_Main <= '1';
+                            presente <= s5;
+                            Addr_Control <="0100";
+                        end if;
+                    when  s6 =>
+                        if Enable_MDS = '1' then
+                            En_MDS_Main <= '0'; 
+                            --En_SRSInv_Main <= '1';
+                            presente <= s7;
+                            Addr_Control <="0101";
+                        else
+                            En_MDS_Main <= '1';
+                            presente <= s6;
+                            Addr_Control <="0011";
+                        end if;
                     when others => null;
                 end case;
             end if;

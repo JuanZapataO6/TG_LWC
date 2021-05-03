@@ -42,7 +42,7 @@ signal xc: std_logic_vector (15 downto 0);
 signal xd: std_logic_vector (15 downto 0);
 signal xe: std_logic_vector (15 downto 0);
 signal xf: std_logic_vector (15 downto 0);
-type estado is (start,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12);
+type estado is (start,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13);
 signal presente:estado:=s0;
 begin
 ASM: process (clk)
@@ -224,6 +224,12 @@ if (CLK'event AND CLK = '1') then
                     end if;
                 when s12 => 
                     Wr_En_B   <= '1';
+                    En_Out <= '0';
+                    Establish <= "00000";
+                    presente <= s13;
+                when s13 => 
+                    Wr_En_B   <= '1';
+                    En_Out <= '0';
                     presente <= s0;
                 when others => null;
             end case;
