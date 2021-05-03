@@ -1,4 +1,6 @@
-# vsim QUIT 
-# ** Error: (vsim-3170) Could not find 'C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/VHDL_Test/work.QUIT'.
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# ERROR: No extended dataflow license exists
+# vsim -gui quit 
+# ** Error: (vsim-3170) Could not find 'C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/VHDL_Test/work.quit'.
 # 
 # Error loading design
