@@ -44,18 +44,6 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity DeMux
 -- Compiling architecture RTL of DeMux
 
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity MDS
--- Compiling architecture Main of MDS
-
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
@@ -67,6 +55,18 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_misc
 -- Compiling entity SR_Slice
 -- Compiling architecture Main of SR_Slice
+
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity MDS
+-- Compiling architecture Main of MDS
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -104,6 +104,17 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_misc
 -- Compiling entity XOR_key
 -- Compiling architecture Main of XOR_key
+
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity Saturnin_Block_EncryptV2
+-- Compiling architecture Main of Saturnin_Block_EncryptV2
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012

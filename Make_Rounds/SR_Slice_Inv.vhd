@@ -145,6 +145,41 @@ if (CLK'event AND CLK = '1') then
                         Wr_En_B   <= '1';
                     end if;
                 when s3 =>
+                    presente  <= s4;
+                    Rd_En_B   <= '1';
+                    Addr_Wr_B <= Establish (3 downto 0);
+                    Establish <= Establish +1;
+                    Wr_En_B   <= '0';
+                    --Data_RIn_B <= x5;
+                when s4 => 
+                    if Establish < "10000" then 
+                        presente<= s4;
+                        case Establish is 
+                            when "00100" => Data_RIn_B <= x4;
+                            when "00101" => Data_RIn_B <= x5;
+                            when "00110" => Data_RIn_B <= x6;
+                            when "00111" => Data_RIn_B <= x7;
+                            when "01000" => Data_RIn_B <= x8;
+                            when "01001" => Data_RIn_B <= x9;
+                            when "01010" => Data_RIn_B <= xa;
+                            when "01011" => Data_RIn_B <= xb;
+                            when "01100" => Data_RIn_B <= xc;
+                            when "01101" => Data_RIn_B <= xd;
+                            when "01110" => Data_RIn_B <= xe;
+                            when "01111" => Data_RIn_B <= xf;
+                            when others => null;
+                        end case; 
+                        --Addr_Aux  := Addr_Aux + 1;
+                        Establish <= Establish + 1;
+                        Addr_Rd_B <= x"8";
+                        Rd_En_B   <= '1';
+                        Addr_Wr_B <= Establish(3 downto 0);
+                        Wr_En_B   <= '0';
+                    else
+                        presente  <= s5;
+                        En_Out <= '1';
+                        Wr_En_B   <= '1';
+                    end if;
                 when others => null;
             end case;
         end if;

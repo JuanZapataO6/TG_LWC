@@ -8,25 +8,48 @@ add wave -noupdate /saturnin_block_encryptv2/Enable_DF
 add wave -noupdate /saturnin_block_encryptv2/Enable_XK
 add wave -noupdate /saturnin_block_encryptv2/Enable_SB
 add wave -noupdate /saturnin_block_encryptv2/Enable_MDS
+add wave -noupdate /saturnin_block_encryptv2/Enable_SRS
+add wave -noupdate /saturnin_block_encryptv2/En_SRSI_Main
+add wave -noupdate /saturnin_block_encryptv2/Enable_SRSI
 add wave -noupdate /saturnin_block_encryptv2/Data_F/presente
 add wave -noupdate /saturnin_block_encryptv2/UXorKey/presente
 add wave -noupdate /saturnin_block_encryptv2/USBox/presente
 add wave -noupdate /saturnin_block_encryptv2/UMDS/presente
 add wave -noupdate /saturnin_block_encryptv2/USR_Slice/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Slice_Inv/presente
 add wave -noupdate /saturnin_block_encryptv2/uMake_Rounds/presenteX0
 add wave -noupdate /saturnin_block_encryptv2/uMake_Rounds/presenteX1
 
 add wave -noupdate /saturnin_block_encryptv2/uMake_Rounds/X0
 add wave -noupdate /saturnin_block_encryptv2/uMake_Rounds/x1
 
-add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/uMake_Rounds/n_0
-add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/uMake_Rounds/n_1
+add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/uMake_Rounds/Rn_0
+add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/uMake_Rounds/Rn_1
+add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Addr_Control
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x0
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x1
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x2
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x3
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x4
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x5
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x6
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x7
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x8
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/x9
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xa
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xb
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xc
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xd
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xe
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/xf
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/USR_Slice_Inv/Data_Out_B
+
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Addr_Control
 
 add wave -noupdate /saturnin_block_encryptv2/Rd_En_SRSB
-add wave -noupdate /saturnin_block_encryptv2/Load
-add wave -noupdate /saturnin_block_encryptv2/R
-add wave -noupdate /saturnin_block_encryptv2/D
+add wave -noupdate /saturnin_block_encryptv2/Load_MR
+add wave -noupdate /saturnin_block_encryptv2/R_MR
+add wave -noupdate /saturnin_block_encryptv2/D_MR
 
 add wave -noupdate /saturnin_block_encryptv2/UMDS/En_In
 add wave -noupdate /saturnin_block_encryptv2/USBox/En_In
@@ -74,4 +97,4 @@ configure wave -timeline 0
 configure wave -timelineunits ps
 update
 WaveRestoreZoom {1510 ns} {2356 ns}
-run 12000
+run 16000

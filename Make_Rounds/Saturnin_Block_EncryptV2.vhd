@@ -86,8 +86,8 @@ component Mux
     port( 
         In_DataForce    : in  std_logic_vector (w-1 downto 0);
         In_XorKey       : in  std_logic_vector (w-1 downto 0);
-        In_SBox         : in  std_logic_vector (w-1 downto 0);
         In_XorKeyRotated: in  std_logic_vector (w-1 downto 0);
+        In_SBox         : in  std_logic_vector (w-1 downto 0);
         In_MDS          : in  std_logic_vector (w-1 downto 0);
         In_SRSheet      : in  std_logic_vector (w-1 downto 0);
         In_SRSlice      : in  std_logic_vector (w-1 downto 0);
@@ -198,6 +198,22 @@ component SR_Slice is
         En_Out      : out std_logic        
     );
 end component SR_Slice;
+component SR_Slice_Inv is
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component SR_Slice_Inv;
 component Make_Rounds is 
     port(
         RC0         : out std_logic_vector(0 to 15);
@@ -212,7 +228,7 @@ component Make_Rounds is
         clk         : in std_logic
     );
 end component Make_Rounds;
-TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7);
+TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
 -----------------------------------------------------
@@ -299,6 +315,17 @@ signal Wr_En_SRSB          : std_logic;
 signal Rd_En_SRSB          : std_logic;
 signal Enable_SRS          : std_logic;
 signal En_SRS_Main         : std_logic:='0';
+--------------------------------------------
+--signals from SR_Slice_Inv to several Mux--
+-------------------------------------------- 
+signal Addr_Wr_SRSIB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_SRSIB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_SRSIB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_SRSIB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_SRSIB          : std_logic;
+signal Rd_En_SRSIB          : std_logic;
+signal Enable_SRSI          : std_logic;
+signal En_SRSI_Main         : std_logic:='0';
 
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
@@ -622,10 +649,10 @@ uMux_WrB: Mux
         In_SBox             =>Data_In_SBB,
         In_MDS              =>Data_In_MDSB,
         In_SRSlice          =>Data_In_SRSB,
-        In_SRSheet          =>Test_Before_Data,
+        In_SRSliceInv       =>Data_In_SRSIB,
         In_XorKeyRotated    =>Test_Before_Data,
         In_SRSheetInv       =>Test_Before_Data,
-        In_SRSliceInv       =>Test_Before_Data,
+        In_SRSheet          =>Test_Before_Data,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Data_RIn_B--Data_Out_Mux  
     );
@@ -642,10 +669,10 @@ uMuxAdrr_WrB: Mux
         In_SBox             =>Addr_Wr_SBB,
         In_MDS              =>Addr_Wr_MDSB,
         In_SRSlice          =>Addr_Wr_SRSB,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SRSliceInv       =>Addr_Wr_SRSIB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
-        In_SRSliceInv       =>Test_Before_Adrr,
+        In_SRSheet          =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Addr_RWr_B--Data_Out_Mux  
     );
@@ -659,10 +686,10 @@ uMuxWrB: MuxLogic
         In_SBox             =>Wr_En_SBB,
         In_MDS              =>Wr_En_MDSB,
         In_SRSlice          =>Wr_En_SRSB,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SRSliceInv       =>Wr_En_SRSIB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
-        In_SRSliceInv       =>Test_Before_Logic,
+        In_SRSheet          =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Wr_REn_B--Data_Out_Mux  
     );
@@ -679,10 +706,10 @@ uDeMux_RdB: DeMux
         Out_SBox         =>Data_Out_SBB,
         Out_MDS          =>Data_Out_MDSB,
         Out_SRSlice      =>Data_Out_SRSB,
-        Out_SRSheet      =>Test_Before_Data,
+        Out_SRSliceInv   =>Data_Out_SRSIB,
         Out_XorKeyRotated=>Test_Before_Data,
         Out_SRSheetInv   =>Test_Before_Data,
-        Out_SRSliceInv   =>Test_Before_Data,
+        Out_SRSheet      =>Test_Before_Data,
         clk              => clk,
         Addr_Control     =>Addr_Control,      
         Data_In          =>Data_Out_SB
@@ -700,10 +727,10 @@ uMuxAdrr_RdB: Mux
         In_SBox             =>Addr_Rd_SBB,
         In_MDS              =>Addr_Rd_MDSB,
         In_SRSlice          =>Addr_Rd_SRSB,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SRSliceInv       =>Addr_Rd_SRSIB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
-        In_SRSliceInv       =>Test_Before_Adrr,
+        In_SRSheet          =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Addr_RRd_B--Data_Out_Mux  
     );
@@ -717,10 +744,10 @@ uMuxRdB: MuxLogic
         In_SBox             =>Rd_En_SBB,
         In_MDS              =>Rd_En_MDSB,
         In_SRSlice          =>Rd_En_SRSB,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SRSliceInv       =>Rd_En_SRSIB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
-        In_SRSliceInv       =>Test_Before_Logic,
+        In_SRSheet          =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Rd_REn_B--Data_Out_Mux  
     );
@@ -734,10 +761,10 @@ uMux_WrK: Mux
     Port Map( 
         In_DataForce        =>Data_In_DFK,
         In_XorKey           =>Test_Before_Data,
-        In_SBox             =>Test_Before_Data,
+        In_SRSheet          =>Test_Before_Data,
         In_XorKeyRotated    =>Test_Before_Data,
         In_MDS              =>Test_Before_Data,
-        In_SRSheet          =>Test_Before_Data,
+        In_SBox             =>Test_Before_Data,
         In_SRSlice          =>Test_Before_Data,
         In_SRSheetInv       =>Test_Before_Data,
         In_SRSliceInv       =>Test_Before_Data,
@@ -754,10 +781,10 @@ uMuxAdrr_Wrk: Mux
     Port Map( 
         In_DataForce        =>Addr_Wr_DFK,
         In_XorKey           =>Test_Before_Adrr,
-        In_SBox             =>Test_Before_Adrr,
+        In_SRSheet          =>Test_Before_Adrr,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SBox             =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSliceInv       =>Test_Before_Adrr,
@@ -771,10 +798,10 @@ uMuxWrk: MuxLogic
     Port Map( 
         In_DataForce        =>Wr_En_DFK,
         In_XorKey           =>Test_Before_Logic,
-        In_SBox             =>Test_Before_Logic,
+        In_SRSheet          =>Test_Before_Logic,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SBox             =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSliceInv       =>Test_Before_Logic,
@@ -812,10 +839,10 @@ uMuxAdrr_Rdk: Mux
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
         In_XorKey           =>Addr_Rd_XKK,
-        In_SBox             =>Test_Before_Adrr,
+        In_SRSheet          =>Test_Before_Adrr,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_MDS              =>Test_Before_Adrr,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SBox             =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSliceInv       =>Test_Before_Adrr,
@@ -829,10 +856,10 @@ uMuxRdk: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
         In_XorKey           =>Rd_En_XKK,
-        In_SBox             =>Test_Before_Logic,
+        In_SRSheet          =>Test_Before_Logic,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SBox             =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSliceInv       =>Test_Before_Logic,
@@ -914,6 +941,25 @@ USR_Slice: SR_Slice
         En_In       => En_SRS_Main,
         En_Out      => Enable_SRS        
     );
+----------------------
+--Component SR_Slice--
+----------------------  
+USR_Slice_Inv: SR_Slice_Inv
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_SRSIB,
+        Data_RIn_B  => Data_In_SRSIB,
+        Wr_En_B     => Wr_En_SRSIB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_SRSIB,
+        Rd_En_B     => Rd_En_SRSIB,
+        Data_Out_B  => Data_Out_SRSIB,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => En_SRSI_Main,
+        En_Out      => Enable_SRSI        
+    );
+
 STat: process(clk,presente)
 begin
     if clk 'event and clk = '1' then 
@@ -987,13 +1033,25 @@ begin
                     when  s6 =>
                         if Enable_MDS = '1' then
                             En_MDS_Main <= '0'; 
-                            --En_SRSInv_Main <= '1';
+                            En_SRSI_Main <= '1';
                             presente <= s7;
                             Addr_Control <="0101";
                         else
                             En_MDS_Main <= '1';
                             presente <= s6;
                             Addr_Control <="0011";
+                        end if;
+                    when s7 =>
+                        if Enable_SRSI = '1' then 
+                            En_SRSI_Main <= '0'; 
+                            --n_SRSI_Main <= '1';
+                            presente <= s7;
+                            Addr_Control <="0110";
+                        else
+                            En_MDS_Main <= '0'; 
+                            En_SRSI_Main <= '1';
+                            presente <= s7;
+                            Addr_Control <="0101";
                         end if;
                     when others => null;
                 end case;

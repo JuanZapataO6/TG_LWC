@@ -1,0 +1,233 @@
+Analysis & Synthesis report for ImplementationV1
+Sat Apr 17 17:44:45 2021
+Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Sat Apr 17 17:44:45 2021           ;
+; Quartus Prime Version       ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
+; Revision Name               ; ImplementationV1                            ;
+; Top-level Entity Name       ; Saturnin_Block_EncryptV2                    ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                                   ;
++---------------------------------------------------------------------------------+--------------------------+--------------------+
+; Option                                                                          ; Setting                  ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------------+--------------------+
+; Device                                                                          ; 5CGXFC7C7F23C8           ;                    ;
+; Top-level entity name                                                           ; Saturnin_Block_EncryptV2 ; ImplementationV1   ;
+; Family name                                                                     ; Cyclone V                ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                      ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                       ; On                 ;
+; Enable compact report table                                                     ; Off                      ; Off                ;
+; Restructure Multiplexers                                                        ; Auto                     ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                      ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                      ; Off                ;
+; Preserve fewer node names                                                       ; On                       ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable                   ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001             ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993                ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto                     ; Auto               ;
+; Safe State Machine                                                              ; Off                      ; Off                ;
+; Extract Verilog State Machines                                                  ; On                       ; On                 ;
+; Extract VHDL State Machines                                                     ; On                       ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                      ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000                     ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                      ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                       ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                       ; On                 ;
+; Parallel Synthesis                                                              ; On                       ; On                 ;
+; DSP Block Balancing                                                             ; Auto                     ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                       ; On                 ;
+; Power-Up Don't Care                                                             ; On                       ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                      ; Off                ;
+; Remove Duplicate Registers                                                      ; On                       ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                      ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                      ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                      ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                      ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                      ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                       ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                      ; Off                ;
+; Optimization Technique                                                          ; Balanced                 ; Balanced           ;
+; Carry Chain Length                                                              ; 70                       ; 70                 ;
+; Auto Carry Chains                                                               ; On                       ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                       ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                      ; Off                ;
+; Auto ROM Replacement                                                            ; On                       ; On                 ;
+; Auto RAM Replacement                                                            ; On                       ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                       ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto                     ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto                     ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                       ; On                 ;
+; Strict RAM Replacement                                                          ; Off                      ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                       ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                      ; Off                ;
+; Auto Resource Sharing                                                           ; Off                      ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                      ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                      ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                      ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                       ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                      ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                       ; On                 ;
+; Report Parameter Settings                                                       ; On                       ; On                 ;
+; Report Source Assignments                                                       ; On                       ; On                 ;
+; Report Connectivity Checks                                                      ; On                       ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                      ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                        ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation       ; Normal compilation ;
+; HDL message level                                                               ; Level2                   ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                      ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000                     ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000                     ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                      ; 100                ;
+; Clock MUX Protection                                                            ; On                       ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                      ; Off                ;
+; Block Design Naming                                                             ; Auto                     ; Auto               ;
+; SDC constraint protection                                                       ; Off                      ; Off                ;
+; Synthesis Effort                                                                ; Auto                     ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                       ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                      ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium                   ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto                     ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                       ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                       ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                      ; Off                ;
++---------------------------------------------------------------------------------+--------------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+    Info: Processing started: Sat Apr 17 17:44:23 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ImplementationV1 -c ImplementationV1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/xor_key.vhd
+    Info (12022): Found design unit 1: XOR_key-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd Line: 27
+    Info (12023): Found entity 1: XOR_key File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/sr_slice_inv.vhd
+    Info (12022): Found design unit 1: SR_Slice_Inv-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd Line: 24
+    Info (12023): Found entity 1: SR_Slice_Inv File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/sr_slice.vhd
+    Info (12022): Found design unit 1: SR_Slice-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd Line: 24
+    Info (12023): Found entity 1: SR_Slice File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/saturnin_block_encryptv2.vhd
+    Info (12022): Found design unit 1: Saturnin_Block_EncryptV2-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 9
+    Info (12023): Found entity 1: Saturnin_Block_EncryptV2 File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/s_box.vhd
+    Info (12022): Found design unit 1: S_Box-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S_Box.vhd Line: 24
+    Info (12023): Found entity 1: S_Box File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S_Box.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/register_logic.vhd
+    Info (12022): Found design unit 1: Register_Logic-rtl File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd Line: 17
+    Info (12023): Found entity 1: Register_Logic File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/register_a.vhd
+    Info (12022): Found design unit 1: Register_A-rtl File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_A.vhd Line: 19
+    Info (12023): Found entity 1: Register_A File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_A.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/muxlogic.vhd
+    Info (12022): Found design unit 1: MuxLogic-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd Line: 25
+    Info (12023): Found entity 1: MuxLogic File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd Line: 8
+Warning (12090): Entity "Mux" obtained from "Make_Rounds/Mux.vhd" instead of from Quartus Prime megafunction library File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/mux.vhd
+    Info (12022): Found design unit 1: Mux-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 27
+    Info (12023): Found entity 1: Mux File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/membnk.vhd
+    Info (12022): Found design unit 1: MemBnk-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd Line: 20
+    Info (12023): Found entity 1: MemBnk File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/mds.vhd
+    Info (12022): Found design unit 1: MDS-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd Line: 25
+    Info (12023): Found entity 1: MDS File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/make_rounds.vhd
+    Info (12022): Found design unit 1: Make_Rounds-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 24
+    Info (12023): Found entity 1: Make_Rounds File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 10
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/demux.vhd
+    Info (12022): Found design unit 1: DeMux-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd Line: 28
+    Info (12023): Found entity 1: DeMux File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/data_generate.vhd
+    Info (12022): Found design unit 1: Data_Generate-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd Line: 18
+    Info (12023): Found entity 1: Data_Generate File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file make_rounds/data_force.vhd
+    Info (12022): Found design unit 1: Data_Force-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Force.vhd Line: 32
+    Info (12023): Found entity 1: Data_Force File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Force.vhd Line: 9
+Info (12127): Elaborating entity "Saturnin_Block_EncryptV2" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Saturnin_Block_EncryptV2.vhd(246): object "RC0" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 246
+Warning (10036): Verilog HDL or VHDL warning at Saturnin_Block_EncryptV2.vhd(247): object "RC1" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 247
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(250): used implicit default value for signal "Addr_Out0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 250
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(251): used implicit default value for signal "Addr_Out1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 251
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(252): used implicit default value for signal "Rd_En_0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 252
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(253): used implicit default value for signal "Rd_En_1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 253
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(314): used explicit default value for signal "Rst_RB" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 314
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(337): used implicit default value for signal "Rst_Rk" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 337
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(352): used explicit default value for signal "Test_Before_Adrr" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 352
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(353): used explicit default value for signal "Test_Before_Logic" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 353
+Error (10533): VHDL Wait Statement error at Saturnin_Block_EncryptV2.vhd(361): Wait Statement must contain condition clause with UNTIL keyword File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 361
+Error (12153): Can't elaborate top-level user hierarchy
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 12 warnings
+    Error: Peak virtual memory: 4837 megabytes
+    Error: Processing ended: Sat Apr 17 17:44:45 2021
+    Error: Elapsed time: 00:00:22
+    Error: Total CPU time (on all processors): 00:00:41
+
+
