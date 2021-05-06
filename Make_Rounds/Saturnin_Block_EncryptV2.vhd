@@ -93,6 +93,7 @@ component Mux
         In_SRSlice      : in  std_logic_vector (w-1 downto 0);
         In_SRSheetInv   : in  std_logic_vector (w-1 downto 0);
         In_SRSliceInv   : in  std_logic_vector (w-1 downto 0);
+        In_RC           : in  std_logic_vector (w-1 downto 0);
         Addr_Control    : in  std_logic_vector (3 downto 0);        
         Data_Out        : out std_logic_vector (w-1 downto 0)
     );
@@ -108,6 +109,7 @@ component MuxLogic
         In_SRSlice      : in  std_logic;
         In_SRSheetInv   : in  std_logic;
         In_SRSliceInv   : in  std_logic;
+        In_RC           : in  std_logic;
         Addr_Control    : in  std_logic_vector (3 downto 0);        
         Data_Out        : out std_logic
     );
@@ -126,6 +128,7 @@ component DeMux
         Out_SRSlice      : Out std_logic_vector (w-1 downto 0);
         Out_SRSheetInv   : Out std_logic_vector (w-1 downto 0);
         Out_SRSliceInv   : Out std_logic_vector (w-1 downto 0);
+        Out_RC           : Out std_logic_vector (w-1 downto 0);
         clk              : in  std_logic;
         Addr_Control     : in  std_logic_vector (3 downto 0);        
         Data_In          : in  std_logic_vector (w-1 downto 0)
@@ -257,18 +260,28 @@ signal Addr_Wr_DFB        : std_logic_vector (3 DOWNTO 0);
 signal Wr_En_DFK          : std_logic;
 signal Wr_En_DFB          : std_logic;
 -------------------------------------------
+--signals from ControlPath to Memory Bank--
+------------------------------------------- 
+signal Addr_Wr_RCB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_RCB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_RCB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_RCB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_RCB          : std_logic;
+signal Rd_En_RCB          : std_logic;
+signal Enable_RC          : std_logic;
+--signal En_SRS_Main         : std_logic:='0';
+-------------------------------------------
 --signals from ControlPath to Make Rounds--
 ------------------------------------------- 
 signal RC0         : std_logic_vector (0 to 15);
 signal RC1         : std_logic_vector (0 to 15);
-signal R_MR           : std_logic_vector (3 downto 0);
-signal D_MR           : std_logic_vector (3 downto 0);
+signal R_MR        : std_logic_vector (3 downto 0);
+signal D_MR        : std_logic_vector (3 downto 0);
 signal Addr_Rd_MR0 : std_logic_vector (4 downto 0);
 signal Addr_Rd_MR1 : std_logic_vector (4 downto 0);
 signal Rd_En_MR0   : std_logic;
 signal Rd_En_MR1   : std_logic;
 signal Load_MR        : std_logic;
-        
 -----------------------------------------
 --signals from Xor_Key to several Mux--
 ----------------------------------------- 
@@ -326,7 +339,6 @@ signal Wr_En_SRSIB          : std_logic;
 signal Rd_En_SRSIB          : std_logic;
 signal Enable_SRSI          : std_logic;
 signal En_SRSI_Main         : std_logic:='0';
-
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -602,40 +614,7 @@ uKey: MemBnk
                 Data_in  => Data_In_k,
                 Data_out => Data_Out_Sk
             );
------------------------------------------    
---Port Map Component Memory Bank MK_RC0--
------------------------------------------
-uRC0: MemBnk 
-    generic map(w => 16,
-                d => 16,
-                a => 4
-    )
-    Port Map (  Wr_En    => Wr_En_B,
-                Rd_En    => Rd_En_B,
-                Rst      => Rst_B,
-                Clk      => clk,
-                Addr_In  => Addr_Wr_B,
-                Addr_Out => Addr_Rd_B,
-                Data_in  => Data_In_B,
-                Data_out => Data_Out_SB
-            );
------------------------------------------    
---Port Map Component Memory Bank MK_RC1--
------------------------------------------
-uRC1: MemBnk 
-    generic map(w => 16,
-                d => 16,
-                a => 4
-            )
-    Port Map (  Wr_En    => Wr_En_k,
-                Rd_En    => Rd_En_k,
-                Rst      => Rst_k,
-                Clk      => clk,
-                Addr_In  => Addr_Wr_k,
-                Addr_Out => Addr_Rd_k,
-                Data_in  => Data_In_k,
-                Data_out => Data_Out_Sk
-            );
+
 --------------------------------------------------    
 --Port Map Component Mux For Write on M. Bank Xb--
 --------------------------------------------------
@@ -649,7 +628,8 @@ uMux_WrB: Mux
         In_SBox             =>Data_In_SBB,
         In_MDS              =>Data_In_MDSB,
         In_SRSlice          =>Data_In_SRSB,
-        In_SRSliceInv       =>Data_In_SRSIB,
+        In_SRSliceInv       =>Data_In_SRSIB,        
+        In_RC               =>Data_In_RCB ,
         In_XorKeyRotated    =>Test_Before_Data,
         In_SRSheetInv       =>Test_Before_Data,
         In_SRSheet          =>Test_Before_Data,
@@ -670,6 +650,7 @@ uMuxAdrr_WrB: Mux
         In_MDS              =>Addr_Wr_MDSB,
         In_SRSlice          =>Addr_Wr_SRSB,
         In_SRSliceInv       =>Addr_Wr_SRSIB,
+        In_RC               =>Addr_Wr_RCB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
@@ -687,6 +668,7 @@ uMuxWrB: MuxLogic
         In_MDS              =>Wr_En_MDSB,
         In_SRSlice          =>Wr_En_SRSB,
         In_SRSliceInv       =>Wr_En_SRSIB,
+        In_RC               =>Wr_En_RCB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
@@ -707,6 +689,7 @@ uDeMux_RdB: DeMux
         Out_MDS          =>Data_Out_MDSB,
         Out_SRSlice      =>Data_Out_SRSB,
         Out_SRSliceInv   =>Data_Out_SRSIB,
+        Out_RC           =>Data_Out_RCB,-- In this case the performance like Register A  (Syncronus)
         Out_XorKeyRotated=>Test_Before_Data,
         Out_SRSheetInv   =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
@@ -728,6 +711,7 @@ uMuxAdrr_RdB: Mux
         In_MDS              =>Addr_Rd_MDSB,
         In_SRSlice          =>Addr_Rd_SRSB,
         In_SRSliceInv       =>Addr_Rd_SRSIB,
+        In_RC               =>Addr_Rd_RCB,
         In_XorKeyRotated    =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
@@ -745,6 +729,7 @@ uMuxRdB: MuxLogic
         In_MDS              =>Rd_En_MDSB,
         In_SRSlice          =>Rd_En_SRSB,
         In_SRSliceInv       =>Rd_En_SRSIB,
+        In_RC               =>Rd_En_RCB,
         In_XorKeyRotated    =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
@@ -766,6 +751,7 @@ uMux_WrK: Mux
         In_MDS              =>Test_Before_Data,
         In_SBox             =>Test_Before_Data,
         In_SRSlice          =>Test_Before_Data,
+        In_RC               =>Test_Before_Data,
         In_SRSheetInv       =>Test_Before_Data,
         In_SRSliceInv       =>Test_Before_Data,
         Addr_Control        =>Addr_Control,
@@ -786,6 +772,7 @@ uMuxAdrr_Wrk: Mux
         In_MDS              =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
+        In_RC               =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSliceInv       =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
@@ -804,6 +791,7 @@ uMuxWrk: MuxLogic
         In_SBox             =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
+        In_RC               =>Test_Before_Logic,
         In_SRSliceInv       =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Wr_REn_k--Data_Out_Mux  
@@ -845,6 +833,7 @@ uMuxAdrr_Rdk: Mux
         In_SBox             =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
         In_SRSheetInv       =>Test_Before_Adrr,
+        In_RC               =>Test_Before_Adrr,
         In_SRSliceInv       =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Addr_RRd_K--Data_Out_Mux  
@@ -863,6 +852,7 @@ uMuxRdk: MuxLogic
         In_SRSlice          =>Test_Before_Logic,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSliceInv       =>Test_Before_Logic,
+        In_RC               =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Rd_REn_k--Data_Out_Mux  
     );
@@ -961,6 +951,7 @@ USR_Slice_Inv: SR_Slice_Inv
     );
 
 STat: process(clk,presente)
+variable i_Control : std_logic_vector(4 DOWNTO 0) := "00000";
 begin
     if clk 'event and clk = '1' then 
             if Enable_generate ='1' then
@@ -1041,18 +1032,61 @@ begin
                             presente <= s6;
                             Addr_Control <="0011";
                         end if;
-                    when s7 =>
+                    when  s7 =>
                         if Enable_SRSI = '1' then 
                             En_SRSI_Main <= '0'; 
-                            --n_SRSI_Main <= '1';
-                            presente <= s7;
-                            Addr_Control <="0110";
+                            Addr_Rd_MR0  <= i_Control;
+                            Rd_En_MR0    <= '0';
+                            Addr_Rd_RCB  <= x"0";
+                            Rd_En_RCB    <= '0'; 
+                            presente     <= s8;
+                            Addr_Control <="1000";
                         else
                             En_MDS_Main <= '0'; 
                             En_SRSI_Main <= '1';
                             presente <= s7;
                             Addr_Control <="0101";
                         end if;
+                    when s8 =>
+                            --RC           <=       RC0 XOR Data_Out_SB; 
+                            Addr_Rd_MR1  <= i_Control;
+                            Rd_En_MR1    <= '0';
+                            Addr_Rd_RCB  <= x"8";
+                            Rd_En_RCB    <= '0'; 
+                            presente     <=s9;
+                            Addr_Control <="1000"; 
+                    when s9 =>
+                            --Data_In_RCB  <= RC0 XOR Data_Out_SB; 
+                            Addr_Rd_MR1  <=i_Control;
+                            Rd_En_RCB    <= '1'; 
+                            Rd_En_MR1    <='0';
+                            presente     <=s10;
+                            Addr_Control <="1000";
+                    when s10 =>
+                            Data_In_RCB  <= RC0 XOR Data_Out_SB; 
+                            Addr_Rd_MR1  <=i_Control;
+                            Rd_En_MR1    <='0';
+                            Addr_Wr_RCB  <=x"0";
+                            Wr_En_RCB    <= '0';
+                            presente     <=s11;
+                            Addr_Control <="1000";
+                    when s11 =>
+                            Data_In_RCB  <= RC1 XOR Data_Out_SB; 
+                            Addr_Rd_MR1  <=i_Control;
+                            Rd_En_MR1    <='0';
+                            Addr_Wr_RCB  <=x"8";
+                            Wr_En_RCB    <= '0';
+                            presente     <=s12;
+                            Addr_Control <="1000";
+                    when s12 =>
+                            --Data_In_RCB  <= RC1 XOR Data_Out_SB; 
+                            Addr_Rd_MR1  <=i_Control;
+                            Rd_En_MR1    <='1';
+                            Addr_Wr_RCB  <=x"0";
+                            Wr_En_RCB    <= '0';
+                            presente     <=s13;
+                            Addr_Control <="1000";
+                        
                     when others => null;
                 end case;
             end if;

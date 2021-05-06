@@ -137,12 +137,13 @@ if (CLK'event AND CLK = '1') then
                         Rd_En_B   <= '0';
                     else
                         presente  <= s3; 
-                        Addr_Aux  := Addr_Aux+1;
-                        Establish <= "00000";
+                        Addr_Aux  := "00100";
+                        Establish <= "00101";
                         Addr_Rd_B <= Addr_Aux(3 downto 0);
                         Rd_En_B   <= '1';
-                        Addr_Wr_B <= x"0";
-                        Wr_En_B   <= '1';
+                        Addr_Wr_B <= x"4";
+                        Wr_En_B   <= '0';
+                        Data_RIn_B <= x4;
                     end if;
                 when s3 =>
                     presente  <= s4;
@@ -150,7 +151,7 @@ if (CLK'event AND CLK = '1') then
                     Addr_Wr_B <= Establish (3 downto 0);
                     Establish <= Establish +1;
                     Wr_En_B   <= '0';
-                    --Data_RIn_B <= x5;
+                    Data_RIn_B <= x5;
                 when s4 => 
                     if Establish < "10000" then 
                         presente<= s4;

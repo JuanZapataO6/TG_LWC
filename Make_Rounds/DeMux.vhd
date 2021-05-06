@@ -19,6 +19,7 @@ entity DeMux is
         Out_SRSlice      : Out std_logic_vector (w-1 downto 0);
         Out_SRSheetInv   : Out std_logic_vector (w-1 downto 0);
         Out_SRSliceInv   : Out std_logic_vector (w-1 downto 0);
+        Out_RC           : Out std_logic_vector (w-1 downto 0);
         clk              : in  std_logic;
         Addr_Control     : in  std_logic_vector (3 downto 0);        
         Data_In          : in  std_logic_vector (w-1 downto 0)
@@ -38,8 +39,9 @@ begin
             when "0100" => Out_SRSlice <=Data_In; 
             when "0101" => Out_SRSliceInv<=Data_In; 
             when "0110" => Out_XorKeyRotated <=Data_In; 
-            when "0111" => Out_SRSheetInv <=Data_In;
-            when "1000" => Out_SRSheet  <=Data_In;
+            when "0111" => Out_SRSheetInv <=Data_In;            
+            when "1000" => Out_RC       <=Data_In;
+            when "1001" => Out_SRSheet  <=Data_In;
             when others => Out_XorKey <=Data_In;
         end case;
     end if;

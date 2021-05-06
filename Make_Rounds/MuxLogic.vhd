@@ -17,6 +17,7 @@ entity MuxLogic is
         In_SRSlice      : in  std_logic;
         In_SRSheetInv   : in  std_logic;
         In_SRSliceInv   : in  std_logic;
+        In_RC           : in  std_logic;
         Addr_Control    : in  std_logic_vector (3 downto 0);        
         Data_Out        : out std_logic
     );
@@ -33,5 +34,6 @@ begin
 		            In_SRSliceInv    when "0101", 
 		            In_XorKeyRotated when "0110", 
 		            In_SRSheet       when "0111",
+                    In_RC            when "1000",   
                     In_SRSheetInv    when  others ;
 end architecture RTL;
