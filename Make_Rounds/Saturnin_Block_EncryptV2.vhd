@@ -153,6 +153,25 @@ component XOR_key
         En_Out      : out std_logic        
     );
 end component XOR_key;
+component XOR_key_Rotated  
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Addr_Rd_K   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Rd_En_k     : out std_logic;
+        Data_Out_B  : in std_logic_vector (0 to 15);
+        Data_Out_K  : in std_logic_vector (0 to 15);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component XOR_key_Rotated;
 component S_Box is
     port (
         --Ports for Memory Bank Write Xb
@@ -282,6 +301,20 @@ signal Addr_Rd_MR1 : std_logic_vector (4 downto 0);
 signal Rd_En_MR0   : std_logic;
 signal Rd_En_MR1   : std_logic;
 signal Load_MR        : std_logic;
+-----------------------------------------------
+--signals from Xor_Key_Rotated to several Mux--
+----------------------------------------------- 
+signal Addr_Wr_XKRB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_XKRB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_XKRK        : std_logic_vector (3 DOWNTO 0);
+signal Addr_Rd_XKRB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_XKRB       : std_logic_vector (15 DOWNTO 0);
+signal Data_Out_XKRK       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_XKRB          : std_logic;
+signal Rd_En_XKRB          : std_logic;
+signal Rd_En_XKRK          : std_logic;
+signal Enable_XKR          : std_logic;
+signal Enable_XKR_Main     : std_logic;
 -----------------------------------------
 --signals from Xor_Key to several Mux--
 ----------------------------------------- 
@@ -630,7 +663,7 @@ uMux_WrB: Mux
         In_SRSlice          =>Data_In_SRSB,
         In_SRSliceInv       =>Data_In_SRSIB,        
         In_RC               =>Data_In_RCB ,
-        In_XorKeyRotated    =>Test_Before_Data,
+        In_XorKeyRotated    =>Data_In_XKRB,
         In_SRSheetInv       =>Test_Before_Data,
         In_SRSheet          =>Test_Before_Data,
         Addr_Control        =>Addr_Control,
@@ -651,7 +684,7 @@ uMuxAdrr_WrB: Mux
         In_SRSlice          =>Addr_Wr_SRSB,
         In_SRSliceInv       =>Addr_Wr_SRSIB,
         In_RC               =>Addr_Wr_RCB,
-        In_XorKeyRotated    =>Test_Before_Adrr,
+        In_XorKeyRotated    =>Addr_Wr_XKRB,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
@@ -669,7 +702,7 @@ uMuxWrB: MuxLogic
         In_SRSlice          =>Wr_En_SRSB,
         In_SRSliceInv       =>Wr_En_SRSIB,
         In_RC               =>Wr_En_RCB,
-        In_XorKeyRotated    =>Test_Before_Logic,
+        In_XorKeyRotated    =>Wr_En_XKRB,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
@@ -690,7 +723,7 @@ uDeMux_RdB: DeMux
         Out_SRSlice      =>Data_Out_SRSB,
         Out_SRSliceInv   =>Data_Out_SRSIB,
         Out_RC           =>Data_Out_RCB,-- In this case the performance like Register A  (Syncronus)
-        Out_XorKeyRotated=>Test_Before_Data,
+        Out_XorKeyRotated=>Data_Out_XKRB,
         Out_SRSheetInv   =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
         clk              => clk,
@@ -712,7 +745,7 @@ uMuxAdrr_RdB: Mux
         In_SRSlice          =>Addr_Rd_SRSB,
         In_SRSliceInv       =>Addr_Rd_SRSIB,
         In_RC               =>Addr_Rd_RCB,
-        In_XorKeyRotated    =>Test_Before_Adrr,
+        In_XorKeyRotated    =>Addr_Rd_XKRB,
         In_SRSheetInv       =>Test_Before_Adrr,
         In_SRSheet          =>Test_Before_Adrr,
         Addr_Control        =>Addr_Control,
@@ -730,7 +763,7 @@ uMuxRdB: MuxLogic
         In_SRSlice          =>Rd_En_SRSB,
         In_SRSliceInv       =>Rd_En_SRSIB,
         In_RC               =>Rd_En_RCB,
-        In_XorKeyRotated    =>Test_Before_Logic,
+        In_XorKeyRotated    =>Rd_En_XKRB,
         In_SRSheetInv       =>Test_Before_Logic,
         In_SRSheet          =>Test_Before_Logic,
         Addr_Control        =>Addr_Control,
@@ -806,8 +839,8 @@ uDeMux_RdK: DeMux
     port map( 
         Out_DataForce    =>Test_Before_Data,
         Out_XorKey       =>Data_Out_XKK,
-        Out_SBox         =>Test_Before_Data,
-        Out_XorKeyRotated=>Test_Before_Data,
+        Out_XorKeyRotated=>Data_Out_XKRK,
+        Out_SBox         =>Test_Before_Data,        
         Out_MDS          =>Test_Before_Data,
         Out_SRSheet      =>Test_Before_Data,
         Out_SRSlice      =>Test_Before_Data,
@@ -827,8 +860,8 @@ uMuxAdrr_Rdk: Mux
     Port Map( 
         In_DataForce        =>Test_Before_Adrr,
         In_XorKey           =>Addr_Rd_XKK,
-        In_SRSheet          =>Test_Before_Adrr,
-        In_XorKeyRotated    =>Test_Before_Adrr,
+        In_XorKeyRotated    =>Addr_Rd_XKRK,
+        In_SRSheet          =>Test_Before_Adrr,        
         In_MDS              =>Test_Before_Adrr,
         In_SBox             =>Test_Before_Adrr,
         In_SRSlice          =>Test_Before_Adrr,
@@ -845,8 +878,8 @@ uMuxRdk: MuxLogic
     Port Map( 
         In_DataForce        =>Test_Before_Logic,
         In_XorKey           =>Rd_En_XKK,
+        In_XorKeyRotated    =>Rd_En_XKRK,
         In_SRSheet          =>Test_Before_Logic,
-        In_XorKeyRotated    =>Test_Before_Logic,
         In_MDS              =>Test_Before_Logic,
         In_SBox             =>Test_Before_Logic,
         In_SRSlice          =>Test_Before_Logic,
@@ -876,6 +909,27 @@ UXorKey: XOR_key
         clk         => Clk, 
         En_In       => Enable_DF,
         En_Out      => Enable_XK        
+    );
+-----------------------------
+--Component XOR_Key_Rotated--
+-----------------------------
+UXorKey_Rotated: XOR_key_Rotated
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_XKRB,
+        Data_RIn_B  => Data_In_XKRB,
+        Wr_En_B     => Wr_En_XKRB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_XKRB,
+        Addr_Rd_K   => Addr_Rd_XKRK,
+        Rd_En_B     => Rd_En_XKRB,
+        Rd_En_k     => Rd_En_XKRK,
+        Data_Out_B  => Data_Out_XKRB,
+        Data_Out_K  => Data_Out_XKRK,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => Enable_XKR_Main,
+        En_Out      => Enable_XKR        
     );
 ---------------------
 --Component S_Box--
@@ -1085,8 +1139,21 @@ begin
                             Addr_Wr_RCB  <=x"0";
                             Wr_En_RCB    <= '0';
                             presente     <=s13;
-                            Addr_Control <="1000";
-                        
+                            Addr_Control <="0110";
+                    when s13 =>
+                            --Data_In_RCB  <= RC1 XOR Data_Out_SB; 
+                            if Enable_XKR = '1' then  
+                                Addr_Rd_MR1  <=i_Control;
+                                Rd_En_MR1    <='1';
+                                Addr_Wr_RCB  <=x"0";
+                                Wr_En_RCB    <= '0';
+                                presente     <=s14;
+                                Addr_Control <="0111";
+                            else 
+                                Enable_XKR_Main <= '1';
+                                presente     <=s13;
+                                Addr_Control <="0110";
+                            end if;    
                     when others => null;
                 end case;
             end if;

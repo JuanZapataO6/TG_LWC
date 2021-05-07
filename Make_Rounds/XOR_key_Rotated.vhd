@@ -9,15 +9,15 @@ entity XOR_key_Rotated is
     port (
         --Ports for Memory Bank Write Xb
         Addr_Wr_B   : out std_logic_vector(3 downto 0);
-        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Data_RIn_B  : out std_logic_vector (15 downto 0);
         Wr_En_B     : out std_logic;
         --Ports for Memory Bank Read xb and xk
         Addr_Rd_B   : out std_logic_vector(3 downto 0);
         Addr_Rd_K   : out std_logic_vector(3 downto 0);
         Rd_En_B     : out std_logic;
         Rd_En_k     : out std_logic;
-        Data_Out_B  : in std_logic_vector (0 to 15);
-        Data_Out_K  : in std_logic_vector (0 to 15);
+        Data_Out_B  : in std_logic_vector (15 downto 0);
+        Data_Out_K  : in std_logic_vector (15 downto 0);
         --Ports For Control Component 
         clk         : in std_logic; 
         En_In       : in std_logic;
@@ -64,16 +64,16 @@ if (CLK'event AND CLK = '1') then
                     Rd_En_K   <= '1';
                     Wr_En_B   <= '1';
                 when s4 =>
-                    presente <= s5;  
-                    Data_RIn_B <=Data_Out_B XOR Data_Out_K(4 downto 0) & Data_Out_K(15 downto 5) ;
-                    Rd_En_B   <= '1';
-                    Rd_En_K   <= '1';
-                    Wr_En_B   <= '0';
+                    presente   <= s5;  
+                    Data_RIn_B <= Data_Out_B XOR (Data_Out_K(4 downto 0) & Data_Out_K(15 downto 5));
+                    Rd_En_B    <= '1';
+                    Rd_En_K    <= '1';
+                    Wr_En_B    <= '0';
                                         
                 when s5 =>
                     presente <= s6;
                     Addr_Wr_B <= Addr_Aux(3 downto 0);
-                    Data_RIn_B <=Data_Out_B XOR Data_Out_K;
+                    Data_RIn_B <=Data_Out_B XOR (Data_Out_K(4 downto 0) & Data_Out_K(15 downto 5));
                     Rd_En_B   <= '1';
                     Rd_En_K   <= '1';
                     Wr_En_B   <= '0';                    
