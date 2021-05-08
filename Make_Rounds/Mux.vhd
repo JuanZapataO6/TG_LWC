@@ -37,5 +37,6 @@ begin
 		            In_XorKeyRotated when "0110", 
 		            In_SRSheet       when "0111",
                     In_RC            when "1000",
+                    In_SRSheetInv    when "1001",
                     In_SRSheetInv    when  others ;
 end architecture RTL;

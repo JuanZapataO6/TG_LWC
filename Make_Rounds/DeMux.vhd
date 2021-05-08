@@ -39,9 +39,9 @@ begin
             when "0100" => Out_SRSlice <=Data_In; 
             when "0101" => Out_SRSliceInv<=Data_In; 
             when "0110" => Out_XorKeyRotated <=Data_In; 
-            when "0111" => Out_SRSheetInv <=Data_In;            
+            when "0111" => Out_SRSheet <=Data_In;            
             when "1000" => Out_RC       <=Data_In;
-            when "1001" => Out_SRSheet  <=Data_In;
+            when "1001" => Out_SRSheetInv  <=Data_In;
             when others => Out_XorKey <=Data_In;
         end case;
     end if;

@@ -236,6 +236,38 @@ component SR_Slice_Inv is
         En_Out      : out std_logic        
     );
 end component SR_Slice_Inv;
+component SR_Sheet is
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (15 downto 0);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component SR_Sheet;
+component SR_Sheet_Inv is
+    port (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   : out std_logic_vector(3 downto 0);
+        Data_RIn_B  : out std_logic_vector (0 to 15);
+        Wr_En_B     : out std_logic;
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   : out std_logic_vector(3 downto 0);
+        Rd_En_B     : out std_logic;
+        Data_Out_B  : in std_logic_vector (15 downto 0);
+        --Ports For Control Component 
+        clk         : in std_logic; 
+        En_In       : in std_logic;
+        En_Out      : out std_logic        
+    );
+end component SR_Sheet_Inv;
 component Make_Rounds is 
     port(
         RC0         : out std_logic_vector(0 to 15);
@@ -250,7 +282,7 @@ component Make_Rounds is
         clk         : in std_logic
     );
 end component Make_Rounds;
-TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18);
+TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20);
 SIGNAL presente:estado:=s0;
 signal clk : std_logic;
 -----------------------------------------------------
@@ -372,6 +404,28 @@ signal Wr_En_SRSIB          : std_logic;
 signal Rd_En_SRSIB          : std_logic;
 signal Enable_SRSI          : std_logic;
 signal En_SRSI_Main         : std_logic:='0';
+----------------------------------------
+--signals from SR_Sheet to several Mux--
+---------------------------------------- 
+signal Addr_Wr_SRSHB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_SRSHB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_SRSHB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_SRSHB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_SRSHB          : std_logic;
+signal Rd_En_SRSHB          : std_logic;
+signal Enable_SRSH          : std_logic;
+signal En_SRSH_Main         : std_logic:='0';
+--------------------------------------------
+--signals from SR_Sheet_Inv to several Mux--
+-------------------------------------------- 
+signal Addr_Wr_SRSHIB        : std_logic_vector (3 DOWNTO 0);
+signal Data_In_SRSHIB        : std_logic_vector (15 DOWNTO 0);
+signal Addr_Rd_SRSHIB        : std_logic_vector (3 DOWNTO 0);
+signal Data_Out_SRSHIB       : std_logic_vector (15 DOWNTO 0);
+signal Wr_En_SRSHIB          : std_logic;
+signal Rd_En_SRSHIB          : std_logic;
+signal Enable_SRSHI          : std_logic;
+signal En_SRSHI_Main         : std_logic:='0';
 ---------------------------------------------------
 -------Signals for MemBnk_B With Registers In------
 ---------------------------------------------------
@@ -664,8 +718,8 @@ uMux_WrB: Mux
         In_SRSliceInv       =>Data_In_SRSIB,        
         In_RC               =>Data_In_RCB ,
         In_XorKeyRotated    =>Data_In_XKRB,
-        In_SRSheetInv       =>Test_Before_Data,
-        In_SRSheet          =>Test_Before_Data,
+        In_SRSheetInv       =>Data_In_SRSHIB,
+        In_SRSheet          =>Data_In_SRSHB,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Data_RIn_B--Data_Out_Mux  
     );
@@ -685,8 +739,8 @@ uMuxAdrr_WrB: Mux
         In_SRSliceInv       =>Addr_Wr_SRSIB,
         In_RC               =>Addr_Wr_RCB,
         In_XorKeyRotated    =>Addr_Wr_XKRB,
-        In_SRSheetInv       =>Test_Before_Adrr,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SRSheetInv       =>Addr_Wr_SRSHIB,
+        In_SRSheet          =>Addr_Wr_SRSHB,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Addr_RWr_B--Data_Out_Mux  
     );
@@ -703,8 +757,8 @@ uMuxWrB: MuxLogic
         In_SRSliceInv       =>Wr_En_SRSIB,
         In_RC               =>Wr_En_RCB,
         In_XorKeyRotated    =>Wr_En_XKRB,
-        In_SRSheetInv       =>Test_Before_Logic,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SRSheetInv       =>Wr_En_SRSHIB,
+        In_SRSheet          =>Wr_En_SRSHB,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Wr_REn_B--Data_Out_Mux  
     );
@@ -724,8 +778,8 @@ uDeMux_RdB: DeMux
         Out_SRSliceInv   =>Data_Out_SRSIB,
         Out_RC           =>Data_Out_RCB,-- In this case the performance like Register A  (Syncronus)
         Out_XorKeyRotated=>Data_Out_XKRB,
-        Out_SRSheetInv   =>Test_Before_Data,
-        Out_SRSheet      =>Test_Before_Data,
+        Out_SRSheetInv   =>Data_Out_SRSHIB,
+        Out_SRSheet      =>Data_Out_SRSHB,
         clk              => clk,
         Addr_Control     =>Addr_Control,      
         Data_In          =>Data_Out_SB
@@ -746,8 +800,8 @@ uMuxAdrr_RdB: Mux
         In_SRSliceInv       =>Addr_Rd_SRSIB,
         In_RC               =>Addr_Rd_RCB,
         In_XorKeyRotated    =>Addr_Rd_XKRB,
-        In_SRSheetInv       =>Test_Before_Adrr,
-        In_SRSheet          =>Test_Before_Adrr,
+        In_SRSheetInv       =>Addr_Rd_SRSHIB,
+        In_SRSheet          =>Addr_Rd_SRSHB,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Addr_RRd_B--Data_Out_Mux  
     );
@@ -764,8 +818,8 @@ uMuxRdB: MuxLogic
         In_SRSliceInv       =>Rd_En_SRSIB,
         In_RC               =>Rd_En_RCB,
         In_XorKeyRotated    =>Rd_En_XKRB,
-        In_SRSheetInv       =>Test_Before_Logic,
-        In_SRSheet          =>Test_Before_Logic,
+        In_SRSheetInv       =>Rd_En_SRSHIB,
+        In_SRSheet          =>Rd_En_SRSHB,
         Addr_Control        =>Addr_Control,
         Data_Out            =>Rd_REn_B--Data_Out_Mux  
     );
@@ -985,9 +1039,9 @@ USR_Slice: SR_Slice
         En_In       => En_SRS_Main,
         En_Out      => Enable_SRS        
     );
-----------------------
---Component SR_Slice--
-----------------------  
+--------------------------
+--Component SR_Slice_Inv--
+--------------------------  
 USR_Slice_Inv: SR_Slice_Inv
     port map (
         --Ports for Memory Bank Write Xb
@@ -1003,7 +1057,42 @@ USR_Slice_Inv: SR_Slice_Inv
         En_In       => En_SRSI_Main,
         En_Out      => Enable_SRSI        
     );
-
+----------------------
+--Component SR_Sheet--
+----------------------  
+USR_Sheet: SR_Sheet
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_SRSHB,
+        Data_RIn_B  => Data_In_SRSHB,
+        Wr_En_B     => Wr_En_SRSHB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_SRSHB,
+        Rd_En_B     => Rd_En_SRSHB,
+        Data_Out_B  => Data_Out_SRSHB,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => En_SRSH_Main,
+        En_Out      => Enable_SRSH        
+    );
+--------------------------
+--Component SR_Sheet_Inv--
+--------------------------    
+USR_Sheet_Inv: SR_Sheet_Inv
+    port map (
+        --Ports for Memory Bank Write Xb
+        Addr_Wr_B   => Addr_Wr_SRSHIB,
+        Data_RIn_B  => Data_In_SRSHIB,
+        Wr_En_B     => Wr_En_SRSHIB,
+        --Ports for Memory Bank Read xb and xk
+        Addr_Rd_B   => Addr_Rd_SRSHIB,
+        Rd_En_B     => Rd_En_SRSHIB,
+        Data_Out_B  => Data_Out_SRSHIB,
+        --Ports For Control Component 
+        clk         => Clk, 
+        En_In       => En_SRSHI_Main,
+        En_Out      => Enable_SRSHI        
+    );
 STat: process(clk,presente)
 variable i_Control : std_logic_vector(4 DOWNTO 0) := "00000";
 begin
@@ -1043,7 +1132,7 @@ begin
                             presente <= s2;
                             Addr_Control <="0010";
                         end if;
-                    when  s3 =>
+                    when  s3  =>
                         if Enable_MDS = '1' then
                             En_SB_Main <= '1'; 
                             presente <= s4;
@@ -1053,18 +1142,24 @@ begin
                             presente <= s3;
                             Addr_Control <="0011";
                         end if;
-                    when  s4 =>
+                    when  s4  =>
                         if Enable_SB = '1' then
-                            En_SB_Main <= '0'; 
-                            En_SRS_Main <= '1';
-                            presente <= s5;
-                            Addr_Control <="0100";
+                            En_SB_Main <= '0';                             
+                            if i_Control(0) = '0' then 
+                                En_SRS_Main <= '1';
+                                presente <= s5;
+                                Addr_Control <="0100";
+                            else 
+                                En_SRSH_Main <= '1';
+                                presente <= s15;
+                                Addr_Control <="0100";
+                            end if;
                         else
                             En_MDS_Main <= '0';
                             presente <= s4;
                             Addr_Control <="0010";
                         end if;
-                    when  s5 =>
+                    when  s5  =>
                         if Enable_SRS = '1' then
                             En_MDS_Main <= '1'; 
                             En_SRS_Main <= '0';
@@ -1075,7 +1170,7 @@ begin
                             presente <= s5;
                             Addr_Control <="0100";
                         end if;
-                    when  s6 =>
+                    when  s6  =>
                         if Enable_MDS = '1' then
                             En_MDS_Main <= '0'; 
                             En_SRSI_Main <= '1';
@@ -1086,7 +1181,7 @@ begin
                             presente <= s6;
                             Addr_Control <="0011";
                         end if;
-                    when  s7 =>
+                    when  s7  =>
                         if Enable_SRSI = '1' then 
                             En_SRSI_Main <= '0'; 
                             Addr_Rd_MR0  <= i_Control;
@@ -1101,7 +1196,7 @@ begin
                             presente <= s7;
                             Addr_Control <="0101";
                         end if;
-                    when s8 =>
+                    when  s8  =>
                             --RC           <=       RC0 XOR Data_Out_SB; 
                             Addr_Rd_MR1  <= i_Control;
                             Rd_En_MR1    <= '0';
@@ -1109,14 +1204,14 @@ begin
                             Rd_En_RCB    <= '0'; 
                             presente     <=s9;
                             Addr_Control <="1000"; 
-                    when s9 =>
+                    when  s9  =>
                             --Data_In_RCB  <= RC0 XOR Data_Out_SB; 
                             Addr_Rd_MR1  <=i_Control;
                             Rd_En_RCB    <= '1'; 
                             Rd_En_MR1    <='0';
                             presente     <=s10;
                             Addr_Control <="1000";
-                    when s10 =>
+                    when  s10 =>
                             Data_In_RCB  <= RC0 XOR Data_Out_SB; 
                             Addr_Rd_MR1  <=i_Control;
                             Rd_En_MR1    <='0';
@@ -1124,7 +1219,7 @@ begin
                             Wr_En_RCB    <= '0';
                             presente     <=s11;
                             Addr_Control <="1000";
-                    when s11 =>
+                    when  s11 =>
                             Data_In_RCB  <= RC1 XOR Data_Out_SB; 
                             Addr_Rd_MR1  <=i_Control;
                             Rd_En_MR1    <='0';
@@ -1132,7 +1227,7 @@ begin
                             Wr_En_RCB    <= '0';
                             presente     <=s12;
                             Addr_Control <="1000";
-                    when s12 =>
+                    when  s12 =>
                             --Data_In_RCB  <= RC1 XOR Data_Out_SB; 
                             Addr_Rd_MR1  <=i_Control;
                             Rd_En_MR1    <='1';
@@ -1153,7 +1248,41 @@ begin
                                 Enable_XKR_Main <= '1';
                                 presente     <=s13;
                                 Addr_Control <="0110";
-                            end if;    
+                            end if;
+                    when s14 =>
+                            i_Control := i_Control+1;
+                            if i_Control < R_MR then  
+                                Addr_Rd_MR1  <=i_Control;
+                                presente <= s2;
+                                En_SB_Main <= '1';
+                                Addr_Control <="0010";
+                            else 
+                                Enable_XKR_Main <= '1';
+                                presente     <= s20;
+                                Addr_Control <= "0110";
+                            end if; 
+                    when s15 =>
+                        if Enable_SRSH = '1' then
+                            En_MDS_Main <= '1'; 
+                            En_SRSH_Main <= '0';
+                            presente <= s16;
+                            Addr_Control <="0011";
+                        else
+                            --En_MDS_Main <= '1';
+                            presente <= s15;
+                            Addr_Control <="0111";
+                        end if;
+                    when  s16  =>
+                        if Enable_MDS = '1' then
+                            En_MDS_Main <= '0'; 
+                            En_SRSHI_Main <= '1';
+                            presente <= s17;
+                            Addr_Control <="1001";
+                        else
+                            En_MDS_Main <= '1';
+                            presente <= s16;
+                            Addr_Control <="0011";
+                        end if;
                     when others => null;
                 end case;
             end if;

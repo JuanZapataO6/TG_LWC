@@ -90,7 +90,7 @@ R16
 !s100 4<NOZA^_KPP6J]lK8Tdg;0
 !i10b 1
 Edemux
-Z23 w1620314510
+Z23 w1620517285
 R2
 R3
 R4
@@ -105,7 +105,7 @@ L8
 VBLJgcgG[W5Qe>g>[8QL;O1
 R11
 32
-Z26 !s108 1620324576.208000
+Z26 !s108 1620517341.642000
 Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd|
 Z28 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd|
 R15
@@ -122,7 +122,7 @@ R7
 DEx4 work 5 demux 0 22 BLJgcgG[W5Qe>g>[8QL;O1
 l30
 L29
-Vg]3CfOjNE?0KX`W_H]:Y<1
+Vm9kdNB<R8Yg5Yb[gdUU980
 R11
 32
 R26
@@ -130,7 +130,7 @@ R27
 R28
 R15
 R16
-!s100 I1:V;<9fJ57SD982klLoB3
+!s100 @`kG[SnlAM7S7Q]GQDhIM0
 !i10b 1
 Emake_rounds
 Z29 w1619997056
@@ -258,7 +258,7 @@ R16
 !s100 lkVY@h]a<aiTnkzd9Fche2
 !i10b 1
 Emux
-Z47 w1620308714
+Z47 w1620517281
 R2
 R3
 R4
@@ -273,7 +273,7 @@ L8
 VE@0fRRbLDPlR1PBEBQH9J0
 R11
 32
-Z50 !s108 1620309413.983000
+Z50 !s108 1620517341.382000
 Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd|
 Z52 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd|
 R15
@@ -290,7 +290,7 @@ R7
 DEx4 work 3 mux 0 22 E@0fRRbLDPlR1PBEBQH9J0
 l29
 L28
-VT4Hg`d`9gjE9T9hljddeF0
+Vck`zC0kQ>hZO>MRT_mK281
 R11
 32
 R50
@@ -298,10 +298,10 @@ R51
 R52
 R15
 R16
-!s100 MhQ_@TQN=2:5CnGEgSPh@0
+!s100 Kg6z6G7AP1`W1jK_L3F5C3
 !i10b 1
 Emuxlogic
-Z53 w1620308772
+Z53 w1620517277
 R2
 R3
 R4
@@ -316,7 +316,7 @@ L8
 V2JM8`aciCC1ZKX>fRNI2g2
 R11
 32
-Z56 !s108 1620309410.009000
+Z56 !s108 1620517341.510000
 Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd|
 Z58 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd|
 R15
@@ -333,7 +333,7 @@ R7
 DEx4 work 8 muxlogic 0 22 2JM8`aciCC1ZKX>fRNI2g2
 l27
 L26
-V2mfN_REgz;[:E=1klOFQL0
+VfACDe]7ZPeZjU4RPXCROX0
 R11
 32
 R56
@@ -341,7 +341,7 @@ R57
 R58
 R15
 R16
-!s100 K>YfBCUC;<`m7=?GWahKM3
+!s100 e5b=oKGYBL_]iW`9XE^_L2
 !i10b 1
 Eregister_a
 Z59 w1612232424
@@ -473,7 +473,7 @@ R16
 !s100 2NE?c2ThV8_;RfFQ^afme2
 !i10b 1
 Esaturnin_block_encryptv2
-Z77 w1620350638
+Z77 w1620517938
 R1
 R4
 R5
@@ -485,36 +485,36 @@ Z79 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDe
 l0
 L7
 VhTd10J4g<9Tb@akW?nlR:0
+!s100 a4LzQ?=]j8IUU^bK:nIe63
 R11
 32
-Z80 !s108 1620350696.938000
+!i10b 1
+Z80 !s108 1620517965.884000
 Z81 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd|
 Z82 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd|
 R15
 R16
-!s100 a4LzQ?=]j8IUU^bK:nIe63
-!i10b 1
 Amain
 R1
 R4
 R5
 R6
 R7
-DEx4 work 24 saturnin_block_encryptv2 0 22 hTd10J4g<9Tb@akW?nlR:0
-l426
+Z83 DEx4 work 24 saturnin_block_encryptv2 0 22 hTd10J4g<9Tb@akW?nlR:0
+l480
 L9
-Vd^@4`EB;kfUY?jifBaBhU3
+V@g_@b2EibK=PGIhG;<@dA3
+!s100 R9C48G<@1:ZiM9QL?9WY_2
 R11
 32
+!i10b 1
 R80
 R81
 R82
 R15
 R16
-!s100 aBzzS3cP3[7GCV4SkS89z1
-!i10b 1
-Esr_slice
-Z83 w1620250443
+Esr_sheet
+Z84 w1620364764
 R2
 R3
 R4
@@ -522,16 +522,102 @@ R5
 R6
 R7
 R8
-Z84 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd
-Z85 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd
+Z85 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd
+Z86 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd
+l0
+L8
+VJYAFhJGjQDn;TSa2of0lj2
+R11
+32
+Z87 !s108 1620515765.166000
+Z88 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd|
+Z89 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd|
+R15
+R16
+!s100 _iJ^mk`X54^[AQj[D1eAB0
+!i10b 1
+Amain
+R2
+R3
+R4
+R5
+R6
+R7
+DEx4 work 8 sr_sheet 0 22 JYAFhJGjQDn;TSa2of0lj2
+l46
+L24
+VZRGk^R5gSe`:UdnjQWGP62
+R11
+32
+R87
+R88
+R89
+R15
+R16
+!s100 Bg@7Y2YLDe]G]o>a02OlB1
+!i10b 1
+Esr_sheet_inv
+Z90 w1620364721
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+Z91 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd
+Z92 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd
+l0
+L8
+VU5G`6KWLgmmjkYFI2=[G22
+R11
+32
+Z93 !s108 1620515765.297000
+Z94 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd|
+Z95 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd|
+R15
+R16
+!s100 zNQTL[=VT18:c9`^>O=EW0
+!i10b 1
+Amain
+R2
+R3
+R4
+R5
+R6
+R7
+DEx4 work 12 sr_sheet_inv 0 22 U5G`6KWLgmmjkYFI2=[G22
+l46
+L24
+V=2]2]69`W`l[IiHiHKH=<2
+R11
+32
+R93
+R94
+R95
+R15
+R16
+!s100 LD^;dIfjmlld<SiJ;bzUm0
+!i10b 1
+Esr_slice
+Z96 w1620250443
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+Z97 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd
+Z98 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd
 l0
 L8
 Vc02@1NTU1]hlb=_@[ljm<2
 R11
 32
-Z86 !s108 1620250465.073000
-Z87 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd|
-Z88 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd|
+Z99 !s108 1620250465.073000
+Z100 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd|
+Z101 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd|
 R15
 R16
 !s100 4OozT<<^kbnIRCUX?OT@_3
@@ -549,15 +635,15 @@ L24
 V34@PS0eh_4OE1:^5SGY4=0
 R11
 32
-R86
-R87
-R88
+R99
+R100
+R101
 R15
 R16
 !s100 fIcNPKSIBReZc3DTCL`3Q3
 !i10b 1
 Esr_slice_inv
-Z89 w1620266447
+Z102 w1620266447
 R2
 R3
 R4
@@ -565,16 +651,16 @@ R5
 R6
 R7
 R8
-Z90 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd
-Z91 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd
+Z103 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd
+Z104 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd
 l0
 L8
 VOQSQZ[lQ89=mzL8n=5Zhe2
 R11
 32
-Z92 !s108 1620266462.336000
-Z93 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd|
-Z94 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd|
+Z105 !s108 1620266462.336000
+Z106 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd|
+Z107 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd|
 R15
 R16
 !s100 <4[U8nLTIMmBD;fXi@h:@3
@@ -592,15 +678,15 @@ L24
 V:^QIbWT>>>;SDRmYlfWhH1
 R11
 32
-R92
-R93
-R94
+R105
+R106
+R107
 R15
 R16
 !s100 i``e?`BYg4U0DbLGSbezz2
 !i10b 1
 Exor_key
-Z95 w1617557500
+Z108 w1617557500
 R2
 R3
 R4
@@ -608,16 +694,16 @@ R5
 R6
 R7
 R8
-Z96 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd
-Z97 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd
+Z109 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd
+Z110 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd
 l0
 L8
 VS=jXL;1DH5G_bB<@X_HA21
 R11
 32
-Z98 !s108 1618443941.517000
-Z99 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
-Z100 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
+Z111 !s108 1618443941.517000
+Z112 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
+Z113 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd|
 R15
 R16
 !s100 g763`ATFHU4z;PbOLW<=L2
@@ -635,15 +721,15 @@ L27
 VM<eRHX74NJOOaY1ZDCA3U2
 R11
 32
-R98
-R99
-R100
+R111
+R112
+R113
 R15
 R16
 !s100 [1oGebC3SlYz<P[_I]Voh2
 !i10b 1
 Exor_key_rotated
-Z101 w1620350657
+Z114 w1620350657
 R2
 R3
 R4
@@ -651,20 +737,20 @@ R5
 R6
 R7
 R8
-Z102 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd
-Z103 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd
+Z115 8C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd
+Z116 FC:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd
 l0
 L8
 VSf>2?EiFXT65J5oo[bAK<2
-!s100 >bQR9H[acEgO1zY;80;cg3
 R11
 32
-!i10b 1
-Z104 !s108 1620350697.127000
-Z105 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd|
-Z106 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd|
+Z117 !s108 1620350697.127000
+Z118 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd|
+Z119 !s107 C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd|
 R15
 R16
+!s100 >bQR9H[acEgO1zY;80;cg3
+!i10b 1
 Amain
 R2
 R3
@@ -672,16 +758,16 @@ R4
 R5
 R6
 R7
-Z107 DEx4 work 15 xor_key_rotated 0 22 Sf>2?EiFXT65J5oo[bAK<2
+DEx4 work 15 xor_key_rotated 0 22 Sf>2?EiFXT65J5oo[bAK<2
 l31
 L27
 V2g0^aJzIjB2HNcGPQMWG33
-!s100 Ljd_]:[elSVlY1zga23HH2
 R11
 32
-!i10b 1
-R104
-R105
-R106
+R117
+R118
+R119
 R15
 R16
+!s100 Ljd_]:[elSVlY1zga23HH2
+!i10b 1
