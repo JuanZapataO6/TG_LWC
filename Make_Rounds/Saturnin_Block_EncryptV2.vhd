@@ -346,7 +346,7 @@ signal Wr_En_XKRB          : std_logic;
 signal Rd_En_XKRB          : std_logic;
 signal Rd_En_XKRK          : std_logic;
 signal Enable_XKR          : std_logic;
-signal Enable_XKR_Main     : std_logic;
+signal En_XKR_Main     : std_logic;
 -----------------------------------------
 --signals from Xor_Key to several Mux--
 ----------------------------------------- 
@@ -360,6 +360,7 @@ signal Wr_En_XKB          : std_logic;
 signal Rd_En_XKB          : std_logic;
 signal Rd_En_XKK          : std_logic;
 signal Enable_XK          : std_logic;
+signal En_XK_Main     : std_logic;
 -----------------------------------------
 --signals from S_Box to several Mux--
 ----------------------------------------- 
@@ -961,7 +962,7 @@ UXorKey: XOR_key
         Data_Out_K  => Data_Out_XKK,
         --Ports For Control Component 
         clk         => Clk, 
-        En_In       => Enable_DF,
+        En_In       => En_XK_Main,
         En_Out      => Enable_XK        
     );
 -----------------------------
@@ -982,7 +983,7 @@ UXorKey_Rotated: XOR_key_Rotated
         Data_Out_K  => Data_Out_XKRK,
         --Ports For Control Component 
         clk         => Clk, 
-        En_In       => Enable_XKR_Main,
+        En_In       => En_XKR_Main,
         En_Out      => Enable_XKR        
     );
 ---------------------
@@ -1101,6 +1102,7 @@ begin
                 case presente is
                     when  s0 =>
                         if Enable_DF = '1' then --Finish Data Force
+                            En_XK_Main <='1';
                             presente <= s1;
                             R_MR <= x"A";
                             D_MR <= x"6";
@@ -1114,11 +1116,13 @@ begin
                             D_MR <= x"6";
                         end if;
                     when  s1 =>
-                        if Enable_XK = '1' then 
+                        if Enable_XK = '1' then
+                            En_XK_Main <='0'; 
                             presente <= s2;
                             En_SB_Main <= '1';
                             Addr_Control <="0010";
                         else
+                            En_XK_Main <='1';
                             presente <= s1;
                             Addr_Control <="0001";
                         end if;
@@ -1233,8 +1237,16 @@ begin
                             Rd_En_MR1    <='1';
                             Addr_Wr_RCB  <=x"0";
                             Wr_En_RCB    <= '0';
-                            presente     <=s13;
-                            Addr_Control <="0110";
+                            if i_Control(0) = '0' then 
+                                En_SRS_Main <= '1';
+                                presente <= s13;
+                                Addr_Control <="0110";
+                            else 
+                                En_XK_Main <= '1';
+                                presente <= s18;
+                                Addr_Control <="0001";
+                            end if;
+                            
                     when s13 =>
                             --Data_In_RCB  <= RC1 XOR Data_Out_SB; 
                             if Enable_XKR = '1' then  
@@ -1245,7 +1257,7 @@ begin
                                 presente     <=s14;
                                 Addr_Control <="0111";
                             else 
-                                Enable_XKR_Main <= '1';
+                                En_XKR_Main <= '1';
                                 presente     <=s13;
                                 Addr_Control <="0110";
                             end if;
@@ -1257,7 +1269,7 @@ begin
                                 En_SB_Main <= '1';
                                 Addr_Control <="0010";
                             else 
-                                Enable_XKR_Main <= '1';
+                                En_XKR_Main <= '1';
                                 presente     <= s20;
                                 Addr_Control <= "0110";
                             end if; 
@@ -1282,6 +1294,29 @@ begin
                             En_MDS_Main <= '1';
                             presente <= s16;
                             Addr_Control <="0011";
+                        end if;
+                    when  s17  =>
+                        if Enable_SRSHI = '1' then 
+                            En_SRSHI_Main <= '0'; 
+                            Addr_Rd_MR0  <= i_Control;
+                            Rd_En_MR0    <= '0';
+                            Addr_Rd_RCB  <= x"0";
+                            Rd_En_RCB    <= '0'; 
+                            presente     <= s8;
+                            Addr_Control <="1000";
+                        else
+                            En_SRSHI_Main <= '1';
+                            presente <= s17;
+                            Addr_Control <="1001";
+                        end if;
+                    when  s18 =>
+                        if Enable_XK = '1' then 
+                            presente <= s14;
+                            En_SRSHI_Main <= '0';
+                        else
+                            presente <= s18;
+                            Addr_Control <="0001";
+                            En_XK_Main <= '1';
                         end if;
                     when others => null;
                 end case;

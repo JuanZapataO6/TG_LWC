@@ -145,6 +145,10 @@ if (CLK'event AND CLK = '1') then
                         En_Out <= '1';
                         Wr_En_B   <= '1';
                     end if;
+                when s5 =>
+                    presente <= s0;
+                    En_Out <= '1';
+                    Establish <="00000";
                 when others => null;
             end case;
         end if;

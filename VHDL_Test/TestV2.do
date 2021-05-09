@@ -7,7 +7,7 @@ add wave -noupdate /saturnin_block_encryptv2/Enable_Generate
 add wave -noupdate /saturnin_block_encryptv2/En_SRSI_Main
 add wave -noupdate /saturnin_block_encryptv2/Enable_SRSI
 add wave -noupdate /saturnin_block_encryptv2/Enable_XKR
-add wave -noupdate /saturnin_block_encryptv2/Enable_XKR_Main
+add wave -noupdate /saturnin_block_encryptv2/En_XKR_Main
 add wave -noupdate /saturnin_block_encryptv2/En_SRSH_Main
 add wave -noupdate /saturnin_block_encryptv2/Enable_SRSH
 add wave -noupdate /saturnin_block_encryptv2/En_SRSHI_Main
@@ -25,8 +25,8 @@ add wave -noupdate /saturnin_block_encryptv2/UXorKey_Rotated/presente
 add wave -noupdate /saturnin_block_encryptv2/presente
 
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Addr_Control
-add wave -noupdate /saturnin_block_encryptv2/Data_In_SRSHB
-add wave -noupdate /saturnin_block_encryptv2/USR_Sheet/Data_RIn_B 
+add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_In_SRSHB
+add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/USR_Sheet/Data_RIn_B 
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_Out_SB
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_Out_Sk
 add wave -noupdate -radix hexadecimal /saturnin_block_encryptv2/Data_In_XKRB
@@ -71,4 +71,4 @@ configure wave -timeline 0
 configure wave -timelineunits ps
 update
 WaveRestoreZoom {1510 ns} {2356 ns}
-run 30000
+run 40000
