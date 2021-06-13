@@ -10,8 +10,12 @@ add wave -noupdate /saturnin_block_encryptv2/Enable_SB
 add wave -noupdate /saturnin_block_encryptv2/Enable_MDS
 add wave -noupdate /saturnin_block_encryptv2/Data_F/presente
 add wave -noupdate /saturnin_block_encryptv2/UXorKey/presente
-
 add wave -noupdate /saturnin_block_encryptv2/UMDS/presente
+add wave -noupdate /saturnin_block_encryptv2/USBox/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Slice/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Slice_Inv/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Sheet/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Sheet_Inv/presente
 
 
 
@@ -92,4 +96,4 @@ configure wave -timeline 0
 configure wave -timelineunits ps
 update
 WaveRestoreZoom {1510 ns} {2356 ns}
-run 10000
+run 100000

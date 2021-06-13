@@ -2,7 +2,14 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 vsim -t ns Saturnin_Block_EncryptV2
 add wave -noupdate /saturnin_block_encryptv2/clk
-
+add wave -noupdate /saturnin_block_encryptv2/Data_F/presente
+add wave -noupdate /saturnin_block_encryptv2/UXorKey/presente
+add wave -noupdate /saturnin_block_encryptv2/UMDS/presente
+add wave -noupdate /saturnin_block_encryptv2/USBox/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Slice/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Slice_Inv/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Sheet/presente
+add wave -noupdate /saturnin_block_encryptv2/USR_Sheet_Inv/presente
 add wave -noupdate /saturnin_block_encryptv2/presente
 add wave -noupdate /saturnin_block_encryptv2/UXorKey_Rotated/presente
 add wave -noupdate /saturnin_block_encryptv2/clk
@@ -25,4 +32,4 @@ add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_bl
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/UXorKey_Rotated/Addr_Rd_K
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /saturnin_block_encryptv2/UXorKey_Rotated/Addr_Wr_B
 
-run 30000
+run 200000

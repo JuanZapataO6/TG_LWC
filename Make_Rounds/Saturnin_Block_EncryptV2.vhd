@@ -1250,12 +1250,13 @@ begin
                     when s13 =>
                             --Data_In_RCB  <= RC1 XOR Data_Out_SB; 
                             if Enable_XKR = '1' then  
-                                Addr_Rd_MR1  <=i_Control;
-                                Rd_En_MR1    <='1';
-                                Addr_Wr_RCB  <=x"0";
+                                En_XKR_Main  <= '0';
+                                Addr_Rd_MR1  <= i_Control;
+                                Rd_En_MR1    <= '1';
+                                Addr_Wr_RCB  <= x"0";
                                 Wr_En_RCB    <= '0';
-                                presente     <=s14;
-                                Addr_Control <="0111";
+                                presente     <= s14;
+                                Addr_Control <= "0111";
                             else 
                                 En_XKR_Main <= '1';
                                 presente     <=s13;
@@ -1269,7 +1270,7 @@ begin
                                 En_SB_Main <= '1';
                                 Addr_Control <="0010";
                             else 
-                                En_XKR_Main <= '1';
+                                En_XKR_Main <= '0';
                                 presente     <= s20;
                                 Addr_Control <= "0110";
                             end if; 
@@ -1311,6 +1312,7 @@ begin
                         end if;
                     when  s18 =>
                         if Enable_XK = '1' then 
+                            En_XK_Main <= '0';
                             presente <= s14;
                             En_SRSHI_Main <= '0';
                         else
