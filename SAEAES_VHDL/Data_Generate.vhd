@@ -55,36 +55,7 @@ begin
     clk <= '1';
   wait for 12.5 ns;
 end process reloj;
---Memory Bank for Key Data
-uKey: MemBnk 
-    generic map(w => 8, -- Width of word 
-                d => 16, -- Numbers of words
-                a => 4 -- Width of address 
-    )
-    Port Map (  Wr_En    => Wr_en_K,
-                Rd_En    => Rd_En_K,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Kn,
-                Addr_Out => Addr_Out_K,
-                Data_in  => Data_In_Kn,
-                Data_Out => Data_Out_K
-                );
---Memory Bank for Nonce, similar to Key
-uNonce: MemBnk 
-    generic map(w => 8, -- Width of word 
-                d => 15, -- Numbers of words
-                a => 4 -- Width of address 
-    )
-    Port Map (  Wr_En    => Wr_en_N,
-                Rd_En    => Rd_En_K,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Kn,
-                Addr_Out => Addr_Out_K,
-                Data_in  => Data_In_Kn,
-                Data_Out => Data_Out_K
-                );
+
 --memory bank for PlainText/Buffer
 uBuf: MemBnk 
     generic map(w => 8,
@@ -115,6 +86,34 @@ uAdd: MemBnk
                 Data_in  => Data_In_Tx,
                 Data_Out => Data_Out_B
                 );
+uKey: MemBnk 
+    generic map(w => 8,
+                d => 16,
+                a => 4
+                )
+    Port Map (  Wr_En    => Wr_en_K,
+                Rd_En    => Rd_En_B,      
+                Rst      => Rst,
+                Clk      => clk,
+                Addr_In  => Addr_In_Kn,
+                Addr_Out => Addr_Out_K,
+                Data_in  => Data_In_Kn,
+                Data_Out => Data_Out_B
+                );
+uNonce: MemBnk 
+    generic map(w => 8,
+                d => 16,
+                a => 4
+                )
+    Port Map (  Wr_En    => Wr_en_N,
+                Rd_En    => Rd_En_B,      
+                Rst      => Rst,
+                Clk      => clk,
+                Addr_In  => Addr_In_Kn,
+                Addr_Out => Addr_Out_K,
+                Data_in  => Data_In_Kn,
+                Data_Out => Data_Out_B
+                );
 
 STat: process (clk,presente)
 variable Finish_En  : std_logic:= '0';
@@ -126,18 +125,20 @@ begin
                 case presente is 
                     when  s0 =>
                         presente   <= s1;
-                        Wr_en_K    <= '0';
                         Wr_en_Tx   <= '0';
-                        Wr_en_N    <= '0';
                         Wr_en_ATx  <= '0';
                         Rst        <= '1';
                         Addr_Aux := Addr_Aux + 1;
-                        if Addr_Aux= "100000" then
-                            Data_In_Tx<= x"80";
+                        if Addr_Aux > "010000" then
+                            --Data_In_Tx<= x"80";
+                            Wr_en_K    <= '1';
+                            Wr_en_n    <= '1';
                         else
-                            Data_In_Tx <= "00" & Addr_In_Tx(Addr_In_Tx'LENGTH-1 DOWNTO 0);
-                            Data_In_Kn <= "000" & Addr_In_Kn(Addr_In_Kn'LENGTH-1 DOWNTO 0);
+                            Wr_en_K    <= '0';
+                            Wr_en_n    <= '0';
                         end if;
+                        Data_In_Tx <= "000" & Addr_In_Tx(Addr_In_Tx'LENGTH-1 DOWNTO 0);
+                        Data_In_Kn <= "0000" & Addr_In_Kn(Addr_In_Kn'LENGTH-1 DOWNTO 0);
                         --Data_In  <= Data_In(Data_In'LENGTH-1 downto 5) & Addr_In(Addr_In'LENGTH-1 DOWNTO 0);
                     when s1 =>
                         presente   <= s0;
@@ -156,6 +157,8 @@ begin
             else 
                 Ena_Out  <='1';
                 Finish_En := '1';
+                Wr_en_Tx   <= '1';
+                Wr_en_ATx  <= '1';
                 --            Address     <= (Address'RANGE => '0');
             end if;
         end if;
