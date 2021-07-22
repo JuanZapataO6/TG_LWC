@@ -19,7 +19,67 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity Make_Rounds
 -- Compiling architecture Main of Make_Rounds
 
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd}
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd} {0 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Loading package Saturnin_Functions
+-- Compiling entity Saturnin_Block_Encrypt
+-- Compiling architecture Main of Saturnin_Block_Encrypt
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(134): (vcom-1294) Declaration with designator "a1_in" already exists in this region.
+** =====> Prior declaration of "a1_in" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(125).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(134): (vcom-1294) Declaration with designator "b1_in" already exists in this region.
+** =====> Prior declaration of "b1_in" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(125).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(134): (vcom-1294) Declaration with designator "c1_in" already exists in this region.
+** =====> Prior declaration of "c1_in" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(125).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(134): (vcom-1294) Declaration with designator "d1_in" already exists in this region.
+** =====> Prior declaration of "d1_in" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(125).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(136): (vcom-1294) Declaration with designator "En_SBox_in" already exists in this region.
+** =====> Prior declaration of "En_SBox_in" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(126).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(136): (vcom-1294) Declaration with designator "En_SBox_out" already exists in this region.
+** =====> Prior declaration of "En_SBox_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(126).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(137): (vcom-1294) Declaration with designator "a0_out" already exists in this region.
+** =====> Prior declaration of "a0_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(127).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(137): (vcom-1294) Declaration with designator "b0_out" already exists in this region.
+** =====> Prior declaration of "b0_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(127).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(137): (vcom-1294) Declaration with designator "c0_out" already exists in this region.
+** =====> Prior declaration of "c0_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(127).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(137): (vcom-1294) Declaration with designator "d0_out" already exists in this region.
+** =====> Prior declaration of "d0_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(127).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(138): (vcom-1294) Declaration with designator "a1_out" already exists in this region.
+** =====> Prior declaration of "a1_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(128).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(138): (vcom-1294) Declaration with designator "b1_out" already exists in this region.
+** =====> Prior declaration of "b1_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(128).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(138): (vcom-1294) Declaration with designator "c1_out" already exists in this region.
+** =====> Prior declaration of "c1_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(128).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(138): (vcom-1294) Declaration with designator "d1_out" already exists in this region.
+** =====> Prior declaration of "d1_out" is at C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(128).
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(770): (vcom-1136) Unknown identifier "En_MDS".
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(770): Type error resolving infix expression "=" as type std.STANDARD.BOOLEAN.
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(772): (vcom-1339) Case statement choices cover only 2 out of 8 cases.
+
+** Error: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_Encrypt.vhd(944): VHDL Compiler exiting
+
+} {12.0 13.0 15.0 16.0 18.0 19.0 21.0 22.0 24.0 25.0 27.0 28.0 30.0 31.0 33.0 34.0 36.0 37.0 39.0 40.0 42.0 43.0 45.0 46.0 48.0 49.0 51.0 52.0 54.0 55.0 56.0 58.0 59.0 60.0} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
 -- Loading package TEXTIO
