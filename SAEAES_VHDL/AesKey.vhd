@@ -2,6 +2,8 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
+use ieee.std_logic_misc.all;
+use work.Definitions.all;
 entity AesKey is
 port (      
     En_In   : in std_logic; -- Flag for start FMS
@@ -83,6 +85,10 @@ uEkey: MemBnk
 STat: process (clk,presente)
 type word is array (0 to 43) of std_logic_vector (31 downto 0);
 variable eKeyAux : word;
+type C_rcon is array (0 to 10) of std_logic_vector (7 downto 0);
+constant rcon : C_rcon:=(
+    x"00",x"01",x"02",x"04",x"08",x"10",x"20",x"40",x"80",x"1b",x"36"
+);
 type C_M0 is array (0 to 255) of std_logic_vector (31 downto 0);
 constant M0 : C_M0:= (
     x"a56363c6", x"847c7cf8", x"997777ee", x"8d7b7bf6", x"0df2f2ff", x"bd6b6bd6", x"b16f6fde", x"54c5c591",
@@ -292,10 +298,60 @@ if clk 'event and clk = '1' then
                 Rd_En_K <= '1';
                 Wr_En_eK <= '1';
                 Addr_Aux_eK := Addr_Aux_eK + 1; 
+                Addr_Wr_eK <= Addr_Aux_eK;
                 Addr_Rd_K <= Addr_Aux(Addr_Aux'length-3 downto 0);
             when s9 => 
                 presente <= s10;
-                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK - 4))) ;
+                --Addr_Aux_eK := Addr_Aux_eK+1;
+                Addr_Wr_eK <= Addr_Aux_eK;
+                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK-4)));
+                RotSub(eKeyAux(to_integer(unsigned(Addr_Aux_eK - 1))),
+                                eKeyAux(to_integer(unsigned(Addr_Aux_eK))));
+            when s10 => 
+                presente <= s11;
+                Wr_En_eK <= '0';
+                --Addr_Aux_eK := Addr_Aux_eK+1;
+                Addr_Wr_eK <= Addr_Aux_eK;
+                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK-4))) 
+                                xor eKeyAux(to_integer(unsigned(Addr_Aux_eK)))
+                                xor x"000000" & rcon(to_integer(unsigned(Addr_Aux_eK(Addr_Aux_eK'length-1 downto 2))));
+                --eKeyAux(to_integer(unsigned(Addr_Aux_eK))) := Data_In_eK;
+            when s11 => 
+                presente <= s12;
+                Addr_Aux_eK := Addr_Aux_eK+1;--5
+                Addr_Wr_eK <= Addr_Aux_eK; 
+                Wr_En_eK <= '0';
+                eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))) := Data_In_eK;
+                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK-4))) 
+                                xor eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))); 
+                
+            when s12 => 
+                presente <= s13;                
+                Addr_Aux_eK := Addr_Aux_eK+1;--6
+                Addr_Wr_eK <= Addr_Aux_eK;
+                Wr_En_eK <= '0';
+                eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))) := Data_In_eK;
+                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK-4))) 
+                                xor eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))); 
+                 
+            when s13 =>
+                presente <= s14;
+                Addr_Aux_eK := Addr_Aux_eK+1;--7
+                Addr_Wr_eK <= Addr_Aux_eK;
+                Wr_En_eK <= '0';
+                eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))) := Data_In_eK;
+                Data_In_eK <= eKeyAux(to_integer(unsigned(Addr_Aux_eK-4))) 
+                                xor eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))); 
+            when s14 =>
+                if Addr_Aux_eK < x"2B" then  
+                    presente <= s9;
+                else 
+                    presente <= s15;
+                end if; 
+                Addr_Aux_eK := Addr_Aux_eK+1;--8
+                Addr_Wr_eK <= Addr_Aux_eK;
+                Wr_En_eK <= '1';
+                eKeyAux(to_integer(unsigned(Addr_Aux_eK-1))) := Data_In_eK;
             when others => null;
         end case;
     end if;
