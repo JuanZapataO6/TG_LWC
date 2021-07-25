@@ -4,24 +4,31 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 entity Data_Generate is 
     port (
-        --Clk           :in  std_logic;
+        Clk           :in  std_logic;
         Rd_En_K       :in  std_logic;
         Rd_En_B       :in  std_logic;
+        Rd_En_A       :in  std_logic;
+        Rd_En_N       :in  std_logic;
         Ena_Out       :out std_logic;
         Addr_Out_K    :in  std_logic_vector(3 downto 0);
+        Addr_Out_N    :in  std_logic_vector(3 downto 0);
+        Addr_Out_A    :in  std_logic_vector(4 downto 0);
         Addr_Out_B    :in  std_logic_vector(4 downto 0);
         Data_Out_K    :out STD_LOGIC_VECTOR(7 DOWNTO 0);
-        Data_Out_B    :out STD_LOGIC_VECTOR(7 DOWNTO 0)
+        Data_Out_B    :out STD_LOGIC_VECTOR(7 DOWNTO 0);
+        Data_Out_A    :out STD_LOGIC_VECTOR(7 DOWNTO 0);
+        Data_Out_N    :out STD_LOGIC_VECTOR(7 DOWNTO 0)
         );
 end Data_Generate;
 
 architecture RTL of Data_Generate is 
 component MemBnk
-generic(    w:integer;--width of word
-            d:integer;--Numbers of words 
-            a:integer --width of Address
-            );
-port( 
+    generic(
+        w:integer;--width of word
+        d:integer;--Numbers of words 
+        a:integer --width of Address
+    );
+    port( 
         Wr_En    : in  std_logic;
         Rd_En    : in  std_logic;        
         Rst      : in  std_logic;
@@ -34,7 +41,6 @@ port(
 end component;
 TYPE estado is (s0, s1);
 SIGNAL presente:estado:=s0;
-
 Signal Data_In_Tx         : STD_LOGIC_VECTOR (7 DOWNTO 0):=x"00";
 Signal Data_In_Kn         : STD_LOGIC_VECTOR (7 DOWNTO 0):=x"00";
 Signal Addr_In_Tx         : std_logic_vector (4 downto 0):="00000";
@@ -44,76 +50,83 @@ signal Wr_en_Tx           : std_logic;
 signal Wr_en_ATx          : std_logic;
 Signal Wr_en_K            : std_logic;
 Signal Wr_en_N            : std_logic;
-signal clk                : std_logic;
-
+--signal clk                : std_logic;
 begin
-
-reloj:process
-begin
-    clk <= '0';
-    wait for 12.5 ns;
-    clk <= '1';
-  wait for 12.5 ns;
-end process reloj;
-
+--reloj:process
+--begin
+--    clk <= '0';
+--    wait for 12.5 ns;
+--    clk <= '1';
+--  wait for 12.5 ns;
+--end process reloj;
 --memory bank for PlainText/Buffer
 uBuf: MemBnk 
-    generic map(w => 8,
-                d => 32,
-                a => 5
-                )
-    Port Map (  Wr_En    => Wr_en_Tx,
-                Rd_En    => Rd_En_B,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Tx,
-                Addr_Out => Addr_Out_B,
-                Data_in  => Data_In_Tx,
-                Data_Out => Data_Out_B
-                );
+    generic map(
+        w => 8,
+        d => 32,
+        a => 5
+    )
+    Port Map (
+        Wr_En    => Wr_en_Tx,
+        Rd_En    => Rd_En_B,      
+        Rst      => Rst,
+        Clk      => clk,
+        Addr_In  => Addr_In_Tx,
+        Addr_Out => Addr_Out_B,
+        Data_in  => Data_In_Tx,
+        Data_Out => Data_Out_B
+    );
 --memory bank for AddText/Buffer
 uAdd: MemBnk 
-    generic map(w => 8,
-                d => 32,
-                a => 5
-                )
-    Port Map (  Wr_En    => Wr_en_ATx,
-                Rd_En    => Rd_En_B,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Tx,
-                Addr_Out => Addr_Out_B,
-                Data_in  => Data_In_Tx,
-                Data_Out => Data_Out_B
-                );
+    generic map(
+        w => 8,
+        d => 32,
+        a => 5
+    )
+    Port Map (
+        Wr_En    => Wr_en_ATx,
+        Rd_En    => Rd_En_A,      
+        Rst      => Rst,
+        Clk      => clk,
+        Addr_In  => Addr_In_Tx,
+        Addr_Out => Addr_Out_A,
+        Data_in  => Data_In_Tx,
+        Data_Out => Data_Out_A
+    );
+--memory bank for Key/Nonce
 uKey: MemBnk 
-    generic map(w => 8,
-                d => 16,
-                a => 4
-                )
-    Port Map (  Wr_En    => Wr_en_K,
-                Rd_En    => Rd_En_B,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Kn,
-                Addr_Out => Addr_Out_K,
-                Data_in  => Data_In_Kn,
-                Data_Out => Data_Out_B
-                );
+    generic map(
+        w => 8,
+        d => 16,
+        a => 4
+    )
+    Port Map (  
+        Wr_En    => Wr_en_K,
+        Rd_En    => Rd_En_K,      
+        Rst      => Rst,
+        Clk      => clk,
+        Addr_In  => Addr_In_Kn,
+        Addr_Out => Addr_Out_K,
+        Data_in  => Data_In_Kn,
+        Data_Out => Data_Out_K
+    );
+--memory bank for Key/Nonce
 uNonce: MemBnk 
-    generic map(w => 8,
-                d => 16,
-                a => 4
-                )
-    Port Map (  Wr_En    => Wr_en_N,
-                Rd_En    => Rd_En_B,      
-                Rst      => Rst,
-                Clk      => clk,
-                Addr_In  => Addr_In_Kn,
-                Addr_Out => Addr_Out_K,
-                Data_in  => Data_In_Kn,
-                Data_Out => Data_Out_B
-                );
+    generic map(
+        w => 8,
+        d => 16,
+        a => 4
+    )
+    Port Map (
+        Wr_En    => Wr_en_N,
+        Rd_En    => Rd_En_N,      
+        Rst      => Rst,
+        Clk      => clk,
+        Addr_In  => Addr_In_Kn,
+        Addr_Out => Addr_Out_N,
+        Data_in  => Data_In_Kn,
+        Data_Out => Data_Out_N
+    );
 
 STat: process (clk,presente)
 variable Finish_En  : std_logic:= '0';

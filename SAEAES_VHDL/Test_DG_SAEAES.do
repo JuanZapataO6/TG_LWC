@@ -1,20 +1,27 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-vsim -t ns Data_Generate
+vsim -t ns SAEAES_Block_Encrypt 
 
-add wave -noupdate /Data_Generate/presente
-add wave -noupdate /Data_Generate/clk
-add wave -noupdate /Data_Generate/Wr_en_Tx
-add wave -noupdate /Data_Generate/Wr_en_ATx
-add wave -noupdate /Data_Generate/Wr_en_K
-add wave -noupdate /Data_Generate/Wr_en_N
-add wave -noupdate -radix hexadecimal /Data_Generate/Data_In_Tx
-add wave -noupdate -radix hexadecimal /Data_Generate/Data_In_Kn
-add wave -noupdate -radix hexadecimal /Data_Generate/Addr_In_Tx
-add wave -noupdate -radix hexadecimal /Data_Generate/Addr_In_Kn
-add wave -noupdate -format Literal -color blue -radix hexadecimal /Data_Generate/uBuf/r_memory
-add wave -noupdate -format Literal -color blue -radix hexadecimal /Data_Generate/uAdd/r_memory
-add wave -noupdate -format Literal -color blue -radix hexadecimal /Data_Generate/uKey/r_memory
-add wave -noupdate -format Literal -color blue -radix hexadecimal /Data_Generate/uNonce/r_memory
-
+add wave -noupdate /SAEAES_Block_Encrypt/presente
+add wave -noupdate /SAEAES_Block_Encrypt/uAesKey/presente
+add wave -noupdate /SAEAES_Block_Encrypt/clk
+add wave -noupdate /SAEAES_Block_Encrypt/Wr_en_Tx
+add wave -noupdate /SAEAES_Block_Encrypt/Wr_en_ATx
+add wave -noupdate /SAEAES_Block_Encrypt/Rd_en_K
+add wave -noupdate /SAEAES_Block_Encrypt/Addr_Out_K
+add wave -noupdate -radix hexadecimal /SAEAES_Block_Encrypt/Data_In_Tx
+add wave -noupdate -radix hexadecimal /SAEAES_Block_Encrypt/Data_In_Kn
+add wave -noupdate -radix hexadecimal /SAEAES_Block_Encrypt/Addr_In_Tx
+add wave -noupdate -radix hexadecimal /SAEAES_Block_Encrypt/Addr_In_Kn
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uBuf/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uAdd/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uKey/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uNonce/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uAesKey/Data_RIn_K
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uAesKey/Data_In_K
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uAesKey/Data_In_eK
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uAesKey/uEkey/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uAesKey/Addr_Wr_eK
+add wave -noupdate /SAEAES_Block_Encrypt/uAesKey/Rd_en_K
+add wave -noupdate /SAEAES_Block_Encrypt/uAesKey/Wr_en_eK
 run 5000
