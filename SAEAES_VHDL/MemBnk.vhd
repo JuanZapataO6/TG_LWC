@@ -8,7 +8,7 @@ entity MemBnk is
             );
     port( 
         Wr_En    : in  std_logic;
-        Rd_En    : in  std_logic;        
+        Rd_En    : in  std_logic;
         Rst      : in  std_logic;
         Clk      : in  std_logic;
         Addr_In  : in  std_logic_vector (a-1 downto 0);

@@ -4,11 +4,12 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 
 package Definitions is 
-    function S_0 (z : in std_logic_vector) return std_logic_vector;
-    function S_1 (z : in std_logic_vector) return std_logic_vector;
-    function S_2 (z : in std_logic_vector) return std_logic_vector;
-    function S_3 (z : in std_logic_vector) return std_logic_vector;
-    --procedure Sub (x:in std_logic_vector  ekey : out std_logic_vector);
+    function  S_0 (z : in std_logic_vector) return std_logic_vector;
+    function  S_1 (z : in std_logic_vector) return std_logic_vector;
+    function  S_2 (z : in std_logic_vector) return std_logic_vector;
+    function  S_3 (z : in std_logic_vector) return std_logic_vector;
+    procedure Sub (x:in std_logic_vector;
+                    ekey : out std_logic_vector);
     procedure RotSub (x : in std_logic_vector; 
                         ekey : out std_logic_vector);
 end Definitions;
@@ -183,4 +184,9 @@ constant M3 : C_M3:= (
         begin
         ekey := S_3(x(7 downto 0)) xor S_0(x(15 downto 8)) xor S_1(x(23 downto 16)) xor S_2(x(31 downto 24));
     end RotSub;
+    procedure Sub (x:in std_logic_vector; 
+                        ekey : out std_logic_vector) is
+        begin
+        ekey := S_0(x(7 downto 0)) xor S_1(x(15 downto 8)) xor S_2(x(23 downto 16)) xor S_3(x(31 downto 24));
+    end Sub;
 end Definitions;   

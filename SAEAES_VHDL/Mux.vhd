@@ -9,34 +9,22 @@ entity Mux is
     generic(    
             w:integer--width of word    
         );
-    port( 
-        In_01   : in  std_logic_vector (w-1 downto 0);
-        In_02   : in  std_logic_vector (w-1 downto 0);
-        In_03   : in  std_logic_vector (w-1 downto 0);
-        In_04   : in  std_logic_vector (w-1 downto 0);
-        In_05   : in  std_logic_vector (w-1 downto 0);
-        In_06   : in  std_logic_vector (w-1 downto 0);
-        In_07   : in  std_logic_vector (w-1 downto 0);
-        In_08   : in  std_logic_vector (w-1 downto 0);
-        In_09   : in  std_logic_vector (w-1 downto 0);
-        In_0A   : in  std_logic_vector (w-1 downto 0);
-        Addr_Control    : in  std_logic_vector (3 downto 0);        
-        Data_Out        : out std_logic_vector (w-1 downto 0)
-    );
+    port(
+        In_0    : in  std_logic_vector (w-1 downto 0);
+        In_1    : in  std_logic_vector (w-1 downto 0);
+        In_2    : in  std_logic_vector (w-1 downto 0);
+        In_3    : in  std_logic_vector (w-1 downto 0);
+        Address : in  std_logic_vector (1 downto 0);
+        Data_Out    : out std_logic_vector (w-1 downto 0)
+    );  
 
-end Mux;
+end Mux ;
 architecture RTL of Mux is 
 begin
-	with Addr_Control select
-		Data_Out <= In_01     when "0000", 
-	                In_02        when "0001",
-		            In_04    when "0010", 
-		            In_05    when "0011", 
-		            In_06    when "0100", 
-		            In_07In  when "0101", 
-		            In_08when "0110", 
-		            In_09    when "0111",
-                    In_0A    when "1000",
-                    In_SRSheetInv    when "1001",
-                    In_SRSheetInv    when  others ;
+	with Address select
+		Data_Out <= In_0    when "00",
+	                In_1    when "01",
+                    In_2    when "10",
+		            In_3    when "11",
+                    In_2    when others;
 end architecture RTL;
