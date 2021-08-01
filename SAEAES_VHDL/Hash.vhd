@@ -90,6 +90,7 @@ begin
                         Data_In_S  <= Data_Out_eS XOR Data_Out_Ad;
                     else
                         presente <= s6;
+                        En_Out <='1';
                     end if;                     
                     
                     

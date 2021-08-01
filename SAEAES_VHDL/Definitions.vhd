@@ -4,6 +4,7 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 
 package Definitions is 
+    
     function  S_0 (z : in std_logic_vector) return std_logic_vector;
     function  S_1 (z : in std_logic_vector) return std_logic_vector;
     function  S_2 (z : in std_logic_vector) return std_logic_vector;
@@ -12,6 +13,25 @@ package Definitions is
                     ekey : out std_logic_vector);
     procedure RotSub (x : in std_logic_vector; 
                         ekey : out std_logic_vector);
+    procedure RK (S_in :in std_logic_vector;
+                    n  :in std_logic_vector; 
+                    S_out : out std_logic_vector);
+    procedure SM (St_0 :in std_logic_vector;
+                    St_1 :in std_logic_vector;
+                    St_2 :in std_logic_vector;
+                    St_3 :in std_logic_vector; 
+                        t_0 : out std_logic_vector;
+                        t_1 : out std_logic_vector;
+                        t_2 : out std_logic_vector;
+                        t_3 : out std_logic_vector);
+    procedure SS (St_0 :in std_logic_vector;
+                    St_1 :in std_logic_vector;
+                    St_2 :in std_logic_vector;
+                    St_3 :in std_logic_vector; 
+                        t_0 : out std_logic_vector;
+                        t_1 : out std_logic_vector;
+                        t_2 : out std_logic_vector;
+                        t_3 : out std_logic_vector);
 end Definitions;
 
 package body Definitions is
@@ -189,4 +209,62 @@ constant M3 : C_M3:= (
         begin
         ekey := S_0(x(7 downto 0)) xor S_1(x(15 downto 8)) xor S_2(x(23 downto 16)) xor S_3(x(31 downto 24));
     end Sub;
+    procedure RK (S_in :in std_logic_vector;
+                    n  :in std_logic_vector; 
+                    S_out : out std_logic_vector) is
+        begin
+        S_out := S_in xor n;
+    end RK;
+    procedure SM (St_0 :in std_logic_vector;
+                    St_1 :in std_logic_vector;
+                    St_2 :in std_logic_vector;
+                    St_3 :in std_logic_vector; 
+                        t_0 : out std_logic_vector;
+                        t_1 : out std_logic_vector;
+                        t_2 : out std_logic_vector;
+                        t_3 : out std_logic_vector) is
+        begin
+        t_0 := M0(to_integer(unsigned(St_0(7 downto 0)))) xor 
+                M1(to_integer(unsigned(St_1(15 downto 8))))xor 
+                M2(to_integer(unsigned(St_2(23 downto 16))))xor
+                M3(to_integer(unsigned(St_3(31 downto 24))));
+        t_1 := M0(to_integer(unsigned(St_1(7 downto 0)))) xor 
+                M1(to_integer(unsigned(St_2(15 downto 8))))xor 
+                M2(to_integer(unsigned(St_3(23 downto 16))))xor
+                M3(to_integer(unsigned(St_0(31 downto 24))));
+        t_2 := M0(to_integer(unsigned(St_2(7 downto 0)))) xor 
+                M1(to_integer(unsigned(St_3(15 downto 8))))xor 
+                M2(to_integer(unsigned(St_0(23 downto 16))))xor
+                M3(to_integer(unsigned(St_1(31 downto 24))));
+        t_3 := M0(to_integer(unsigned(St_3(7 downto 0)))) xor 
+                M1(to_integer(unsigned(St_0(15 downto 8))))xor 
+                M2(to_integer(unsigned(St_1(23 downto 16))))xor
+                M3(to_integer(unsigned(St_2(31 downto 24))));
+    end SM;
+    procedure SS (St_0 :in std_logic_vector;
+                    St_1 :in std_logic_vector;
+                    St_2 :in std_logic_vector;
+                    St_3 :in std_logic_vector; 
+                        t_0 : out std_logic_vector;
+                        t_1 : out std_logic_vector;
+                        t_2 : out std_logic_vector;
+                        t_3 : out std_logic_vector) is
+        begin
+        t_0 := S_0(St_0(7 downto 0)) xor 
+                S_1(St_1(15 downto 8))xor 
+                S_2(St_2(23 downto 16))xor
+                S_3(St_3(31 downto 24));
+        t_1 := S_0(St_1(7 downto 0)) xor 
+                S_1(St_2(15 downto 8))xor 
+                S_2(St_3(23 downto 16))xor
+                S_3(St_0(31 downto 24));
+        t_2 := S_0(St_2(7 downto 0)) xor 
+                S_1(St_3(15 downto 8))xor 
+                S_2(St_0(23 downto 16))xor
+                S_3(St_1(31 downto 24));
+        t_3 := S_0(St_3(7 downto 0)) xor 
+                S_1(St_0(15 downto 8))xor 
+                S_2(St_1(23 downto 16))xor
+                S_3(St_2(31 downto 24));
+    end SS;
 end Definitions;   

@@ -41,6 +41,25 @@ component AesKey
         Data_In_eK : out std_logic_vector (31 downto 0)
     );
 end component AesKey;
+component AesEnc
+    port (      
+        En_In   : in std_logic; -- Flag for start FMS
+        En_Out  : out std_logic;
+        Clk     : in std_logic; -- Clock signal 
+        --Read Memory bank of key from DataGenerate 
+        Wr_En_eS   : out std_logic;
+        Data_In_eS : out std_logic_vector (7 downto 0);  
+        Addr_Wr_eS : out std_logic_vector (3 DOWNTO 0);
+
+        Rd_En_eS    : out std_logic;
+        Addr_Rd_eS : out std_logic_vector (3 DOWNTO 0);
+        Data_Out_eS : in  std_logic_vector (7 downto 0);
+
+        Rd_En_eK    : out std_logic;
+        Addr_Rd_eK  : out std_logic_vector (5 DOWNTO 0);
+        Data_Out_eK : in  std_logic_vector (31 downto 0)
+    );
+end component AesEnc;
 component Hash
     port (
         Addr_Rd_eS   : out std_logic_vector(3 downto 0);
@@ -119,9 +138,9 @@ component MuxLogic
 end component MuxLogic;
 component DeMux
     generic(    
-            w:integer--width of word
-    );
-    port( 
+            w:integer--width of word    
+        );
+    port(
         Out_0   : Out std_logic_vector (w-1 downto 0);
         Out_1   : Out std_logic_vector (w-1 downto 0);
         Out_2   : Out std_logic_vector (w-1 downto 0);
@@ -156,6 +175,7 @@ signal Rst          : std_logic;
 Signal En_Hash      : std_logic;
 signal Rst_eS       : std_logic;
 --
+Signal En_AE        : std_logic;
 Signal Rd_En_Ad     : std_logic;
 Signal Addr_Rd_Ad   : std_logic_vector (4 DOWNTO 0);
 Signal Data_Out_Ad  : std_logic_vector (7 downto 0);
@@ -170,7 +190,7 @@ Signal Addr_Wr_eK   : std_logic_vector (5 DOWNTO 0);
 Signal Data_In_eK   : std_logic_vector (31 downto 0);
 
 --Signals for S (state) with memorybank in this script 
-Signal Ena_AE       : std_logic;
+
 Signal Rd_En_S      : std_logic;
 Signal Addr_Rd_S    : std_logic_vector (3 DOWNTO 0);
 Signal Data_Out_S   : std_logic_vector (7 downto 0);
@@ -190,6 +210,8 @@ Signal eK_AddrRd_Hash: std_logic_vector(5 downto 0);
 --Signals For DeMux Data_Out_eK
 signal DataIn_eK_AE   : std_logic_vector(31 downto 0);
 signal DataIn_eK_Hash : std_logic_vector(31 downto 0);
+signal Data_Flag0_eK  : std_logic_vector(31 downto 0);
+signal Data_Flag1_eK  : std_logic_vector(31 downto 0);
 --Signals For Mux En_Rd_eS
 signal eS_Rd_AE     : std_logic;
 signal eS_Rd_Hash   : std_logic;
@@ -208,7 +230,9 @@ Signal eS_AddrWr_Hash: std_logic_vector(3 downto 0);
 --Signals For DeMux Data_In_eS
 signal DataIn_eS_AE   : std_logic_vector(7 downto 0);
 signal DataIn_eS_Hash : std_logic_vector(7 downto 0);
-
+--Signal Data dont collition in DeMux
+signal Data_Flag0_eS   : std_logic_vector(7 downto 0);
+signal Data_Flag1_eS : std_logic_vector(7 downto 0);
 
 begin
 
@@ -247,8 +271,8 @@ uDeMux_eKey  : DeMux
     port map( 
         Out_0   => DataIn_eK_AE,
         Out_1   => DataIn_eK_Hash,
-        Out_2   => DataIn_eK_AE,
-        Out_3   => DataIn_eK_AE,
+        Out_2   => Data_Flag0_eK,
+        Out_3   => Data_Flag1_eK,
         clk     => clk,
         Address => Addr_Control,
         Data_In => Data_Out_eK
@@ -281,8 +305,8 @@ uDeMux_eSe_DOut  : DeMux
     port map( 
         Out_0   => DataOut_eS_AE,
         Out_1   => DataOut_eS_Hash,
-        Out_2   => DataOut_eS_AE,
-        Out_3   => DataOut_eS_AE,
+        Out_2   => Data_Flag0_eS,
+        Out_3   => Data_Flag1_eS,
         clk     => Clk,
         Address => Addr_Control,
         Data_In => Data_Out_S
@@ -368,7 +392,24 @@ uHash : Hash
     En_Out      =>En_Hash,
     clk         =>clk
     );
+uAesEnc : AesEnc 
+    port map(      
+        En_In   => En_Hash,
+        En_Out  => En_AE,
+        Clk     => Clk,
+        --Read Memory bank of key from DataGenerate 
+        Wr_En_eS   => Es_Wr_AE,
+        Data_In_eS => DataIn_eS_AE,
+        Addr_Wr_eS => eS_AddrWr_AE,
 
+        Rd_En_eS    => eS_Rd_AE,
+        Addr_Rd_eS  => eS_AddrRd_AE,
+        Data_Out_eS => DataOut_eS_AE,
+
+        Rd_En_eK    => eK_Rd_AE,
+        Addr_Rd_eK  => eK_AddrRd_AE,
+        Data_Out_eK => DataIn_eK_AE
+    );
 ueKey: MemBnk
     generic map(
         w => 32, --Witdth of words

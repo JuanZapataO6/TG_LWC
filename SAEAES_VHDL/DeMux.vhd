@@ -1,13 +1,10 @@
-library IEEE;
-library work;
-use IEEE.std_logic_1164.all;
-use IEEE.std_logic_unsigned.all;
-use ieee.std_logic_misc.all;
-use work.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.ALL; 
 
 entity DeMux is
     generic(    
-            w:integer--width of word
+        w:integer --width of word
     );
     port( 
         Out_0   : Out std_logic_vector (w-1 downto 0);
@@ -29,7 +26,7 @@ begin
             when "01" => Out_1 <=Data_In;
             when "10" => Out_2 <=Data_In; 
             when "11" => Out_3 <=Data_In;
-            when others => null;
+        when others => null;
         end case;
     end if;
 end process;

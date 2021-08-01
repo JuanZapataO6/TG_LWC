@@ -5,9 +5,35 @@ vsim -t ns SAEAES_Block_Encrypt
 add wave -noupdate /SAEAES_Block_Encrypt/presente
 add wave -noupdate /SAEAES_Block_Encrypt/uAesKey/presente
 add wave -noupdate /SAEAES_Block_Encrypt/uHash/presente
+add wave -noupdate /SAEAES_Block_Encrypt/uAesEnc/presente
 add wave -noupdate /SAEAES_Block_Encrypt/clk
+
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Out_0
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Out_1
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Out_2
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Out_3
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Address
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eSe_DOut/Data_In
+
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Out_0
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Out_1
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Out_2
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Out_3
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Address
+add wave -noupdate /SAEAES_Block_Encrypt/uDeMux_eKey/Data_In
 add wave -noupdate /SAEAES_Block_Encrypt/uAesKey/En_out
+add wave -noupdate /SAEAES_Block_Encrypt/uHash/En_out
+add wave -noupdate /SAEAES_Block_Encrypt/uAesEnc/En_In
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Addr_Rd_eK
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Addr_Rd_S
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Data_Out_eK
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Data_Out_S
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/uAesEnc/Data_Out_eS
+add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/uAesEnc/witness_eSe
+
+
 add wave -noupdate /SAEAES_Block_Encrypt/Rd_en_K
+
 add wave -noupdate /SAEAES_Block_Encrypt/Addr_Out_K
 add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uBuf/r_memory
 add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uDataGenerate/uAdd/r_memory
