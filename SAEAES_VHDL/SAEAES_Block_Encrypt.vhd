@@ -233,7 +233,10 @@ signal DataIn_eS_Hash : std_logic_vector(7 downto 0);
 --Signal Data dont collition in DeMux
 signal Data_Flag0_eS   : std_logic_vector(7 downto 0);
 signal Data_Flag1_eS : std_logic_vector(7 downto 0);
-
+--
+signal Flag_Hash   : std_logic;
+signal Flag_AesEnc : std_logic;
+signal Flag_AesKey : std_logic;
 begin
 
 reloj:process
@@ -388,13 +391,13 @@ uHash : Hash
     Addr_Wr_S   =>eS_AddrWr_Hash,
     Wr_En_S     =>eS_Wr_Hash,
     Rst_S       =>Rst_eS,
-    En_In       =>En_AK,
+    En_In       =>Flag_Hash,
     En_Out      =>En_Hash,
     clk         =>clk
     );
 uAesEnc : AesEnc 
     port map(      
-        En_In   => En_Hash,
+        En_In   => Flag_AesEnc,
         En_Out  => En_AE,
         Clk     => Clk,
         --Read Memory bank of key from DataGenerate 
@@ -448,18 +451,35 @@ begin
         if En_DG ='1' then
             case presente is
                 when  s0 =>
-                    if En_AK = '1' then --Finish Data Force
+                    if En_AK = '1' then --Finish AesKey
+                        Flag_Hash <= '1';
                         presente <= s1;
                         Addr_Control <="01";
                     else
+                        Flag_Hash <= '0';
                         presente <= s0;
                     end if;
                 when  s1 =>
                     if En_Hash = '1' then --Finish Data Force
                         presente <= s2;
                         Addr_Control <="00";
+                        Flag_Hash <= '0';
+                        Flag_AesEnc <= '1';
                     else
                         presente <= s1;
+                        Flag_AesEnc <= '0';
+                        Addr_Control <="01";
+                    end if;
+                when  s2 =>
+                    if En_AE = '1' then --Finish Data Force
+                        presente <= s1;
+                        Addr_Control <="01";
+                        Flag_Hash <= '1';
+                        Flag_AesEnc <= '0';
+                    else
+                        presente <= s2;
+                        Flag_AesEnc <= '1';
+                        Addr_Control <="00";
                     end if;
                 when others => null;
             end case;

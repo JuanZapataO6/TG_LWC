@@ -33,10 +33,11 @@ begin
 STat: process (clk)
 
 variable Addr_eS_Aux : std_logic_vector(4 downto 0):="00000";
+variable Addr_aD_Aux : std_logic_vector(4 downto 0):="00000";
 begin
-    if clk 'event and clk = '1' then 
-        if En_In ='1' then  
-            case presente is 
+    if clk 'event and clk = '1' then
+        if En_In ='1' then
+            case presente is
                 when  s0 =>
                     presente <= s1;
                     Rst_S <= '0';
@@ -49,20 +50,19 @@ begin
                         Wr_En_S <= '1';
                         Addr_eS_Aux:=Addr_eS_Aux+1;
                         Addr_Wr_S <= Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
-                    else 
+                    else
                         presente <= s2;
-                        Rst_S <= '1'; 
-                        
-                    end if; 
+                        Rst_S <= '1';
+                    end if;
                 when s2 =>
                     presente <= s3;
                     Rd_En_Ad <= '0';
                     Rd_En_eS <= '0';
                     Rst_S <= '1';
                     Addr_eS_Aux:="00000";
-                    Addr_Rd_Ad <= Addr_eS_Aux;
+                    Addr_aD_Aux:="00000";
+                    Addr_Rd_Ad <= Addr_aD_Aux;
                     Addr_Rd_eS <=  Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
-
                 when  s3 =>
                     presente <= s4;
                     Rst_S    <= '1';
@@ -70,31 +70,44 @@ begin
                     Rd_En_eS <= '1';
                     Wr_En_S  <= '1';
                     Addr_Wr_S  <= Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
-                    --Data_In_S  <= Data_Out_eS XOR Data_Out_Ad;
-                    --Addr_eS_Aux:= Addr_eS_Aux + 1;
-                    --Addr_Wr_S  <= Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0) - 1;
-                    --Addr_Rd_Ad <= Addr_eS_Aux;
-                    --Addr_Rd_eS <=  Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
                 when  s4 =>
                     presente <= s5;
                 when  s5 =>
-                    if  Addr_eS_Aux < "1000" then
+                    if  Addr_eS_Aux(Addr_eS_Aux'length-3 downto 0) = "111" then
+                        presente <= s6;
+                        En_Out <='1';
+                    else                        
+                        presente <= s3;                        
+                    end if;
+                    Wr_En_S  <= '0';
+                    Rst_S    <= '1';
+                    Rd_En_Ad <= '0';
+                    Rd_En_eS <= '0';
+                    Addr_eS_Aux:= Addr_eS_Aux + 1;
+                    Addr_aD_Aux:= Addr_aD_Aux + 1;
+                    Addr_Rd_Ad <= Addr_aD_Aux;
+                    Addr_Rd_eS <= Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
+                    Data_In_S  <= Data_Out_eS XOR Data_Out_Ad;
+                when s6 =>
+                    presente <= s7;
+                    Wr_En_S  <= '1';
+                    En_Out <='0';
+                when  s7 =>
+                    if  En_In = '1' then
                         presente <= s3;
-                        Wr_En_S  <= '0';
-                        Rst_S    <= '1';
                         Rd_En_Ad <= '0';
                         Rd_En_eS <= '0';
-                        Addr_eS_Aux:= Addr_eS_Aux + 1;
-                        Addr_Rd_Ad <= Addr_eS_Aux;
+                        Rst_S <= '1';
+                        Addr_eS_Aux := "00000";
+                        --Addr_aD_Aux:= Addr_aD_Aux + 1;
+                        Addr_Rd_Ad <= Addr_aD_Aux;
                         Addr_Rd_eS <=  Addr_eS_Aux(Addr_eS_Aux'length-2 downto 0);
                         Data_In_S  <= Data_Out_eS XOR Data_Out_Ad;
                     else
-                        presente <= s6;
-                        En_Out <='1';
-                    end if;                     
-                    
-                    
-                    
+                        Addr_eS_Aux := "00000";
+                        presente <= s7;
+                        En_Out <='0';
+                    end if;
                 when others => null;
             end case;
         end if;
