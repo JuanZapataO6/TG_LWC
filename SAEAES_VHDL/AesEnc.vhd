@@ -57,87 +57,85 @@ if clk 'event and clk = '1' then
                 presente <= s1;
                 Rd_En_eK <= '0';
                 Addr_Rd_eK <= Addr_Aux; --0--4
-                Rd_En_eS <= '0';
-                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--0
             when s1 =>
                 presente <= s2;
                 Addr_Aux := Addr_Aux + 1; 
                 Rd_En_eK <= '0';
-                Addr_Rd_eK <= Addr_Aux; --1--5
-                Rd_En_eS <= '0';
-                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--1
+                Addr_Rd_eK <= Addr_Aux; --1--
             when s2 => 
                 presente <= s3;
                 Addr_Aux := Addr_Aux + 1; 
                 Rd_En_eK <= '0';
-                Addr_Rd_eK <= Addr_Aux; --2 --6
-                Rd_En_eS <= '0';
-                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--2
-            when s3 => 
-                presente <= s4;
-                Addr_Aux := Addr_Aux + 1; 
-                Rd_En_eK <= '0';
-                Addr_Rd_eK <= Addr_Aux; --3--7
-                Rd_En_eS <= '0';
-                Addr_Rd_eS < = Addr_Aux(Addr_Aux'length-3 downto 0);--3
-                if Addr_Aux_eS <= "11" then 
-                    eSAux(to_integer(unsigned(Addr_Aux_eS))) :=x"000000" & Data_Out_eS;
-                    witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
+                Addr_Rd_eK <= Addr_Aux;--2 --6
+            when s3 =>
+                Addr_Aux := Addr_Aux + 1;
+                if Addr_Aux <= x"2B" then  
+                    presente <= s3;
+                    Rd_En_eK <= '0';
+                    Addr_Rd_eK <= Addr_Aux;
+                elsif Addr_Aux >= x"2E" then  
+                    presente <= s4;
+                    Rd_En_eK <= '1';
                 end if;
-                eKeyAux (to_integer(unsigned(Addr_Aux-3))) :=Data_Out_eK;
+                --3
+                eKeyAux(to_integer(unsigned(Addr_Aux-3))) :=Data_Out_eK;
                 witness_eKe <= eKeyAux(to_integer(unsigned(Addr_Aux-3)));
-            when s4 => 
+            when s4=>
                 presente <= s5;
-                Rd_En_eK <= '0';
-                Addr_Rd_eK <= Addr_Aux;
-                Rd_En_eS <= '0';
-                if Addr_Aux_eS <= "11" then 
-                    eSAux(to_integer(unsigned(Addr_Aux_eS))) :=x"0000" & Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(7 downto 0);
-                    witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
-                end if;
-                eKeyAux(to_integer(unsigned(Addr_Aux-2))) :=Data_Out_eK;
-                witness_eKe <= eKeyAux(to_integer(unsigned(Addr_Aux-2)));
-            when s5 =>    
+                Rd_En_eK <= '1';
+                Addr_Aux := "000000";
+            when s5 => 
                 presente <= s6;
-                Rd_En_eK <= '0';
-                Addr_Rd_eK <= Addr_Aux;
-                Rd_En_eS <= '0';
-                if Addr_Aux_eS <= "11" then 
-                    eSAux(to_integer(unsigned(Addr_Aux_eS))) :=x"00" & Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(15 downto 0);
-                    witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
-                end if;
-                eKeyAux(to_integer(unsigned(Addr_Aux-1))) :=Data_Out_eK;
-                witness_eKe <= eKeyAux(to_integer(unsigned(Addr_Aux-1)));
-            when s6 =>
-                presente <= s7;
-                Rd_En_eK <= '0';
-                Rd_En_eS <= '0';
-                if Addr_Aux_eS <= "11" then 
-                    eSAux(to_integer(unsigned(Addr_Aux_eS))) :=Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(23 downto 0);
-                    witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
-                end if;
-                eKeyAux(to_integer(unsigned(Addr_Aux))) :=Data_Out_eK;
-                witness_eKe <= eKeyAux(to_integer(unsigned(Addr_Aux)));
-            when s7 =>
-                if Addr_Aux >= x"2B" then  
-                    presente <= s8;--32 16 8 4 2 1
-                    --4--8--16--32
-                else
-                    presente <= s0;
-                    Addr_Aux_eS := Addr_Aux_eS + 1;
-                    Addr_Aux := Addr_Aux + 1;
-                end if;                
+                Rd_En_es <= '0';
                 Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
-                witness_eSe_0 <= eSAux(0);
-                witness_eSe_1 <= eSAux(1);
-                witness_eSe_2 <= eSAux(2);
-                witness_eSe_3 <= eSAux(3);
-                witness_eKe_0 <= eKeyAux(to_integer(unsigned(Addr_Aux-3)));
-                witness_eKe_1 <= eKeyAux(to_integer(unsigned(Addr_Aux-2)));
-                witness_eKe_2 <= eKeyAux(to_integer(unsigned(Addr_Aux-1)));
-                witness_eKe_3 <= eKeyAux(to_integer(unsigned(Addr_Aux-0)));
+            when s6 =>    
+                presente <= s7;
+                Rd_En_es <= '0';
+                Addr_Aux := Addr_Aux + 1;--1
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
+            when s7 =>    
+                presente <= s8;
+                Rd_En_es <= '0';
+                Addr_Aux := Addr_Aux + 1;--1
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
             when s8 =>
                 presente <= s9;
+                Addr_Aux := Addr_Aux + 1;--2 
+                Rd_En_es <= '0';
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
+                eSAux(to_integer(unsigned(Addr_Aux_eS))):= x"000000" & Data_Out_eS;
+                witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
+            when s9 =>
+                presente <= s10;
+                Addr_Aux := Addr_Aux + 1;--3 
+                Rd_En_es <= '0';
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
+                eSAux(to_integer(unsigned(Addr_Aux_eS))):= x"0000" & Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(7 downto 0);
+                witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
+            when s10 =>
+                presente <= s11;
+                --Addr_Aux := Addr_Aux + 1;--5
+                Rd_En_es <= '0';
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
+                eSAux(to_integer(unsigned(Addr_Aux_eS))):= x"00" & Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(15 downto 0);
+                witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
+            when s11 =>
+                presente <= s12;
+                --Addr_Aux := Addr_Aux + 1;--6
+                Rd_En_es <= '0';
+                Addr_Rd_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);
+                eSAux(to_integer(unsigned(Addr_Aux_eS))):= Data_Out_eS & eSAux(to_integer(unsigned(Addr_Aux_eS)))(23 downto 0);
+                witness_eSe <= eSAux(to_integer(unsigned(Addr_Aux_eS)));
+            when s12 =>
+                if Addr_Aux_eS = "11" then
+                    presente <= s13;
+                else 
+                    presente <= s5;
+                    Addr_Aux_eS := Addr_Aux_eS + 1; 
+                    --Addr_Aux := Addr_Aux + 1;
+                end if;
+            when s13 =>
+                presente <= s14;
                 RK(eSAux(0),eKeyAux(0),eSAux(0));
                 RK(eSAux(1),eKeyAux(1),eSAux(1));
                 RK(eSAux(2),eKeyAux(2),eSAux(2));
@@ -150,8 +148,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= eKeyAux(5);
                 witness_eKe_2 <= eKeyAux(6);
                 witness_eKe_3 <= eKeyAux(7);
-            when s9 =>
-                presente <= s10;
+            when s14 =>
+                presente <= s15;
                 SM(eSAux(0),eSAux(1),eSAux(2),eSAux(3),
                     TAux(0),TAux(1),TAux(2),TAux(3));
                 witness_eSe_0 <= eSAux(0);
@@ -162,8 +160,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= TAux(1);
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
-            when s10 =>
-                presente <= s11;
+            when s15 =>
+                presente <= s16;
                 RK(TAux(0),eKeyAux(4),TAux(0));
                 RK(TAux(1),eKeyAux(5),TAux(1));
                 RK(TAux(2),eKeyAux(6),TAux(2));
@@ -177,13 +175,13 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
                 witness_eKe <= eSAux(2);
-            when s11 =>
-                presente <= s12;
+            when s16 =>
+                presente <= s17;
                 SM(TAux(0),TAux(1),TAux(2),TAux(3),
                     eSAux(0),eSAux(1),eSAux(2),eSAux(3));
                 witness_eKe <= eSAux(3);
-            when s12 =>
-                presente <= s13;
+            when s17 =>
+                presente <= s18;
                 RK(eSAux(0),eKeyAux(8),eSAux(0));
                 RK(eSAux(1),eKeyAux(9),eSAux(1));
                 RK(eSAux(2),eKeyAux(10),eSAux(2));
@@ -197,8 +195,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= eKeyAux(10);
                 witness_eKe_3 <= eKeyAux(11);
                 witness_eKe <= eSAux(2);
-            when s13 =>
-                presente <= s14;
+            when s18 =>
+                presente <= s19;
                 SM(eSAux(0),eSAux(1),eSAux(2),eSAux(3),
                     TAux(0),TAux(1),TAux(2),TAux(3));
                 witness_eSe_0 <= eSAux(0);
@@ -209,8 +207,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= TAux(1);
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
-            when s14 =>
-                presente <= s15;
+            when s19 =>
+                presente <= s20;
                 RK(TAux(0),eKeyAux(12),TAux(0));
                 RK(TAux(1),eKeyAux(13),TAux(1));
                 RK(TAux(2),eKeyAux(14),TAux(2));
@@ -224,13 +222,13 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= eKeyAux(14);
                 witness_eKe_3 <= eKeyAux(15);
                 witness_eKe <= eSAux(2);
-            when s15 =>
-                presente <= s16;
+            when s20 =>
+                presente <= s21;
                 SM(TAux(0),TAux(1),TAux(2),TAux(3),
                     eSAux(0),eSAux(1),eSAux(2),eSAux(3));
                 witness_eKe <= eSAux(3);
-            when s16 =>
-                presente <= s17;
+            when s21 =>
+                presente <= s22;
                 RK(eSAux(0),eKeyAux(16),eSAux(0));
                 RK(eSAux(1),eKeyAux(17),eSAux(1));
                 RK(eSAux(2),eKeyAux(18),eSAux(2));
@@ -243,8 +241,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= eKeyAux(17);
                 witness_eKe_2 <= eKeyAux(18);
                 witness_eKe_3 <= eKeyAux(19);
-            when s17 =>
-                presente <= s18;
+            when s22 =>
+                presente <= s23;
                 SM(eSAux(0),eSAux(1),eSAux(2),eSAux(3),
                     TAux(0),TAux(1),TAux(2),TAux(3));
                 witness_eSe_0 <= eSAux(0);
@@ -255,8 +253,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= TAux(1);
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
-            when s18 =>
-                presente <= s19;
+            when s23 =>
+                presente <= s24;
                 RK(TAux(0),eKeyAux(20),TAux(0));
                 RK(TAux(1),eKeyAux(21),TAux(1));
                 RK(TAux(2),eKeyAux(22),TAux(2));
@@ -270,13 +268,13 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= eKeyAux(22);
                 witness_eKe_3 <= eKeyAux(23);
                 witness_eKe <= eSAux(2);
-            when s19 =>
-                presente <= s20;
+            when s24 =>
+                presente <= s25;
                 SM(TAux(0),TAux(1),TAux(2),TAux(3),
                     eSAux(0),eSAux(1),eSAux(2),eSAux(3));
                 witness_eKe <= eSAux(3);
-            when s20 =>
-                presente <= s21;
+            when s25 =>
+                presente <= s26;
                 RK(eSAux(0),eKeyAux(24),eSAux(0));
                 RK(eSAux(1),eKeyAux(25),eSAux(1));
                 RK(eSAux(2),eKeyAux(26),eSAux(2));
@@ -289,8 +287,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= eKeyAux(25);
                 witness_eKe_2 <= eKeyAux(26);
                 witness_eKe_3 <= eKeyAux(27);
-            when s21 =>
-                presente <= s22;
+            when s26 =>
+                presente <= s27;
                 SM(eSAux(0),eSAux(1),eSAux(2),eSAux(3),
                     TAux(0),TAux(1),TAux(2),TAux(3));
                 witness_eSe_0 <= eSAux(0);
@@ -301,8 +299,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= TAux(1);
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
-            when s22 =>
-                presente <= s23;
+            when s27 =>
+                presente <= s28;
                 RK(TAux(0),eKeyAux(28),TAux(0));
                 RK(TAux(1),eKeyAux(29),TAux(1));
                 RK(TAux(2),eKeyAux(30),TAux(2));
@@ -316,13 +314,13 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= eKeyAux(30);
                 witness_eKe_3 <= eKeyAux(31);
                 witness_eKe <= eSAux(2);
-            when s23 =>
-                presente <= s24;
+            when s28 =>
+                presente <= s29;
                 SM(TAux(0),TAux(1),TAux(2),TAux(3),
                     eSAux(0),eSAux(1),eSAux(2),eSAux(3));
                 witness_eKe <= eSAux(3);
-            when s24 =>
-                presente <= s25;
+            when s29 =>
+                presente <= s30;
                 RK(eSAux(0),eKeyAux(32),eSAux(0));
                 RK(eSAux(1),eKeyAux(33),eSAux(1));
                 RK(eSAux(2),eKeyAux(34),eSAux(2));
@@ -335,8 +333,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= eKeyAux(33);
                 witness_eKe_2 <= eKeyAux(34);
                 witness_eKe_3 <= eKeyAux(35);
-            when s25 =>
-                presente <= s26;
+            when s30 =>
+                presente <= s31;
                 SM(eSAux(0),eSAux(1),eSAux(2),eSAux(3),
                     TAux(0),TAux(1),TAux(2),TAux(3));
                 witness_eSe_0 <= eSAux(0);
@@ -347,8 +345,8 @@ if clk 'event and clk = '1' then
                 witness_eKe_1 <= TAux(1);
                 witness_eKe_2 <= TAux(2);
                 witness_eKe_3 <= TAux(3);
-            when s26 =>
-                presente <= s27;
+            when s31 =>
+                presente <= s32;
                 RK(TAux(0),eKeyAux(36),TAux(0));
                 RK(TAux(1),eKeyAux(37),TAux(1));
                 RK(TAux(2),eKeyAux(38),TAux(2));
@@ -362,13 +360,13 @@ if clk 'event and clk = '1' then
                 witness_eKe_2 <= eKeyAux(38);
                 witness_eKe_3 <= eKeyAux(39);
                 witness_eKe <= eSAux(2);
-            when s27 =>
-                presente <= s28;
+            when s32 =>
+                presente <= s33;
                 SS(TAux(0),TAux(1),TAux(2),TAux(3),
                     eSAux(0),eSAux(1),eSAux(2),eSAux(3));
                 witness_eKe <= eSAux(3);
-            when s28 =>
-                presente <= s29;
+            when s33 =>
+                presente <= s34;
                 RK(eSAux(0),eKeyAux(40),eSAux(0));
                 RK(eSAux(1),eKeyAux(41),eSAux(1));
                 RK(eSAux(2),eKeyAux(42),eSAux(2));
@@ -383,58 +381,58 @@ if clk 'event and clk = '1' then
                 witness_eKe_3 <= eKeyAux(43);
                 Addr_Aux   :="000000";
                 Addr_Aux_eS:= "00";
-            when s29 =>
-                presente   <= s30;
+            when s34 =>
+                presente   <= s35;
                 Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--0
                 Wr_En_eS   <= '0';
                 Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(7 downto 0);
-            when s30 =>
-                presente   <= s31;
+            when s35 =>
+                presente   <= s36;
                 Addr_Aux   := Addr_Aux+1; --1
                 Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--1
                 Wr_En_eS   <= '0';
                 Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(15 downto 8);
-            when s31 =>
-                presente   <= s32;
+            when s36 =>
+                presente   <= s37;
                 Addr_Aux   := Addr_Aux+1; --1
                 Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--2
                 Wr_En_eS   <= '0';
                 Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(23 downto 16);
-            when s32 =>
-                presente   <= s33;
+            when s37 =>
+                presente   <= s38;
                 Addr_Aux   := Addr_Aux+1; --1
                 Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--3
                 Wr_En_eS   <= '0';
                 Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(31 downto 24);
-            when s33 =>
-                presente   <= s34;
+            when s38 =>
+                presente   <= s39;
                 --Addr_Aux   <= Addr_Aux+1; --1
                 --Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--3
                 Wr_En_eS   <= '1';
                 --Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(32 downto 24);
-            when s34 =>
-                presente   <= s35;
+            when s39 =>
+                presente   <= s40;
                 --Addr_Aux   <= Addr_Aux+1; --1
                 --Addr_Wr_eS <= Addr_Aux(Addr_Aux'length-3 downto 0);--3
                 Wr_En_eS   <= '1';
                 --Data_In_eS <= eSAux(to_integer(unsigned(Addr_Aux_eS)))(32 downto 24);
-            when s35 =>
+            when s40 =>
                 if Addr_Aux_eS < "11" then
-                    presente   <= s29;
+                    presente   <= s34;
                 else 
-                    presente   <= s36;
+                    presente   <= s41;
                     En_Out <='1';
                 end if; 
                 Addr_Aux    := Addr_Aux+1; --1
                 Addr_Aux_eS := Addr_Aux_eS+1;
-            when s36 =>
-                presente   <= s37;
+            when s41 =>
+                presente   <= s42;
                 En_Out <='0';
-            when s37 =>
+            when s42 =>
                 if En_In <= '1' then
-                    presente   <= s0;
+                    presente   <= s4;
                 else 
-                    presente <= s37;
+                    presente <= s42;
                     En_Out <='0';
                     
                 end if;
