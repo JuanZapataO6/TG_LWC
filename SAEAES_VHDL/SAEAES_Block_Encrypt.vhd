@@ -83,11 +83,15 @@ component Hash
 end component Hash;
 component Encrypt
     port(
-        Addr_Rd_eS   : out std_logic_vector(3 downto 0);
-        Data_Out_eS  : in  std_logic_vector(7 downto 0);
-        Rd_En_eS     : out std_logic;        Addr_Rd_Bf   : out std_logic_vector(4 downto 0);
-        Data_Out_Bf  : in  std_logic_vector(7 downto 0);
-        Rd_En_Bf     : out std_logic;
+        Addr_Rd_eS  : out std_logic_vector(3 downto 0);
+        Data_Out_eS : in  std_logic_vector(7 downto 0);
+        Rd_En_eS    : out std_logic;       
+        Addr_Rd_Bf  : out std_logic_vector(4 downto 0);
+        Data_Out_Bf : in  std_logic_vector(7 downto 0);
+        Rd_En_Bf    : out std_logic;
+        Data_In_Ct  : out std_logic_vector(7  downto 0);
+        Addr_Wr_Ct  : out std_logic_vector(5 downto 0);
+        Wr_En_Ct    : out std_logic;
         Data_In_S   : out std_logic_vector(7  downto 0);
         Addr_Wr_S   : out std_logic_vector(3 downto 0);
         Wr_En_S     : out std_logic;
@@ -194,7 +198,7 @@ signal Rst          : std_logic;
 ----Signals for AesKey with memorybank in this script 
 Signal En_Hash      : std_logic;
 Signal En_Hash_1    : std_logic;
-signal Rst_eS       : std_logic;
+signal Rst_eS       : std_logic;    
 --
 Signal En_Encrypt   : std_logic;
 Signal En_Encrypt_1 : std_logic;
@@ -223,6 +227,14 @@ Signal Wr_En_S      : std_logic;
 Signal Addr_Wr_S    : std_logic_vector (3 DOWNTO 0);
 Signal Data_In_S    : std_logic_vector (7 downto 0);
 
+--Signals for Ct (state) with memorybank in this script 
+Signal Rd_En_Ct      : std_logic;
+Signal Addr_Rd_Ct    : std_logic_vector (5 DOWNTO 0);
+Signal Data_Out_Ct   : std_logic_vector (7 downto 0);
+
+Signal Wr_En_Ct      : std_logic;
+Signal Addr_Wr_Ct    : std_logic_vector (5 DOWNTO 0);
+Signal Data_In_Ct    : std_logic_vector (7 downto 0);
 --Signal of control from ControlPath to Mux's and Demux
 signal Addr_Control : std_logic_vector (1 downto 0);
 --Signals For Mux En_Rd_eK
@@ -456,7 +468,11 @@ uEncrypt : Encrypt
         Addr_Rd_Bf   =>Addr_Rd_Bf,
         Data_Out_Bf  =>Data_Out_Bf,
         Rd_En_Bf     =>Rd_En_Bf,
-        
+
+        Data_In_Ct   =>Data_In_Ct,
+        Addr_Wr_Ct   =>Addr_Wr_Ct,
+        Wr_En_Ct     =>Wr_En_Ct,
+
         Data_In_S   =>DataIn_eS_Encrypt,
         Addr_Wr_S   =>eS_AddrWr_Encrypt,
         Wr_En_S     =>eS_Wr_Encrypt,
@@ -497,6 +513,22 @@ ueSe: MemBnk
         Addr_Out => Addr_Rd_S, --port
         Data_in  => Data_In_S, --signal 
         Data_Out => Data_Out_S --port
+    );
+uCt: MemBnk
+    generic map(
+        w => 8, --Witdth of words
+        d => 40, --Numbers of Words
+        a => 6   --Witdth of Address
+    )
+    Port Map (  
+        Wr_En    => Wr_En_Ct,   --signal 
+        Rd_En    => Rd_En_Ct,   --port 
+        Rst      => Rst,        --signal 
+        Clk      => clk,        --port
+        Addr_In  => Addr_Wr_Ct, --signal 
+        Addr_Out => Addr_Rd_Ct, --port
+        Data_in  => Data_In_Ct, --signal 
+        Data_Out => Data_Out_Ct--port
     );
 STat: process(clk,presente)
 begin

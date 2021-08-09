@@ -19,6 +19,7 @@ add wave -noupdate /SAEAES_Block_Encrypt/uEncrypt/En_In
 add wave -noupdate /SAEAES_Block_Encrypt/uEncrypt/En_out
 
 add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/ueSe/r_memory
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uCt/r_memory
 
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Rd_En_Bf
 add wave -noupdate -format Literal -color brown  -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Rd_En_eS
@@ -31,6 +32,9 @@ add wave -noupdate -format Literal -color blue   -radix hexadecimal /SAEAES_Bloc
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Data_Out_Bf
 add wave -noupdate -format Literal -color brown -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Data_Out_eS
 add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Data_In_S
+
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Addr_Wr_Ct
+add wave -noupdate -format Literal -color blue -radix hexadecimal /SAEAES_Block_Encrypt/uEncrypt/Data_In_Ct
 
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Rd_En_S
 add wave -noupdate -format Literal -color yellow -radix hexadecimal /SAEAES_Block_Encrypt/Addr_Rd_S
