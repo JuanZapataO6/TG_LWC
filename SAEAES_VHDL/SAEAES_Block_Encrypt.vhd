@@ -1,10 +1,17 @@
 LIBRARY ieee;
+library work;
 USE ieee.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
-
+use ieee.std_logic_misc.all;
+use work.all;
 entity SAEAES_Block_Encrypt is 
-
+    PORT (
+        RSTn 	: IN std_logic;
+        clk 	: IN std_logic;
+        SERIN 	: IN std_logic
+        
+    );
 end SAEAES_Block_Encrypt;
 
 architecture Main of SAEAES_Block_Encrypt is 
@@ -26,6 +33,30 @@ component Data_Generate
         Data_Out_N    :out STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
 end component Data_Generate;
+component S2P
+    port(
+        RSTn 	: IN std_logic;
+        CLOCK 	: IN std_logic;
+        SERIN 	: IN std_logic;
+        PERRn 	: OUT std_logic;
+        DRDY 	: OUT std_logic;
+        DOUT 	: OUT std_logic_vector (7 downto 0)
+    );
+end component S2P;
+component Data_Force
+    port( 
+        clk     :in  std_logic;
+        DIn     :in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        --Ports for Data Generate
+        En_In   :in  std_logic;
+        --Ports for MemBnk Write
+        Data_Out:out std_logic_vector (7 DOWNTO 0);
+        Addr_Rd :in  std_logic_vector (4 DOWNTO 0);
+        Rd_En   :in  std_logic;
+        --Ports Of fininish 
+        En_Out  :out std_logic
+    );
+end component ;
 component AesKey
     port (      
         En_In   : in std_logic; -- Flag for start FMS
@@ -176,7 +207,13 @@ component DeMux
 end component DeMux;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20);
 SIGNAL presente:estado:=s0;
-signal clk : std_logic;
+--signal clk : std_logic;
+--
+signal  PERRn, DRDY : std_logic;
+signal  DOUT : std_logic_vector (7 downto 0);
+signal  D_OUT : std_logic_vector (7 downto 0);
+signal  Addr_OUT : std_logic_vector (4 downto 0);
+signal  Rd_En, En_DF : std_logic;
 --signals Data_Generate component 
 signal Rd_En_K      : std_logic; --LogicPin for read Key from DG
 signal Rd_En_Bf     : std_logic; --LogicPin for read Buf from DG
@@ -281,13 +318,32 @@ signal Flag_AesEnc  : std_logic;
 signal Flag_AesKey  : std_logic;
 begin
 
-reloj:process
-    begin
-    clk <= '0';
-    wait for 12.5 ns;
-    clk <= '1';
-    wait for 12.5 ns;
-end process reloj;
+--reloj:process
+  --  begin
+  --  clk <= '0';
+  --  wait for 12.5 ns;
+  --  clk <= '1';
+  --  wait for 12.5 ns;
+--end process reloj;
+uS2P: S2P 
+    PORT MAP (
+        RSTn 	=> RSTn,
+        CLOCK 	=> Clk,
+        SERIN 	=> SERIN,
+        PERRn 	=> PERRn,
+        DRDY 	=> DRDY,
+        DOUT 	=> DOUT
+    );
+uDF: Data_Force
+    port map( 
+        clk      =>clk,
+        DIn      =>DOUT,
+        En_In    =>DRDY,
+        Data_Out =>Data_Out_Bf,
+        Addr_Rd  =>Addr_Rd_Bf,
+        Rd_En    =>Rd_En_Bf,
+        En_Out   =>En_DF
+    );
 uMux_eK_Rd : MuxLogic
     port map(
         In_0   => eK_Rd_AE, --In for AesEnc
@@ -394,16 +450,16 @@ uDataGenerate   : Data_Generate
     port map (
         Clk         => Clk,
         Rd_En_K     => Rd_En_K,
-        Rd_En_B     => Rd_En_Bf,
+        Rd_En_B     => Rd_En,
         Rd_En_A     => Rd_En_Ad,
         Rd_En_N     => Rd_En_N,
         Ena_Out     => En_DG,
         Addr_Out_K  => Addr_Out_K,
         Addr_Out_N  => Addr_Out_N,
         Addr_Out_A  => Addr_Rd_Ad,
-        Addr_Out_B  => Addr_Rd_Bf,
+        Addr_Out_B  => Addr_OUT,
         Data_Out_K  => Data_Out_K,
-        Data_Out_B  => Data_Out_Bf,
+        Data_Out_B  => D_OUT,
         Data_Out_A  => Data_Out_Ad,
         Data_Out_N  => Data_Out_N
     );
@@ -533,7 +589,7 @@ uCt: MemBnk
 STat: process(clk,presente)
 begin
     if clk 'event and clk = '1' then 
-        if En_DG ='1' then
+        if En_DF ='1' then
             case presente is
                 when s0 =>
                     if En_AK = '1' then --Finish AesKey

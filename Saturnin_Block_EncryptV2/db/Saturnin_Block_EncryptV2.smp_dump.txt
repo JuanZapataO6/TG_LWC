@@ -1,0 +1,184 @@
+
+State Machine - |Saturnin_Block_EncryptV2|presente
+Name presente.s20 presente.s19 presente.s18 presente.s17 presente.s16 presente.s15 presente.s14 presente.s13 presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s13 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s14 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s15 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s16 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s17 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s18 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s19 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s20 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|SR_Sheet_Inv:USR_Sheet_Inv|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|SR_Sheet:USR_Sheet|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|SR_Slice_Inv:USR_Slice_Inv|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|SR_Slice:USR_Slice|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|MDS:UMDS|presente
+Name presente.s13 presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|S_Box:USBox|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|XOR_key_Rotated:UXorKey_Rotated|presente
+Name presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 0 0 0 1 0 0 0 1 
+presente.s5 0 0 0 0 0 1 0 0 0 0 1 
+presente.s6 0 0 0 0 1 0 0 0 0 0 1 
+presente.s7 0 0 0 1 0 0 0 0 0 0 1 
+presente.s8 0 0 1 0 0 0 0 0 0 0 1 
+presente.s9 0 1 0 0 0 0 0 0 0 0 1 
+presente.s10 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|XOR_key:UXorKey|presente
+Name presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 0 0 0 1 0 0 0 1 
+presente.s5 0 0 0 0 0 1 0 0 0 0 1 
+presente.s6 0 0 0 0 1 0 0 0 0 0 1 
+presente.s7 0 0 0 1 0 0 0 0 0 0 1 
+presente.s8 0 0 1 0 0 0 0 0 0 0 1 
+presente.s9 0 1 0 0 0 0 0 0 0 0 1 
+presente.s10 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX1
+Name presenteX1.s5 presenteX1.s4 presenteX1.s3 presenteX1.s2 presenteX1.s1 presenteX1.s0 
+presenteX1.s0 0 0 0 0 0 0 
+presenteX1.s1 0 0 0 0 1 1 
+presenteX1.s2 0 0 0 1 0 1 
+presenteX1.s3 0 0 1 0 0 1 
+presenteX1.s4 0 1 0 0 0 1 
+presenteX1.s5 1 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX0
+Name presenteX0.s5 presenteX0.s4 presenteX0.s3 presenteX0.s2 presenteX0.s1 presenteX0.s0 
+presenteX0.s0 0 0 0 0 0 0 
+presenteX0.s1 0 0 0 0 1 1 
+presenteX0.s2 0 0 0 1 0 1 
+presenteX0.s3 0 0 1 0 0 1 
+presenteX0.s4 0 1 0 0 0 1 
+presenteX0.s5 1 0 0 0 0 1 
+
+State Machine - |Saturnin_Block_EncryptV2|Data_Force:Data_F|presente
+Name presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 1 0 0 0 1 
+presente.s5 0 0 1 0 0 0 0 1 
+presente.s6 0 1 0 0 0 0 0 1 
+presente.s7 1 0 0 0 0 0 0 1 

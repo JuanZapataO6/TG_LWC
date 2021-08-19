@@ -1,0 +1,1510 @@
+Analysis & Synthesis report for Saturnin_Block_EncryptV2
+Wed Aug 18 12:59:41 2021
+Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |Saturnin_Block_EncryptV2|presente
+  9. State Machine - |Saturnin_Block_EncryptV2|SR_Sheet_Inv:USR_Sheet_Inv|presente
+ 10. State Machine - |Saturnin_Block_EncryptV2|SR_Sheet:USR_Sheet|presente
+ 11. State Machine - |Saturnin_Block_EncryptV2|SR_Slice_Inv:USR_Slice_Inv|presente
+ 12. State Machine - |Saturnin_Block_EncryptV2|SR_Slice:USR_Slice|presente
+ 13. State Machine - |Saturnin_Block_EncryptV2|MDS:UMDS|presente
+ 14. State Machine - |Saturnin_Block_EncryptV2|S_Box:USBox|presente
+ 15. State Machine - |Saturnin_Block_EncryptV2|XOR_key_Rotated:UXorKey_Rotated|presente
+ 16. State Machine - |Saturnin_Block_EncryptV2|XOR_key:UXorKey|presente
+ 17. State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX1
+ 18. State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX0
+ 19. State Machine - |Saturnin_Block_EncryptV2|Data_Force:Data_F|presente
+ 20. Registers Removed During Synthesis
+ 21. Removed Registers Triggering Further Register Optimizations
+ 22. General Register Statistics
+ 23. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 24. Parameter Settings for User Entity Instance: Register_A:RinB_MB
+ 25. Parameter Settings for User Entity Instance: Register_A:RinK_MB
+ 26. Parameter Settings for User Entity Instance: Register_A:RinB_AdrrWr
+ 27. Parameter Settings for User Entity Instance: Register_A:RinB_AdrrRd
+ 28. Parameter Settings for User Entity Instance: Register_A:RinK_AdrrWr
+ 29. Parameter Settings for User Entity Instance: Register_A:RinK_AdrrRd
+ 30. Parameter Settings for User Entity Instance: Data_Generate:Data_Ge|MemBnk:uKey
+ 31. Parameter Settings for User Entity Instance: Data_Generate:Data_Ge|MemBnk:uBuf
+ 32. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|MemBnk:u_R0
+ 33. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrWr
+ 34. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrRd
+ 35. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_MB
+ 36. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|MemBnk:u_R1
+ 37. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrWr
+ 38. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrRd
+ 39. Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_MB
+ 40. Parameter Settings for User Entity Instance: MemBnk:uBuff
+ 41. Parameter Settings for User Entity Instance: MemBnk:uKey
+ 42. Parameter Settings for User Entity Instance: Mux:uMux_WrB
+ 43. Parameter Settings for User Entity Instance: Mux:uMuxAdrr_WrB
+ 44. Parameter Settings for User Entity Instance: DeMux:uDeMux_RdB
+ 45. Parameter Settings for User Entity Instance: Mux:uMuxAdrr_RdB
+ 46. Parameter Settings for User Entity Instance: Mux:uMux_WrK
+ 47. Parameter Settings for User Entity Instance: Mux:uMuxAdrr_Wrk
+ 48. Parameter Settings for User Entity Instance: DeMux:uDeMux_RdK
+ 49. Parameter Settings for User Entity Instance: Mux:uMuxAdrr_Rdk
+ 50. Port Connectivity Checks: "MuxLogic:uMuxRdk"
+ 51. Port Connectivity Checks: "Mux:uMuxAdrr_Rdk"
+ 52. Port Connectivity Checks: "DeMux:uDeMux_RdK"
+ 53. Port Connectivity Checks: "MuxLogic:uMuxWrk"
+ 54. Port Connectivity Checks: "Mux:uMuxAdrr_Wrk"
+ 55. Port Connectivity Checks: "MuxLogic:uMuxRdB"
+ 56. Port Connectivity Checks: "Mux:uMuxAdrr_RdB"
+ 57. Port Connectivity Checks: "DeMux:uDeMux_RdB"
+ 58. Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrRd"
+ 59. Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_Logic:Rin1_EnRd"
+ 60. Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrRd"
+ 61. Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_Logic:Rin0_EnRd"
+ 62. Port Connectivity Checks: "Data_Generate:Data_Ge|MemBnk:uKey"
+ 63. Port Connectivity Checks: "Register_Logic:RinB_Rst"
+ 64. Post-Synthesis Netlist Statistics for Top Partition
+ 65. Elapsed Time Per Partition
+ 66. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Wed Aug 18 12:59:41 2021       ;
+; Quartus Prime Version           ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
+; Revision Name                   ; Saturnin_Block_EncryptV2                    ;
+; Top-level Entity Name           ; Saturnin_Block_EncryptV2                    ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 3                                           ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                                         ;
++---------------------------------------------------------------------------------+--------------------------+--------------------------+
+; Option                                                                          ; Setting                  ; Default Value            ;
++---------------------------------------------------------------------------------+--------------------------+--------------------------+
+; Device                                                                          ; 5CSXFC6D6F31C6           ;                          ;
+; Top-level entity name                                                           ; Saturnin_Block_EncryptV2 ; Saturnin_Block_EncryptV2 ;
+; Family name                                                                     ; Cyclone V                ; Cyclone V                ;
+; Use smart compilation                                                           ; Off                      ; Off                      ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                       ; On                       ;
+; Enable compact report table                                                     ; Off                      ; Off                      ;
+; Restructure Multiplexers                                                        ; Auto                     ; Auto                     ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                      ; Off                      ;
+; Create Debugging Nodes for IP Cores                                             ; Off                      ; Off                      ;
+; Preserve fewer node names                                                       ; On                       ; On                       ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable                   ; Enable                   ;
+; Verilog Version                                                                 ; Verilog_2001             ; Verilog_2001             ;
+; VHDL Version                                                                    ; VHDL_1993                ; VHDL_1993                ;
+; State Machine Processing                                                        ; Auto                     ; Auto                     ;
+; Safe State Machine                                                              ; Off                      ; Off                      ;
+; Extract Verilog State Machines                                                  ; On                       ; On                       ;
+; Extract VHDL State Machines                                                     ; On                       ; On                       ;
+; Ignore Verilog initial constructs                                               ; Off                      ; Off                      ;
+; Iteration limit for constant Verilog loops                                      ; 5000                     ; 5000                     ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                      ; 250                      ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                       ; On                       ;
+; Infer RAMs from Raw Logic                                                       ; On                       ; On                       ;
+; Parallel Synthesis                                                              ; On                       ; On                       ;
+; DSP Block Balancing                                                             ; Auto                     ; Auto                     ;
+; NOT Gate Push-Back                                                              ; On                       ; On                       ;
+; Power-Up Don't Care                                                             ; On                       ; On                       ;
+; Remove Redundant Logic Cells                                                    ; Off                      ; Off                      ;
+; Remove Duplicate Registers                                                      ; On                       ; On                       ;
+; Ignore CARRY Buffers                                                            ; Off                      ; Off                      ;
+; Ignore CASCADE Buffers                                                          ; Off                      ; Off                      ;
+; Ignore GLOBAL Buffers                                                           ; Off                      ; Off                      ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                      ; Off                      ;
+; Ignore LCELL Buffers                                                            ; Off                      ; Off                      ;
+; Ignore SOFT Buffers                                                             ; On                       ; On                       ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                      ; Off                      ;
+; Optimization Technique                                                          ; Balanced                 ; Balanced                 ;
+; Carry Chain Length                                                              ; 70                       ; 70                       ;
+; Auto Carry Chains                                                               ; On                       ; On                       ;
+; Auto Open-Drain Pins                                                            ; On                       ; On                       ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                      ; Off                      ;
+; Auto ROM Replacement                                                            ; On                       ; On                       ;
+; Auto RAM Replacement                                                            ; On                       ; On                       ;
+; Auto DSP Block Replacement                                                      ; On                       ; On                       ;
+; Auto Shift Register Replacement                                                 ; Auto                     ; Auto                     ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto                     ; Auto                     ;
+; Auto Clock Enable Replacement                                                   ; On                       ; On                       ;
+; Strict RAM Replacement                                                          ; Off                      ; Off                      ;
+; Allow Synchronous Control Signals                                               ; On                       ; On                       ;
+; Force Use of Synchronous Clear Signals                                          ; Off                      ; Off                      ;
+; Auto Resource Sharing                                                           ; Off                      ; Off                      ;
+; Allow Any RAM Size For Recognition                                              ; Off                      ; Off                      ;
+; Allow Any ROM Size For Recognition                                              ; Off                      ; Off                      ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                      ; Off                      ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                       ; On                       ;
+; Ignore translate_off and synthesis_off directives                               ; Off                      ; Off                      ;
+; Timing-Driven Synthesis                                                         ; On                       ; On                       ;
+; Report Parameter Settings                                                       ; On                       ; On                       ;
+; Report Source Assignments                                                       ; On                       ; On                       ;
+; Report Connectivity Checks                                                      ; On                       ; On                       ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                      ; Off                      ;
+; Synchronization Register Chain Length                                           ; 3                        ; 3                        ;
+; Power Optimization During Synthesis                                             ; Normal compilation       ; Normal compilation       ;
+; HDL message level                                                               ; Level2                   ; Level2                   ;
+; Suppress Register Optimization Related Messages                                 ; Off                      ; Off                      ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000                     ; 5000                     ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000                     ; 5000                     ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                      ; 100                      ;
+; Clock MUX Protection                                                            ; On                       ; On                       ;
+; Auto Gated Clock Conversion                                                     ; Off                      ; Off                      ;
+; Block Design Naming                                                             ; Auto                     ; Auto                     ;
+; SDC constraint protection                                                       ; Off                      ; Off                      ;
+; Synthesis Effort                                                                ; Auto                     ; Auto                     ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                       ; On                       ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                      ; Off                      ;
+; Analysis & Synthesis Message Level                                              ; Medium                   ; Medium                   ;
+; Disable Register Merging Across Hierarchies                                     ; Auto                     ; Auto                     ;
+; Resource Aware Inference For Block RAM                                          ; On                       ; On                       ;
+; Automatic Parallel Synthesis                                                    ; On                       ; On                       ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                      ; Off                      ;
++---------------------------------------------------------------------------------+--------------------------+--------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                               ;
++---------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path            ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                                             ; Library ;
++---------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; ../Make_Rounds/XOR_key_Rotated.vhd          ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd          ;         ;
+; ../Make_Rounds/XOR_key.vhd                  ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd                  ;         ;
+; ../Make_Rounds/SR_Slice_Inv.vhd             ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd             ;         ;
+; ../Make_Rounds/SR_Slice.vhd                 ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd                 ;         ;
+; ../Make_Rounds/SR_Sheet_Inv.vhd             ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd             ;         ;
+; ../Make_Rounds/SR_Sheet.vhd                 ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd                 ;         ;
+; ../Make_Rounds/Saturnin_Block_EncryptV2.vhd ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd ;         ;
+; ../Make_Rounds/S2P.vhd                      ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S2P.vhd                      ;         ;
+; ../Make_Rounds/S_Box.vhd                    ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S_Box.vhd                    ;         ;
+; ../Make_Rounds/Register_Logic.vhd           ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd           ;         ;
+; ../Make_Rounds/Register_A.vhd               ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_A.vhd               ;         ;
+; ../Make_Rounds/MuxLogic.vhd                 ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd                 ;         ;
+; ../Make_Rounds/Mux.vhd                      ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd                      ;         ;
+; ../Make_Rounds/MemBnk_TB.vhd                ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_TB.vhd                ;         ;
+; ../Make_Rounds/MemBnk_32.vhd                ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_32.vhd                ;         ;
+; ../Make_Rounds/MemBnk_16.vhd                ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_16.vhd                ;         ;
+; ../Make_Rounds/MemBnk.vhd                   ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd                   ;         ;
+; ../Make_Rounds/MDS.vhd                      ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd                      ;         ;
+; ../Make_Rounds/Make_Rounds_TB.vhd           ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds_TB.vhd           ;         ;
+; ../Make_Rounds/Make_Rounds.vhd              ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd              ;         ;
+; ../Make_Rounds/DeMux.vhd                    ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd                    ;         ;
+; ../Make_Rounds/Data_Generate.vhd            ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd            ;         ;
+; ../Make_Rounds/Data_Force.vhd               ; yes             ; User VHDL File  ; C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Force.vhd               ;         ;
++---------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimate of Logic utilization (ALMs needed) ; 0     ;
+;                                             ;       ;
+; Combinational ALUT usage for logic          ; 0     ;
+;     -- 7 input functions                    ; 0     ;
+;     -- 6 input functions                    ; 0     ;
+;     -- 5 input functions                    ; 0     ;
+;     -- 4 input functions                    ; 0     ;
+;     -- <=3 input functions                  ; 0     ;
+;                                             ;       ;
+; Dedicated logic registers                   ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 3     ;
+;                                             ;       ;
+; Total DSP Blocks                            ; 0     ;
+;                                             ;       ;
+; Maximum fan-out node                        ; RSTn  ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 3     ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                       ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------+--------------------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name       ; Entity Name              ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------+--------------------------+--------------+
+; |Saturnin_Block_EncryptV2  ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 3    ; 0            ; |Saturnin_Block_EncryptV2 ; Saturnin_Block_EncryptV2 ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------+--------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|presente                                                                                                                                                                                                                                                                            ;
++--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; Name         ; presente.s20 ; presente.s19 ; presente.s18 ; presente.s17 ; presente.s16 ; presente.s15 ; presente.s14 ; presente.s13 ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ;
++--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; presente.s0  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ;
+; presente.s1  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1           ;
+; presente.s2  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1           ;
+; presente.s3  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1           ;
+; presente.s4  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s5  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s6  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s7  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s8  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s9  ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s10 ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s11 ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s12 ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s13 ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s14 ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s15 ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s16 ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s17 ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s18 ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s19 ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s20 ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
++--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|SR_Sheet_Inv:USR_Sheet_Inv|presente                                                                                                                                            ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|SR_Sheet:USR_Sheet|presente                                                                                                                                                    ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|SR_Slice_Inv:USR_Slice_Inv|presente                                                                                                                                            ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|SR_Slice:USR_Slice|presente                                                                                                                                                    ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|MDS:UMDS|presente                                                                                                                                                                             ;
++----------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s13 ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 0            ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s13   ; 1            ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|S_Box:USBox|presente                                                                                                                                                           ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; Name           ; presente.s12 ; presente.s11 ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ; presente.start ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+; presente.start ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0              ;
+; presente.s0    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1              ;
+; presente.s1    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1              ;
+; presente.s2    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1              ;
+; presente.s3    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s4    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s5    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s6    ; 0            ; 0            ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s7    ; 0            ; 0            ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s8    ; 0            ; 0            ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s9    ; 0            ; 0            ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s10   ; 0            ; 0            ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s11   ; 0            ; 1            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
+; presente.s12   ; 1            ; 0            ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1              ;
++----------------+--------------+--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+----------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|XOR_key_Rotated:UXorKey_Rotated|presente                                                                                      ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; Name         ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; presente.s0  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ;
+; presente.s1  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1           ;
+; presente.s2  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1           ;
+; presente.s3  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1           ;
+; presente.s4  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s5  ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s6  ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s7  ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s8  ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s9  ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s10 ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|XOR_key:UXorKey|presente                                                                                                      ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; Name         ; presente.s10 ; presente.s9 ; presente.s8 ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; presente.s0  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ;
+; presente.s1  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1           ;
+; presente.s2  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1           ;
+; presente.s3  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1           ;
+; presente.s4  ; 0            ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s5  ; 0            ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s6  ; 0            ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s7  ; 0            ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s8  ; 0            ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s9  ; 0            ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s10 ; 1            ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
++--------------+--------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX1                                 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; presenteX1.s5 ; presenteX1.s4 ; presenteX1.s3 ; presenteX1.s2 ; presenteX1.s1 ; presenteX1.s0 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; presenteX1.s0 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; presenteX1.s1 ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; presenteX1.s2 ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; presenteX1.s3 ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; presenteX1.s4 ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; presenteX1.s5 ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX0                                 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; presenteX0.s5 ; presenteX0.s4 ; presenteX0.s3 ; presenteX0.s2 ; presenteX0.s1 ; presenteX0.s0 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; presenteX0.s0 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; presenteX0.s1 ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; presenteX0.s2 ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; presenteX0.s3 ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; presenteX0.s4 ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; presenteX0.s5 ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Saturnin_Block_EncryptV2|Data_Force:Data_F|presente                                                        ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; Name        ; presente.s7 ; presente.s6 ; presente.s5 ; presente.s4 ; presente.s3 ; presente.s2 ; presente.s1 ; presente.s0 ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+; presente.s0 ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ;
+; presente.s1 ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1           ;
+; presente.s2 ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1           ;
+; presente.s3 ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1           ;
+; presente.s4 ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s5 ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s6 ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
+; presente.s7 ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                            ;
++------------------------------------------------------+----------------------------------------+
+; Register name                                        ; Reason for Removal                     ;
++------------------------------------------------------+----------------------------------------+
+; Data_Generate:Data_Ge|Ena_Out                        ; Stuck at VCC due to stuck port data_in ;
+; Data_Generate:Data_Ge|presente                       ; Lost fanout                            ;
+; Data_Generate:Data_Ge|\STat:Finish_En                ; Lost fanout                            ;
+; Data_Generate:Data_Ge|\STat:Addr_Aux[0..5]           ; Lost fanout                            ;
+; Load_MR                                              ; Stuck at VCC due to stuck port data_in ;
+; D_MR[0]                                              ; Stuck at GND due to stuck port data_in ;
+; D_MR[1,2]                                            ; Stuck at VCC due to stuck port data_in ;
+; D_MR[3]                                              ; Stuck at GND due to stuck port data_in ;
+; R_MR[0]                                              ; Stuck at GND due to stuck port data_in ;
+; R_MR[1]                                              ; Stuck at VCC due to stuck port data_in ;
+; R_MR[2]                                              ; Stuck at GND due to stuck port data_in ;
+; R_MR[3]                                              ; Stuck at VCC due to stuck port data_in ;
+; Data_Force:Data_F|Enable_DF                          ; Stuck at VCC due to stuck port data_in ;
+; SR_Sheet_Inv:USR_Sheet_Inv|\ASM:Addr_Aux[0..4]       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|\ASM:Addr_Aux[0..4]               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|\ASM:Addr_Aux[0..4]       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|\ASM:Addr_Aux[0..4]               ; Lost fanout                            ;
+; MDS:UMDS|\ASM:Addr_Aux[0..4]                         ; Lost fanout                            ;
+; S_Box:USBox|\ASM:Addr_Aux[0..4]                      ; Lost fanout                            ;
+; XOR_key:UXorKey|En_Out                               ; Lost fanout                            ;
+; S_Box:USBox|En_Out                                   ; Lost fanout                            ;
+; \STat:i_Control[0..4]                                ; Lost fanout                            ;
+; MDS:UMDS|En_Out                                      ; Lost fanout                            ;
+; SR_Slice:USR_Slice|En_Out                            ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|En_Out                    ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|En_Out                    ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|En_Out               ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|En_Out                            ; Lost fanout                            ;
+; En_SRSHI_Main                                        ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|Establish[1..4]           ; Lost fanout                            ;
+; En_SRSH_Main                                         ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|Establish[1..4]                   ; Lost fanout                            ;
+; En_SRSI_Main                                         ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|Establish[1..4]           ; Lost fanout                            ;
+; En_SRS_Main                                          ; Lost fanout                            ;
+; SR_Slice:USR_Slice|Establish[1..4]                   ; Lost fanout                            ;
+; En_MDS_Main                                          ; Lost fanout                            ;
+; MDS:UMDS|Establish[1..4]                             ; Lost fanout                            ;
+; En_SB_Main                                           ; Lost fanout                            ;
+; S_Box:USBox|Establish[0..4]                          ; Lost fanout                            ;
+; S_Box:USBox|\ASM:Flag_Aux                            ; Lost fanout                            ;
+; En_XKR_Main                                          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|\STat:Addr_Aux[0..4] ; Lost fanout                            ;
+; En_XK_Main                                           ; Lost fanout                            ;
+; XOR_key:UXorKey|\STat:Addr_Aux[0..4]                 ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[15]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|i_1[4]                      ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|Rn_1[1..4]                  ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[15]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|i_0[4]                      ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|Rn_0[1..4]                  ; Lost fanout                            ;
+; Data_Force:Data_F|\STat:Addr_Aux[4]                  ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|Establish[0]              ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|Establish[0]                      ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|Establish[0]              ; Lost fanout                            ;
+; SR_Slice:USR_Slice|Establish[0]                      ; Lost fanout                            ;
+; MDS:UMDS|Establish[0]                                ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[14]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|i_1[0..3]                   ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|Rn_1[0]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[14]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|i_0[0..3]                   ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|Rn_0[0]                     ; Lost fanout                            ;
+; Data_Force:Data_F|\STat:Addr_Aux[0..3]               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[13]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[13]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[12]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[12]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[11]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[11]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[10]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[10]                    ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[9]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[9]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[8]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[8]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[7]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[7]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[6]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[6]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[5]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[5]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[4]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[4]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[3]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[3]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[2]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[2]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[1]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[1]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x1[0]                     ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|R_x0[0]                     ; Lost fanout                            ;
+; presente.s0                                          ; Lost fanout                            ;
+; presente.s1                                          ; Lost fanout                            ;
+; presente.s2                                          ; Lost fanout                            ;
+; presente.s3                                          ; Lost fanout                            ;
+; presente.s4                                          ; Lost fanout                            ;
+; presente.s5                                          ; Lost fanout                            ;
+; presente.s6                                          ; Lost fanout                            ;
+; presente.s7                                          ; Lost fanout                            ;
+; presente.s8                                          ; Lost fanout                            ;
+; presente.s9                                          ; Lost fanout                            ;
+; presente.s10                                         ; Lost fanout                            ;
+; presente.s11                                         ; Lost fanout                            ;
+; presente.s12                                         ; Lost fanout                            ;
+; presente.s13                                         ; Lost fanout                            ;
+; presente.s14                                         ; Lost fanout                            ;
+; presente.s15                                         ; Lost fanout                            ;
+; presente.s16                                         ; Lost fanout                            ;
+; presente.s17                                         ; Lost fanout                            ;
+; presente.s18                                         ; Lost fanout                            ;
+; presente.s19                                         ; Lost fanout                            ;
+; presente.s20                                         ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.start            ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s0               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s1               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s2               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s3               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s4               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s5               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s6               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s7               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s8               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s9               ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s10              ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s11              ; Lost fanout                            ;
+; SR_Sheet_Inv:USR_Sheet_Inv|presente.s12              ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.start                    ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s0                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s1                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s2                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s3                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s4                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s5                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s6                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s7                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s8                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s9                       ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s10                      ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s11                      ; Lost fanout                            ;
+; SR_Sheet:USR_Sheet|presente.s12                      ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.start            ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s0               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s1               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s2               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s3               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s4               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s5               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s6               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s7               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s8               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s9               ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s10              ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s11              ; Lost fanout                            ;
+; SR_Slice_Inv:USR_Slice_Inv|presente.s12              ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.start                    ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s0                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s1                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s2                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s3                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s4                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s5                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s6                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s7                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s8                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s9                       ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s10                      ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s11                      ; Lost fanout                            ;
+; SR_Slice:USR_Slice|presente.s12                      ; Lost fanout                            ;
+; MDS:UMDS|presente.start                              ; Lost fanout                            ;
+; MDS:UMDS|presente.s0                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s1                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s2                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s3                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s4                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s5                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s6                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s7                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s8                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s9                                 ; Lost fanout                            ;
+; MDS:UMDS|presente.s10                                ; Lost fanout                            ;
+; MDS:UMDS|presente.s11                                ; Lost fanout                            ;
+; MDS:UMDS|presente.s12                                ; Lost fanout                            ;
+; MDS:UMDS|presente.s13                                ; Lost fanout                            ;
+; S_Box:USBox|presente.start                           ; Lost fanout                            ;
+; S_Box:USBox|presente.s0                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s1                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s2                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s3                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s4                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s5                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s6                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s7                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s8                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s9                              ; Lost fanout                            ;
+; S_Box:USBox|presente.s10                             ; Lost fanout                            ;
+; S_Box:USBox|presente.s11                             ; Lost fanout                            ;
+; S_Box:USBox|presente.s12                             ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s0          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s1          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s2          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s3          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s4          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s5          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s6          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s7          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s8          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s9          ; Lost fanout                            ;
+; XOR_key_Rotated:UXorKey_Rotated|presente.s10         ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s0                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s1                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s2                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s3                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s4                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s5                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s6                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s7                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s8                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s9                          ; Lost fanout                            ;
+; XOR_key:UXorKey|presente.s10                         ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s0               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s1               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s2               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s3               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s4               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX1.s5               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s0               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s1               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s2               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s3               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s4               ; Lost fanout                            ;
+; Make_Rounds:uMake_Rounds|presenteX0.s5               ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s0                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s1                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s2                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s3                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s4                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s5                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s6                        ; Lost fanout                            ;
+; Data_Force:Data_F|presente.s7                        ; Lost fanout                            ;
+; Total Number of Removed Registers = 316              ;                                        ;
++------------------------------------------------------+----------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                             ;
++---------------------------------------------------+---------------------------+-----------------------------------------------------------------------------------------+
+; Register name                                     ; Reason for Removal        ; Registers Removed due to This Register                                                  ;
++---------------------------------------------------+---------------------------+-----------------------------------------------------------------------------------------+
+; Data_Generate:Data_Ge|Ena_Out                     ; Stuck at VCC              ; Data_Generate:Data_Ge|\STat:Finish_En, Data_Generate:Data_Ge|\STat:Addr_Aux[5],         ;
+;                                                   ; due to stuck port data_in ; Load_MR, D_MR[0], D_MR[1], D_MR[2], D_MR[3], R_MR[0], R_MR[1], R_MR[2], R_MR[3],        ;
+;                                                   ;                           ; XOR_key:UXorKey|En_Out, S_Box:USBox|En_Out, \STat:i_Control[0], MDS:UMDS|En_Out,        ;
+;                                                   ;                           ; SR_Slice:USR_Slice|En_Out, SR_Slice_Inv:USR_Slice_Inv|En_Out,                           ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|En_Out, XOR_key_Rotated:UXorKey_Rotated|En_Out,              ;
+;                                                   ;                           ; SR_Sheet:USR_Sheet|En_Out, En_XKR_Main, En_XK_Main, Make_Rounds:uMake_Rounds|Rn_1[4],   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|Rn_1[3], Make_Rounds:uMake_Rounds|Rn_1[2],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|Rn_0[4], Make_Rounds:uMake_Rounds|Rn_0[3],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|Rn_0[2], Make_Rounds:uMake_Rounds|R_x1[6],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[6], Make_Rounds:uMake_Rounds|R_x1[5],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[5], Make_Rounds:uMake_Rounds|R_x1[4],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[4], Make_Rounds:uMake_Rounds|R_x1[3],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[3], Make_Rounds:uMake_Rounds|R_x1[2],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[2], Make_Rounds:uMake_Rounds|R_x1[1],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[1], Make_Rounds:uMake_Rounds|R_x1[0],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[0], presente.s0, presente.s13,                            ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|presente.s0, SR_Sheet_Inv:USR_Sheet_Inv|presente.s1,         ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|presente.s2, SR_Sheet_Inv:USR_Sheet_Inv|presente.s3,         ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|presente.s4, SR_Sheet:USR_Sheet|presente.s0,                 ;
+;                                                   ;                           ; SR_Sheet:USR_Sheet|presente.s1, SR_Sheet:USR_Sheet|presente.s2,                         ;
+;                                                   ;                           ; SR_Sheet:USR_Sheet|presente.s3, SR_Sheet:USR_Sheet|presente.s4,                         ;
+;                                                   ;                           ; SR_Slice_Inv:USR_Slice_Inv|presente.s0, SR_Slice_Inv:USR_Slice_Inv|presente.s1,         ;
+;                                                   ;                           ; SR_Slice_Inv:USR_Slice_Inv|presente.s2, SR_Slice_Inv:USR_Slice_Inv|presente.s3,         ;
+;                                                   ;                           ; SR_Slice_Inv:USR_Slice_Inv|presente.s4, SR_Slice:USR_Slice|presente.s0,                 ;
+;                                                   ;                           ; SR_Slice:USR_Slice|presente.s1, SR_Slice:USR_Slice|presente.s2,                         ;
+;                                                   ;                           ; SR_Slice:USR_Slice|presente.s3, SR_Slice:USR_Slice|presente.s4,                         ;
+;                                                   ;                           ; MDS:UMDS|presente.s11, MDS:UMDS|presente.s12, MDS:UMDS|presente.s13,                    ;
+;                                                   ;                           ; S_Box:USBox|presente.s0, S_Box:USBox|presente.s11, S_Box:USBox|presente.s12,            ;
+;                                                   ;                           ; XOR_key_Rotated:UXorKey_Rotated|presente.s9,                                            ;
+;                                                   ;                           ; XOR_key_Rotated:UXorKey_Rotated|presente.s10, XOR_key:UXorKey|presente.s9,              ;
+;                                                   ;                           ; XOR_key:UXorKey|presente.s10, Make_Rounds:uMake_Rounds|presenteX1.s3,                   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|presenteX1.s4, Make_Rounds:uMake_Rounds|presenteX1.s5,         ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|presenteX0.s3, Make_Rounds:uMake_Rounds|presenteX0.s4,         ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|presenteX0.s5                                                  ;
+; S_Box:USBox|\ASM:Addr_Aux[4]                      ; Lost Fanouts              ; S_Box:USBox|\ASM:Addr_Aux[2], S_Box:USBox|\ASM:Addr_Aux[1],                             ;
+;                                                   ;                           ; S_Box:USBox|\ASM:Addr_Aux[0], En_SB_Main, S_Box:USBox|Establish[4], presente.s1,        ;
+;                                                   ;                           ; presente.s3, S_Box:USBox|presente.s1, S_Box:USBox|presente.s2, S_Box:USBox|presente.s8, ;
+;                                                   ;                           ; S_Box:USBox|presente.s9, S_Box:USBox|presente.s10                                       ;
+; Make_Rounds:uMake_Rounds|R_x1[15]                 ; Lost Fanouts              ; Make_Rounds:uMake_Rounds|i_1[4], Make_Rounds:uMake_Rounds|R_x1[14],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x1[13], Make_Rounds:uMake_Rounds|R_x1[12],                   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x1[11], Make_Rounds:uMake_Rounds|R_x1[10],                   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x1[9], Make_Rounds:uMake_Rounds|R_x1[8],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x1[7], Make_Rounds:uMake_Rounds|presenteX1.s0,               ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|presenteX1.s1, Make_Rounds:uMake_Rounds|presenteX1.s2          ;
+; Make_Rounds:uMake_Rounds|R_x0[15]                 ; Lost Fanouts              ; Make_Rounds:uMake_Rounds|i_0[4], Make_Rounds:uMake_Rounds|R_x0[14],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[13], Make_Rounds:uMake_Rounds|R_x0[12],                   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[11], Make_Rounds:uMake_Rounds|R_x0[10],                   ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[9], Make_Rounds:uMake_Rounds|R_x0[8],                     ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|R_x0[7], Make_Rounds:uMake_Rounds|presenteX0.s0,               ;
+;                                                   ;                           ; Make_Rounds:uMake_Rounds|presenteX0.s1, Make_Rounds:uMake_Rounds|presenteX0.s2          ;
+; SR_Sheet_Inv:USR_Sheet_Inv|\ASM:Addr_Aux[4]       ; Lost Fanouts              ; SR_Sheet_Inv:USR_Sheet_Inv|\ASM:Addr_Aux[0], En_SRSHI_Main,                             ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|Establish[4], SR_Sheet_Inv:USR_Sheet_Inv|Establish[3],       ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|Establish[2], presente.s16, presente.s17, presente.s18,      ;
+;                                                   ;                           ; SR_Sheet_Inv:USR_Sheet_Inv|presente.s5                                                  ;
+; MDS:UMDS|\ASM:Addr_Aux[4]                         ; Lost Fanouts              ; MDS:UMDS|\ASM:Addr_Aux[1], MDS:UMDS|\ASM:Addr_Aux[0], En_MDS_Main,                      ;
+;                                                   ;                           ; MDS:UMDS|Establish[4], MDS:UMDS|Establish[3], presente.s2, MDS:UMDS|presente.s1,        ;
+;                                                   ;                           ; MDS:UMDS|presente.s2, MDS:UMDS|presente.s8                                              ;
+; SR_Sheet:USR_Sheet|\ASM:Addr_Aux[4]               ; Lost Fanouts              ; SR_Sheet:USR_Sheet|\ASM:Addr_Aux[0], En_SRSH_Main, SR_Sheet:USR_Sheet|Establish[4],     ;
+;                                                   ;                           ; SR_Sheet:USR_Sheet|Establish[3], SR_Sheet:USR_Sheet|Establish[2], presente.s4,          ;
+;                                                   ;                           ; presente.s15, SR_Sheet:USR_Sheet|presente.s5                                            ;
+; SR_Slice:USR_Slice|\ASM:Addr_Aux[4]               ; Lost Fanouts              ; SR_Slice:USR_Slice|\ASM:Addr_Aux[0], En_SRS_Main, SR_Slice:USR_Slice|Establish[4],      ;
+;                                                   ;                           ; SR_Slice:USR_Slice|Establish[3], SR_Slice:USR_Slice|Establish[2], presente.s5,          ;
+;                                                   ;                           ; presente.s12, SR_Slice:USR_Slice|presente.s5                                            ;
+; SR_Slice_Inv:USR_Slice_Inv|\ASM:Addr_Aux[4]       ; Lost Fanouts              ; SR_Slice_Inv:USR_Slice_Inv|\ASM:Addr_Aux[0], En_SRSI_Main,                              ;
+;                                                   ;                           ; SR_Slice_Inv:USR_Slice_Inv|Establish[4], SR_Slice_Inv:USR_Slice_Inv|Establish[3],       ;
+;                                                   ;                           ; presente.s6, presente.s7, SR_Slice_Inv:USR_Slice_Inv|presente.s5                        ;
+; Data_Force:Data_F|Enable_DF                       ; Stuck at VCC              ; Data_Force:Data_F|\STat:Addr_Aux[4], Data_Force:Data_F|\STat:Addr_Aux[1],               ;
+;                                                   ; due to stuck port data_in ; Data_Force:Data_F|\STat:Addr_Aux[0], Data_Force:Data_F|\STat:Addr_Aux[2],               ;
+;                                                   ;                           ; Data_Force:Data_F|\STat:Addr_Aux[3], Data_Force:Data_F|presente.s4                      ;
+; \STat:i_Control[4]                                ; Lost Fanouts              ; \STat:i_Control[3], \STat:i_Control[2], presente.s14                                    ;
+; XOR_key_Rotated:UXorKey_Rotated|\STat:Addr_Aux[4] ; Lost Fanouts              ; XOR_key_Rotated:UXorKey_Rotated|\STat:Addr_Aux[3],                                      ;
+;                                                   ;                           ; XOR_key_Rotated:UXorKey_Rotated|presente.s0                                             ;
+; XOR_key:UXorKey|\STat:Addr_Aux[4]                 ; Lost Fanouts              ; XOR_key:UXorKey|\STat:Addr_Aux[3], XOR_key:UXorKey|presente.s0                          ;
++---------------------------------------------------+---------------------------+-----------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|R_x1[5]        ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|R_x0[7]        ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|R_x1[4]        ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|R_x0[3]        ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|i_1[4]         ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|i_0[4]         ;
+; 8:1                ; 5 bits    ; 25 LEs        ; 10 LEs               ; 15 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|S_Box:USBox|Establish[0]                ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|MDS:UMDS|Establish[0]                   ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|SR_Sheet_Inv:USR_Sheet_Inv|Establish[0] ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|SR_Sheet:USR_Sheet|Establish[0]         ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|SR_Slice_Inv:USR_Slice_Inv|Establish[2] ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Saturnin_Block_EncryptV2|SR_Slice:USR_Slice|Establish[1]         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX1     ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Saturnin_Block_EncryptV2|Make_Rounds:uMake_Rounds|presenteX0     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinB_MB ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; w              ; 16    ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinK_MB ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; w              ; 16    ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinB_AdrrWr ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; w              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinB_AdrrRd ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; w              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinK_AdrrWr ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; w              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register_A:RinK_AdrrRd ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; w              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Data_Generate:Data_Ge|MemBnk:uKey ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; w              ; 8     ; Signed Integer                                        ;
+; d              ; 32    ; Signed Integer                                        ;
+; a              ; 5     ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Data_Generate:Data_Ge|MemBnk:uBuf ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; w              ; 8     ; Signed Integer                                        ;
+; d              ; 32    ; Signed Integer                                        ;
+; a              ; 5     ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|MemBnk:u_R0 ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; w              ; 16    ; Signed Integer                                           ;
+; d              ; 32    ; Signed Integer                                           ;
+; a              ; 5     ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrWr ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; w              ; 5     ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrRd ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; w              ; 5     ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin0_MB ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; w              ; 16    ; Signed Integer                                                  ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|MemBnk:u_R1 ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; w              ; 16    ; Signed Integer                                           ;
+; d              ; 32    ; Signed Integer                                           ;
+; a              ; 5     ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrWr ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; w              ; 5     ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrRd ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; w              ; 5     ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Make_Rounds:uMake_Rounds|Register_A:Rin1_MB ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; w              ; 16    ; Signed Integer                                                  ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: MemBnk:uBuff ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; w              ; 16    ; Signed Integer                   ;
+; d              ; 16    ; Signed Integer                   ;
+; a              ; 4     ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: MemBnk:uKey ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; w              ; 16    ; Signed Integer                  ;
+; d              ; 16    ; Signed Integer                  ;
+; a              ; 4     ; Signed Integer                  ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMux_WrB ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; w              ; 16    ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMuxAdrr_WrB ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 4     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: DeMux:uDeMux_RdB ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 16    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMuxAdrr_RdB ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 4     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMux_WrK ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; w              ; 16    ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMuxAdrr_Wrk ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 4     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: DeMux:uDeMux_RdK ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 16    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:uMuxAdrr_Rdk ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 4     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------+
+; Port Connectivity Checks: "MuxLogic:uMuxRdk"    ;
++---------------+-------+----------+--------------+
+; Port          ; Type  ; Severity ; Details      ;
++---------------+-------+----------+--------------+
+; in_dataforce  ; Input ; Info     ; Stuck at VCC ;
+; in_sbox       ; Input ; Info     ; Stuck at VCC ;
+; in_mds        ; Input ; Info     ; Stuck at VCC ;
+; in_srsheet    ; Input ; Info     ; Stuck at VCC ;
+; in_srslice    ; Input ; Info     ; Stuck at VCC ;
+; in_srsheetinv ; Input ; Info     ; Stuck at VCC ;
+; in_srsliceinv ; Input ; Info     ; Stuck at VCC ;
+; in_rc         ; Input ; Info     ; Stuck at VCC ;
++---------------+-------+----------+--------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "Mux:uMuxAdrr_Rdk"          ;
++---------------------+-------+----------+--------------+
+; Port                ; Type  ; Severity ; Details      ;
++---------------------+-------+----------+--------------+
+; in_dataforce[1..0]  ; Input ; Info     ; Stuck at VCC ;
+; in_dataforce[3..2]  ; Input ; Info     ; Stuck at GND ;
+; in_sbox[1..0]       ; Input ; Info     ; Stuck at VCC ;
+; in_sbox[3..2]       ; Input ; Info     ; Stuck at GND ;
+; in_mds[1..0]        ; Input ; Info     ; Stuck at VCC ;
+; in_mds[3..2]        ; Input ; Info     ; Stuck at GND ;
+; in_srsheet[1..0]    ; Input ; Info     ; Stuck at VCC ;
+; in_srsheet[3..2]    ; Input ; Info     ; Stuck at GND ;
+; in_srslice[1..0]    ; Input ; Info     ; Stuck at VCC ;
+; in_srslice[3..2]    ; Input ; Info     ; Stuck at GND ;
+; in_srsheetinv[1..0] ; Input ; Info     ; Stuck at VCC ;
+; in_srsheetinv[3..2] ; Input ; Info     ; Stuck at GND ;
+; in_srsliceinv[1..0] ; Input ; Info     ; Stuck at VCC ;
+; in_srsliceinv[3..2] ; Input ; Info     ; Stuck at GND ;
+; in_rc[1..0]         ; Input ; Info     ; Stuck at VCC ;
+; in_rc[3..2]         ; Input ; Info     ; Stuck at GND ;
++---------------------+-------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DeMux:uDeMux_RdK"                                                                     ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; out_rc ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "MuxLogic:uMuxWrk"       ;
++------------------+-------+----------+--------------+
+; Port             ; Type  ; Severity ; Details      ;
++------------------+-------+----------+--------------+
+; in_xorkey        ; Input ; Info     ; Stuck at VCC ;
+; in_xorkeyrotated ; Input ; Info     ; Stuck at VCC ;
+; in_sbox          ; Input ; Info     ; Stuck at VCC ;
+; in_mds           ; Input ; Info     ; Stuck at VCC ;
+; in_srsheet       ; Input ; Info     ; Stuck at VCC ;
+; in_srslice       ; Input ; Info     ; Stuck at VCC ;
+; in_srsheetinv    ; Input ; Info     ; Stuck at VCC ;
+; in_srsliceinv    ; Input ; Info     ; Stuck at VCC ;
+; in_rc            ; Input ; Info     ; Stuck at VCC ;
++------------------+-------+----------+--------------+
+
+
++----------------------------------------------------------+
+; Port Connectivity Checks: "Mux:uMuxAdrr_Wrk"             ;
++------------------------+-------+----------+--------------+
+; Port                   ; Type  ; Severity ; Details      ;
++------------------------+-------+----------+--------------+
+; in_xorkey[1..0]        ; Input ; Info     ; Stuck at VCC ;
+; in_xorkey[3..2]        ; Input ; Info     ; Stuck at GND ;
+; in_xorkeyrotated[1..0] ; Input ; Info     ; Stuck at VCC ;
+; in_xorkeyrotated[3..2] ; Input ; Info     ; Stuck at GND ;
+; in_sbox[1..0]          ; Input ; Info     ; Stuck at VCC ;
+; in_sbox[3..2]          ; Input ; Info     ; Stuck at GND ;
+; in_mds[1..0]           ; Input ; Info     ; Stuck at VCC ;
+; in_mds[3..2]           ; Input ; Info     ; Stuck at GND ;
+; in_srsheet[1..0]       ; Input ; Info     ; Stuck at VCC ;
+; in_srsheet[3..2]       ; Input ; Info     ; Stuck at GND ;
+; in_srslice[1..0]       ; Input ; Info     ; Stuck at VCC ;
+; in_srslice[3..2]       ; Input ; Info     ; Stuck at GND ;
+; in_srsheetinv[1..0]    ; Input ; Info     ; Stuck at VCC ;
+; in_srsheetinv[3..2]    ; Input ; Info     ; Stuck at GND ;
+; in_srsliceinv[1..0]    ; Input ; Info     ; Stuck at VCC ;
+; in_srsliceinv[3..2]    ; Input ; Info     ; Stuck at GND ;
+; in_rc[1..0]            ; Input ; Info     ; Stuck at VCC ;
+; in_rc[3..2]            ; Input ; Info     ; Stuck at GND ;
++------------------------+-------+----------+--------------+
+
+
++------------------------------------------------+
+; Port Connectivity Checks: "MuxLogic:uMuxRdB"   ;
++--------------+-------+----------+--------------+
+; Port         ; Type  ; Severity ; Details      ;
++--------------+-------+----------+--------------+
+; in_dataforce ; Input ; Info     ; Stuck at VCC ;
++--------------+-------+----------+--------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "Mux:uMuxAdrr_RdB"         ;
++--------------------+-------+----------+--------------+
+; Port               ; Type  ; Severity ; Details      ;
++--------------------+-------+----------+--------------+
+; in_dataforce[1..0] ; Input ; Info     ; Stuck at VCC ;
+; in_dataforce[3..2] ; Input ; Info     ; Stuck at GND ;
++--------------------+-------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DeMux:uDeMux_RdB"                                                                     ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; out_rc ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_A:Rin1_AdrrRd"                                      ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; dd_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_Logic:Rin1_EnRd"                                    ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; dd_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrRd"                                      ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; dd_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Make_Rounds:uMake_Rounds|Register_Logic:Rin0_EnRd"                                    ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; dd_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "Data_Generate:Data_Ge|MemBnk:uKey" ;
++---------------+-------+----------+----------------------------+
+; Port          ; Type  ; Severity ; Details                    ;
++---------------+-------+----------+----------------------------+
+; data_in[7..5] ; Input ; Info     ; Stuck at GND               ;
++---------------+-------+----------+----------------------------+
+
+
++-----------------------------------------------------+
+; Port Connectivity Checks: "Register_Logic:RinB_Rst" ;
++-------+-------+----------+--------------------------+
+; Port  ; Type  ; Severity ; Details                  ;
++-------+-------+----------+--------------------------+
+; dd_in ; Input ; Info     ; Stuck at VCC             ;
++-------+-------+----------+--------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-------------------+---------------------------------+
+; Type              ; Count                           ;
++-------------------+---------------------------------+
+; boundary_port     ; 3                               ;
+;                   ;                                 ;
+; Max LUT depth     ; 0.00                            ;
+; Average LUT depth ; 0.00                            ;
++-------------------+---------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+    Info: Processing started: Wed Aug 18 12:59:24 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Saturnin_Block_EncryptV2 -c Saturnin_Block_EncryptV2
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/xor_key_rotated.vhd
+    Info (12022): Found design unit 1: XOR_key_Rotated-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd Line: 27
+    Info (12023): Found entity 1: XOR_key_Rotated File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key_Rotated.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/xor_key.vhd
+    Info (12022): Found design unit 1: XOR_key-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd Line: 27
+    Info (12023): Found entity 1: XOR_key File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/XOR_key.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/sr_slice_inv.vhd
+    Info (12022): Found design unit 1: SR_Slice_Inv-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd Line: 24
+    Info (12023): Found entity 1: SR_Slice_Inv File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice_Inv.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/sr_slice.vhd
+    Info (12022): Found design unit 1: SR_Slice-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd Line: 24
+    Info (12023): Found entity 1: SR_Slice File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Slice.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/sr_sheet_inv.vhd
+    Info (12022): Found design unit 1: SR_Sheet_Inv-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd Line: 24
+    Info (12023): Found entity 1: SR_Sheet_Inv File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet_Inv.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/sr_sheet.vhd
+    Info (12022): Found design unit 1: SR_Sheet-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd Line: 24
+    Info (12023): Found entity 1: SR_Sheet File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/SR_Sheet.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/saturnin_block_encryptv2.vhd
+    Info (12022): Found design unit 1: Saturnin_Block_EncryptV2-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 15
+    Info (12023): Found entity 1: Saturnin_Block_EncryptV2 File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/s2p.vhd
+    Info (12022): Found design unit 1: S2P-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S2P.vhd Line: 17
+    Info (12023): Found entity 1: S2P File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S2P.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/s_box.vhd
+    Info (12022): Found design unit 1: S_Box-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S_Box.vhd Line: 24
+    Info (12023): Found entity 1: S_Box File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/S_Box.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/register_logic.vhd
+    Info (12022): Found design unit 1: Register_Logic-rtl File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd Line: 17
+    Info (12023): Found entity 1: Register_Logic File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_Logic.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/register_a.vhd
+    Info (12022): Found design unit 1: Register_A-rtl File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_A.vhd Line: 19
+    Info (12023): Found entity 1: Register_A File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Register_A.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/muxlogic.vhd
+    Info (12022): Found design unit 1: MuxLogic-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd Line: 26
+    Info (12023): Found entity 1: MuxLogic File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MuxLogic.vhd Line: 8
+Warning (12090): Entity "Mux" obtained from "../Make_Rounds/Mux.vhd" instead of from Quartus Prime megafunction library File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/mux.vhd
+    Info (12022): Found design unit 1: Mux-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 28
+    Info (12023): Found entity 1: Mux File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Mux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/membnk_tb.vhd
+    Info (12022): Found design unit 1: MemBnk_TB-testbench File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_TB.vhd Line: 7
+    Info (12023): Found entity 1: MemBnk_TB File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_TB.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/membnk_32.vhd
+    Info (12022): Found design unit 1: MemBnk_32-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_32.vhd Line: 20
+    Info (12023): Found entity 1: MemBnk_32 File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_32.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/membnk_16.vhd
+    Info (12022): Found design unit 1: MemBnk_16-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_16.vhd Line: 21
+    Info (12023): Found entity 1: MemBnk_16 File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk_16.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/membnk.vhd
+    Info (12022): Found design unit 1: MemBnk-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd Line: 20
+    Info (12023): Found entity 1: MemBnk File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MemBnk.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/mds.vhd
+    Info (12022): Found design unit 1: MDS-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd Line: 25
+    Info (12023): Found entity 1: MDS File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/MDS.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/make_rounds_tb.vhd
+    Info (12022): Found design unit 1: Make_Rounds_TB-testbench File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds_TB.vhd Line: 8
+    Info (12023): Found entity 1: Make_Rounds_TB File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds_TB.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/make_rounds.vhd
+    Info (12022): Found design unit 1: Make_Rounds-Main File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 24
+    Info (12023): Found entity 1: Make_Rounds File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 10
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/demux.vhd
+    Info (12022): Found design unit 1: DeMux-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd Line: 29
+    Info (12023): Found entity 1: DeMux File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/DeMux.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/data_generate.vhd
+    Info (12022): Found design unit 1: Data_Generate-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd Line: 18
+    Info (12023): Found entity 1: Data_Generate File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juan pablo/onedrive - correounivalle.edu.co/universidad/proyectodegrado/implementation/make_rounds/data_force.vhd
+    Info (12022): Found design unit 1: Data_Force-RTL File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Force.vhd Line: 32
+    Info (12023): Found entity 1: Data_Force File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Force.vhd Line: 9
+Info (12127): Elaborating entity "Saturnin_Block_EncryptV2" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Saturnin_Block_EncryptV2.vhd(325): object "Data_Out_RCB" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 325
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(447): used explicit default value for signal "Rst_RB" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 447
+Warning (10541): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(470): used implicit default value for signal "Rst_Rk" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 470
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(485): used explicit default value for signal "Test_Before_Adrr" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 485
+Warning (10540): VHDL Signal Declaration warning at Saturnin_Block_EncryptV2.vhd(486): used explicit default value for signal "Test_Before_Logic" because signal was never assigned a value File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 486
+Info (12128): Elaborating entity "Register_A" for hierarchy "Register_A:RinB_MB" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 501
+Info (12128): Elaborating entity "Register_Logic" for hierarchy "Register_Logic:RinB_EnWr" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 525
+Info (12128): Elaborating entity "Register_A" for hierarchy "Register_A:RinB_AdrrWr" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 552
+Info (12128): Elaborating entity "Data_Generate" for hierarchy "Data_Generate:Data_Ge" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 627
+Info (12128): Elaborating entity "MemBnk" for hierarchy "Data_Generate:Data_Ge|MemBnk:uKey" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Data_Generate.vhd Line: 57
+Info (12128): Elaborating entity "Data_Force" for hierarchy "Data_Force:Data_F" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 640
+Info (12128): Elaborating entity "Make_Rounds" for hierarchy "Make_Rounds:uMake_Rounds" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 664
+Warning (10036): Verilog HDL or VHDL warning at Make_Rounds.vhd(74): object "Addr_Rd_0" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 74
+Warning (10036): Verilog HDL or VHDL warning at Make_Rounds.vhd(75): object "Addr_Rd_1" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 75
+Warning (10036): Verilog HDL or VHDL warning at Make_Rounds.vhd(76): object "Rd_En_0" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 76
+Warning (10036): Verilog HDL or VHDL warning at Make_Rounds.vhd(77): object "Rd_En_1" assigned a value but never read File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 77
+Info (12128): Elaborating entity "MemBnk" for hierarchy "Make_Rounds:uMake_Rounds|MemBnk:u_R0" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 83
+Info (12128): Elaborating entity "Register_A" for hierarchy "Make_Rounds:uMake_Rounds|Register_A:Rin0_AdrrWr" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Make_Rounds.vhd Line: 115
+Info (12128): Elaborating entity "MemBnk" for hierarchy "MemBnk:uBuff" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 680
+Info (12128): Elaborating entity "Mux" for hierarchy "Mux:uMux_WrB" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 715
+Info (12128): Elaborating entity "Mux" for hierarchy "Mux:uMuxAdrr_WrB" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 736
+Info (12128): Elaborating entity "MuxLogic" for hierarchy "MuxLogic:uMuxWrB" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 757
+Info (12128): Elaborating entity "DeMux" for hierarchy "DeMux:uDeMux_RdB" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 775
+Info (12128): Elaborating entity "XOR_key" for hierarchy "XOR_key:UXorKey" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 956
+Info (12128): Elaborating entity "XOR_key_Rotated" for hierarchy "XOR_key_Rotated:UXorKey_Rotated" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 977
+Info (12128): Elaborating entity "S_Box" for hierarchy "S_Box:USBox" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 998
+Info (12128): Elaborating entity "MDS" for hierarchy "MDS:UMDS" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 1016
+Info (12128): Elaborating entity "SR_Slice" for hierarchy "SR_Slice:USR_Slice" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 1034
+Info (12128): Elaborating entity "SR_Slice_Inv" for hierarchy "SR_Slice_Inv:USR_Slice_Inv" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 1052
+Info (12128): Elaborating entity "SR_Sheet" for hierarchy "SR_Sheet:USR_Sheet" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 1070
+Info (12128): Elaborating entity "SR_Sheet_Inv" for hierarchy "SR_Sheet_Inv:USR_Sheet_Inv" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 1088
+Info (17049): 305 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 3 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "RSTn" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 9
+    Warning (15610): No output dependent on input pin "SERIN" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 11
+    Warning (15610): No output dependent on input pin "clk" File: C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/Make_Rounds/Saturnin_Block_EncryptV2.vhd Line: 10
+Info (21057): Implemented 3 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 4872 megabytes
+    Info: Processing ended: Wed Aug 18 12:59:41 2021
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:35
+
+

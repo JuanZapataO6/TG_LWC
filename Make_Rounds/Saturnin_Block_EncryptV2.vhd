@@ -4,7 +4,13 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 
 
-entity Saturnin_Block_EncryptV2 is 
+entity Saturnin_Block_EncryptV2 is
+    PORT (
+        RSTn 	: IN std_logic;
+        clk 	: IN std_logic;
+        SERIN 	: IN std_logic
+        
+    );
 end Saturnin_Block_EncryptV2;
 architecture Main of Saturnin_Block_EncryptV2 is 
 component Register_A
@@ -284,7 +290,7 @@ component Make_Rounds is
 end component Make_Rounds;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20);
 SIGNAL presente:estado:=s0;
-signal clk : std_logic;
+--signal clk : std_logic;
 -----------------------------------------------------
 ----------------signals for control mux--------------
 --from DataForce to SaturninBlock (Address Control)--
@@ -482,13 +488,13 @@ begin
 ------------------------------
 --Process For internal Clock--
 ------------------------------
-reloj:process
-    begin
-    clk <= '0';
-    wait for 12.5 ns;
-    clk <= '1';
-    wait for 12.5 ns;
-end process reloj;
+--reloj:process
+--    begin
+--    clk <= '0';
+--    wait for 12.5 ns;
+--    clk <= '1';
+--    wait for 12.5 ns;
+--end process reloj;
 ---------------------------------------------
 --In Register For Memory Bank on Buffer(Xb)--
 ---------------------------------------------

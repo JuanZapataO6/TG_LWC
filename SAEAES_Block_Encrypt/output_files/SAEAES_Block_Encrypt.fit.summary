@@ -1,0 +1,20 @@
+Fitter Status : Successful - Wed Aug 18 12:31:32 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : SAEAES_Block_Encrypt
+Top-level Entity Name : SAEAES_Block_Encrypt
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 280 / 41,910 ( < 1 % )
+Total registers : 548
+Total pins : 3 / 499 ( < 1 % )
+Total virtual pins : 0
+Total block memory bits : 1,280 / 5,662,720 ( < 1 % )
+Total RAM Blocks : 1 / 553 ( < 1 % )
+Total DSP Blocks : 0 / 112 ( 0 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )
