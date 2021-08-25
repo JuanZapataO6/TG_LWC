@@ -1,0 +1,20 @@
+Fitter Status : Successful - Fri Aug 20 16:24:55 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : DG_Tb
+Top-level Entity Name : DG_Tb
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 406 / 41,910 ( < 1 % )
+Total registers : 1052
+Total pins : 52 / 499 ( 10 % )
+Total virtual pins : 0
+Total block memory bits : 6,816 / 5,662,720 ( < 1 % )
+Total RAM Blocks : 5 / 553 ( < 1 % )
+Total DSP Blocks : 0 / 112 ( 0 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )

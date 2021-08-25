@@ -67,12 +67,7 @@ signal rRd_En : std_logic;
 signal En_rIn, Rst       : std_logic;
 
 begin
-uReg_In: Register_Logic
-    port map(
-        DD_IN  => En_In,
-        DD_OUT => En_rIn,
-        Clk    => clk
-    );
+
 uReg_Rd: Register_Logic
     port map(
         DD_IN  => Rd_En,
@@ -135,12 +130,12 @@ begin
 if clk 'event and clk = '1' then
     if Addr_Aux < "100000" then
         case presente is
-               
             when s0 =>
                 if En_In ='1' then
                     presente <= s1;
                     Addr_Wr  <= Addr_Aux(Addr_Aux'length -2 downto 0);
                     Wr_En    <= '0';
+                    Rst      <= '1';
                     Data_In  <= DIn;
                 else 
                     presente <= s0;
@@ -153,7 +148,6 @@ if clk 'event and clk = '1' then
             when s2 =>
                 presente    <= s3;
             when s3 =>
-                --En_Out <= '1';
                 presente    <= s0;
             when others => null;
         end case;

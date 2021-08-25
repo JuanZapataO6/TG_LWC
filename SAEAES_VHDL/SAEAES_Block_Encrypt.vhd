@@ -9,8 +9,10 @@ entity SAEAES_Block_Encrypt is
     PORT (
         RSTn 	: IN std_logic;
         clk 	: IN std_logic;
-        SERIN 	: IN std_logic
-        
+        SERIN 	: IN std_logic;
+        Rd_En_Ct : IN std_logic;
+        Addr_Rd_Ct : IN std_logic_vector (5 DOWNTO 0);
+        Data_Out_Ct: OUT std_logic_vector (7 downto 0)
     );
 end SAEAES_Block_Encrypt;
 
@@ -265,9 +267,9 @@ Signal Addr_Wr_S    : std_logic_vector (3 DOWNTO 0);
 Signal Data_In_S    : std_logic_vector (7 downto 0);
 
 --Signals for Ct (state) with memorybank in this script 
-Signal Rd_En_Ct      : std_logic;
-Signal Addr_Rd_Ct    : std_logic_vector (5 DOWNTO 0);
-Signal Data_Out_Ct   : std_logic_vector (7 downto 0);
+--Signal Rd_En_Ct      : std_logic;
+--Signal Addr_Rd_Ct    : std_logic_vector (5 DOWNTO 0);
+--Signal Data_Out_Ct   : std_logic_vector (7 downto 0);
 
 Signal Wr_En_Ct      : std_logic;
 Signal Addr_Wr_Ct    : std_logic_vector (5 DOWNTO 0);

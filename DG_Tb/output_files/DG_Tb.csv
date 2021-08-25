@@ -1,0 +1,78 @@
+# Copyright (C) 2019  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+
+# Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+# File: C:\Users\JUAN PABLO\OneDrive - correounivalle.edu.co\Universidad\ProyectoDeGrado\Implementation\DG_Tb\output_files\DG_Tb.csv
+# Generated on: Fri Aug 20 15:51:34 2021
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Transceiver Analog Settings Protocol,VCCR_GXB/VCCT_GXB Voltage,Transceiver I/O Pin Termination,Transceiver Dedicated Refclk Pin Termination,Transmitter Common Mode Driver Voltage,Transmitter Slew Rate Control,Transmitter Differential Output Voltage,Receiver Buffer Common Mode Voltage,Strict Preservation
+Addr_Out[4],Input,PIN_w25,5B,B5B_N0,PIN_AH9,,,,,,,,,,,,,,
+Addr_Out[3],Input,PIN_AC30,5B,B5B_N0,PIN_AE13,,,,,,,,,,,,,,
+Addr_Out[2],Input,PIN_AB28,5B,B5B_N0,PIN_AK2,,,,,,,,,,,,,,
+Addr_Out[1],Input,PIN_Y27,5B,B5B_N0,PIN_AB13,,,,,,,,,,,,,,
+Addr_Out[0],Input,PIN_AB30,5B,B5B_N0,PIN_AG11,,,,,,,,,,,,,,
+altera_reserved_tck,Input,,,,PIN_AC5,,,,,,,,,,,,,,
+altera_reserved_tdi,Input,,,,PIN_U8,,,,,,,,,,,,,,
+altera_reserved_tdo,Output,,,,PIN_AB9,,,,,,,,,,,,,,
+altera_reserved_tms,Input,,,,PIN_V9,,,,,,,,,,,,,,
+Clk,Input,PIN_AF14,3B,B3B_N0,PIN_AF14,2.5 V,,,,,,,,,,,,,
+Ena_Out,Output,PIN_AA24,5A,B5A_N0,PIN_AH25,,,,,,,,,,,,,,
+Hex0[6],Output,PIN_AH18,4A,B4A_N0,PIN_AH18,2.5 V,,,,,,,,,,,,,
+Hex0[5],Output,PIN_AG18,4A,B4A_N0,PIN_AG18,2.5 V,,,,,,,,,,,,,
+Hex0[4],Output,PIN_AH17,4A,B4A_N0,PIN_AH17,2.5 V,,,,,,,,,,,,,
+Hex0[3],Output,PIN_AG16,4A,B4A_N0,PIN_AG16,2.5 V,,,,,,,,,,,,,
+Hex0[2],Output,PIN_AG17,4A,B4A_N0,PIN_AG17,2.5 V,,,,,,,,,,,,,
+Hex0[1],Output,PIN_V18,4A,B4A_N0,PIN_V18,2.5 V,,,,,,,,,,,,,
+Hex0[0],Output,PIN_W17,4A,B4A_N0,PIN_W17,2.5 V,,,,,,,,,,,,,
+Hex1[6],Output,PIN_AF16,4A,B4A_N0,PIN_AF16,2.5 V,,,,,,,,,,,,,
+Hex1[5],Output,PIN_V16,4A,B4A_N0,PIN_V16,2.5 V,,,,,,,,,,,,,
+Hex1[4],Output,PIN_AE16,4A,B4A_N0,PIN_AE16,2.5 V,,,,,,,,,,,,,
+Hex1[3],Output,PIN_AD17,4A,B4A_N0,PIN_AD17,2.5 V,,,,,,,,,,,,,
+Hex1[2],Output,PIN_AE18,4A,B4A_N0,PIN_AE18,2.5 V,,,,,,,,,,,,,
+Hex1[1],Output,PIN_AE17,4A,B4A_N0,PIN_AE17,2.5 V,,,,,,,,,,,,,
+Hex1[0],Output,PIN_V17,4A,B4A_N0,PIN_V17,2.5 V,,,,,,,,,,,,,
+Hex2[6],Output,PIN_AA21,4A,B4A_N0,PIN_AB12,,,,,,,,,,,,,,
+Hex2[5],Output,PIN_AB17,4A,B4A_N0,PIN_AF8,,,,,,,,,,,,,,
+Hex2[4],Output,PIN_AA18,4A,B4A_N0,PIN_AA12,,,,,,,,,,,,,,
+Hex2[3],Output,PIN_Y17,4A,B4A_N0,PIN_AF6,,,,,,,,,,,,,,
+Hex2[2],Output,PIN_Y18,4A,B4A_N0,PIN_AG7,,,,,,,,,,,,,,
+Hex2[1],Output,,,,PIN_AG6,,,,,,,,,,,,,,
+Hex2[0],Output,,,,PIN_AG1,,,,,,,,,,,,,,
+Hex3[6],Output,,,,PIN_AA13,,,,,,,,,,,,,,
+Hex3[5],Output,,,,PIN_AE28,,,,,,,,,,,,,,
+Hex3[4],Output,,,,PIN_AF20,,,,,,,,,,,,,,
+Hex3[3],Output,,,,PIN_AF13,,,,,,,,,,,,,,
+Hex3[2],Output,,,,PIN_AK3,,,,,,,,,,,,,,
+Hex3[1],Output,,,,PIN_AJ4,,,,,,,,,,,,,,
+Hex3[0],Output,,,,PIN_AH8,,,,,,,,,,,,,,
+Hex4[6],Output,,,,PIN_AD12,,,,,,,,,,,,,,
+Hex4[5],Output,,,,PIN_AF11,,,,,,,,,,,,,,
+Hex4[4],Output,,,,PIN_AG10,,,,,,,,,,,,,,
+Hex4[3],Output,,,,PIN_AH3,,,,,,,,,,,,,,
+Hex4[2],Output,,,,PIN_AC12,,,,,,,,,,,,,,
+Hex4[1],Output,,,,PIN_AG2,,,,,,,,,,,,,,
+Hex4[0],Output,,,,PIN_AJ1,,,,,,,,,,,,,,
+Hex5[6],Output,,,,PIN_AK24,,,,,,,,,,,,,,
+Hex5[5],Output,,,,PIN_AD10,,,,,,,,,,,,,,
+Hex5[4],Output,,,,PIN_AC22,,,,,,,,,,,,,,
+Hex5[3],Output,,,,PIN_AE7,,,,,,,,,,,,,,
+Hex5[2],Output,,,,PIN_AF9,,,,,,,,,,,,,,
+Hex5[1],Output,,,,PIN_A13,,,,,,,,,,,,,,
+Hex5[0],Output,,,,PIN_B3,,,,,,,,,,,,,,
+Rd_En_A,Input,,,,PIN_AH5,,,,,,,,,,,,,,
+Rd_En_K,Input,,,,PIN_AG5,,,,,,,,,,,,,,
+Rd_En_N,Input,,,,PIN_AJ2,,,,,,,,,,,,,,

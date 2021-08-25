@@ -1,0 +1,181 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Data_Out_T[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_T[7]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex0[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Hex1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Data_Out_Ct[7]",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "Rd_En_Ct",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd_Ct[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Rd_En",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Addr_Rd[3]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

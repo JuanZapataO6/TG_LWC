@@ -1,0 +1,35 @@
+
+State Machine - |S2P_Tb|presente
+Name presente.s20 presente.s19 presente.s18 presente.s17 presente.s16 presente.s15 presente.s14 presente.s13 presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s13 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s14 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s15 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s16 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s17 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s18 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s19 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s20 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |S2P_Tb|Data_Force:u2|presente
+Name presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 
+presente.s0 0 0 0 0 0 0 0 0 
+presente.s1 0 0 0 0 0 0 1 1 
+presente.s2 0 0 0 0 0 1 0 1 
+presente.s3 0 0 0 0 1 0 0 1 
+presente.s4 0 0 0 1 0 0 0 1 
+presente.s5 0 0 1 0 0 0 0 1 
+presente.s6 0 1 0 0 0 0 0 1 
+presente.s7 1 0 0 0 0 0 0 1 

@@ -1,0 +1,313 @@
+|S2P_Tb
+D_OUT[0] <= Data_Force:u2.Data_Out[0]
+D_OUT[1] <= Data_Force:u2.Data_Out[1]
+D_OUT[2] <= Data_Force:u2.Data_Out[2]
+D_OUT[3] <= Data_Force:u2.Data_Out[3]
+D_OUT[4] <= Data_Force:u2.Data_Out[4]
+D_OUT[5] <= Data_Force:u2.Data_Out[5]
+D_OUT[6] <= Data_Force:u2.Data_Out[6]
+D_OUT[7] <= Data_Force:u2.Data_Out[7]
+Addr_OUT[0] => Data_Force:u2.Addr_Rd[0]
+Addr_OUT[1] => Data_Force:u2.Addr_Rd[1]
+Addr_OUT[2] => Data_Force:u2.Addr_Rd[2]
+Addr_OUT[3] => Data_Force:u2.Addr_Rd[3]
+Addr_OUT[4] => Data_Force:u2.Addr_Rd[4]
+Rd_En => Data_Force:u2.Rd_En
+Clk => S2P:u1.CLOCK
+Clk => SERIN.CLK
+Clk => RSTn.CLK
+Clk => \STAt:data[0].CLK
+Clk => \STAt:data[1].CLK
+Clk => \STAt:data[2].CLK
+Clk => \STAt:data[3].CLK
+Clk => \STAt:data[4].CLK
+Clk => \STAt:data[5].CLK
+Clk => \STAt:data[6].CLK
+Clk => \STAt:data[7].CLK
+Clk => \STAt:index[0].CLK
+Clk => \STAt:index[1].CLK
+Clk => \STAt:index[2].CLK
+Clk => \STAt:index[3].CLK
+Clk => Data_Force:u2.clk
+Clk => presente~17.DATAIN
+
+
+|S2P_Tb|S2P:u1
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => DFF.OUTPUTSELECT
+RSTn => NORMAL.OUTPUTSELECT
+RSTn => PERRn_FF.OUTPUTSELECT
+RSTn => DRDY.OUTPUTSELECT
+RSTn => PAR_EN.OUTPUTSELECT
+RSTn => CNT7_FF.OUTPUTSELECT
+RSTn => CNT.OUTPUTSELECT
+RSTn => CNT.OUTPUTSELECT
+RSTn => CNT.OUTPUTSELECT
+CLOCK => CNT[0].CLK
+CLOCK => CNT[1].CLK
+CLOCK => CNT[2].CLK
+CLOCK => CNT7_FF.CLK
+CLOCK => PAR_EN.CLK
+CLOCK => DRDY~reg0.CLK
+CLOCK => PERRn_FF.CLK
+CLOCK => NORMAL.CLK
+CLOCK => DFF[0].CLK
+CLOCK => DFF[1].CLK
+CLOCK => DFF[2].CLK
+CLOCK => DFF[3].CLK
+CLOCK => DFF[4].CLK
+CLOCK => DFF[5].CLK
+CLOCK => DFF[6].CLK
+CLOCK => DFF[7].CLK
+SERIN => DFF.DATAB
+SERIN => PERRn_FF.IN1
+SERIN => CNT_EN.IN1
+PERRn <= PERRn_FF.DB_MAX_OUTPUT_PORT_TYPE
+DRDY <= DRDY~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DOUT[0] <= DFF[0].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[1] <= DFF[1].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[2] <= DFF[2].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[3] <= DFF[3].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[4] <= DFF[4].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[5] <= DFF[5].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[6] <= DFF[6].DB_MAX_OUTPUT_PORT_TYPE
+DOUT[7] <= DFF[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|S2P_Tb|Data_Force:u2
+clk => Register_Logic:uReg_In.Clk
+clk => En_Out~reg0.CLK
+clk => Data_In[0].CLK
+clk => Data_In[1].CLK
+clk => Data_In[2].CLK
+clk => Data_In[3].CLK
+clk => Data_In[4].CLK
+clk => Data_In[5].CLK
+clk => Data_In[6].CLK
+clk => Data_In[7].CLK
+clk => Rst.CLK
+clk => Wr_En.CLK
+clk => Addr_Wr[0].CLK
+clk => Addr_Wr[1].CLK
+clk => Addr_Wr[2].CLK
+clk => Addr_Wr[3].CLK
+clk => Addr_Wr[4].CLK
+clk => \STat:Addr_Aux[0].CLK
+clk => \STat:Addr_Aux[1].CLK
+clk => \STat:Addr_Aux[2].CLK
+clk => \STat:Addr_Aux[3].CLK
+clk => \STat:Addr_Aux[4].CLK
+clk => \STat:Addr_Aux[5].CLK
+clk => Register_Logic:uReg_Rd.Clk
+clk => Register_Logic:uReg_Wr.Clk
+clk => Register_A:uReg_AddrWr.Clk
+clk => Register_A:uReg_AddrRd.Clk
+clk => Register_A:uReg_DataIn.Clk
+clk => MemBnk:uReg_Data.Clk
+clk => presente~5.DATAIN
+DIn[0] => Data_In.DATAB
+DIn[1] => Data_In.DATAB
+DIn[2] => Data_In.DATAB
+DIn[3] => Data_In.DATAB
+DIn[4] => Data_In.DATAB
+DIn[5] => Data_In.DATAB
+DIn[6] => Data_In.DATAB
+DIn[7] => Data_In.DATAB
+En_In => Addr_Wr.OUTPUTSELECT
+En_In => Addr_Wr.OUTPUTSELECT
+En_In => Addr_Wr.OUTPUTSELECT
+En_In => Addr_Wr.OUTPUTSELECT
+En_In => Addr_Wr.OUTPUTSELECT
+En_In => Wr_En.OUTPUTSELECT
+En_In => Rst.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => Data_In.OUTPUTSELECT
+En_In => En_Out.OUTPUTSELECT
+En_In => Selector1.IN3
+En_In => Register_Logic:uReg_In.DD_IN
+En_In => Selector0.IN2
+Data_Out[0] <= MemBnk:uReg_Data.Data_Out[0]
+Data_Out[1] <= MemBnk:uReg_Data.Data_Out[1]
+Data_Out[2] <= MemBnk:uReg_Data.Data_Out[2]
+Data_Out[3] <= MemBnk:uReg_Data.Data_Out[3]
+Data_Out[4] <= MemBnk:uReg_Data.Data_Out[4]
+Data_Out[5] <= MemBnk:uReg_Data.Data_Out[5]
+Data_Out[6] <= MemBnk:uReg_Data.Data_Out[6]
+Data_Out[7] <= MemBnk:uReg_Data.Data_Out[7]
+Addr_Rd[0] => Register_A:uReg_AddrRd.DD_IN[0]
+Addr_Rd[1] => Register_A:uReg_AddrRd.DD_IN[1]
+Addr_Rd[2] => Register_A:uReg_AddrRd.DD_IN[2]
+Addr_Rd[3] => Register_A:uReg_AddrRd.DD_IN[3]
+Addr_Rd[4] => Register_A:uReg_AddrRd.DD_IN[4]
+Rd_En => Register_Logic:uReg_Rd.DD_IN
+En_Out <= En_Out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|S2P_Tb|Data_Force:u2|Register_Logic:uReg_In
+DD_IN => DD_OUT~reg0.DATAIN
+DD_OUT <= DD_OUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|Register_Logic:uReg_Rd
+DD_IN => DD_OUT~reg0.DATAIN
+DD_OUT <= DD_OUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|Register_Logic:uReg_Wr
+DD_IN => DD_OUT~reg0.DATAIN
+DD_OUT <= DD_OUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|Register_A:uReg_AddrWr
+DD_IN[0] => DD_OUT[0]~reg0.DATAIN
+DD_IN[1] => DD_OUT[1]~reg0.DATAIN
+DD_IN[2] => DD_OUT[2]~reg0.DATAIN
+DD_IN[3] => DD_OUT[3]~reg0.DATAIN
+DD_IN[4] => DD_OUT[4]~reg0.DATAIN
+DD_OUT[0] <= DD_OUT[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[1] <= DD_OUT[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[2] <= DD_OUT[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[3] <= DD_OUT[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[4] <= DD_OUT[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT[0]~reg0.CLK
+Clk => DD_OUT[1]~reg0.CLK
+Clk => DD_OUT[2]~reg0.CLK
+Clk => DD_OUT[3]~reg0.CLK
+Clk => DD_OUT[4]~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|Register_A:uReg_AddrRd
+DD_IN[0] => DD_OUT[0]~reg0.DATAIN
+DD_IN[1] => DD_OUT[1]~reg0.DATAIN
+DD_IN[2] => DD_OUT[2]~reg0.DATAIN
+DD_IN[3] => DD_OUT[3]~reg0.DATAIN
+DD_IN[4] => DD_OUT[4]~reg0.DATAIN
+DD_OUT[0] <= DD_OUT[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[1] <= DD_OUT[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[2] <= DD_OUT[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[3] <= DD_OUT[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[4] <= DD_OUT[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT[0]~reg0.CLK
+Clk => DD_OUT[1]~reg0.CLK
+Clk => DD_OUT[2]~reg0.CLK
+Clk => DD_OUT[3]~reg0.CLK
+Clk => DD_OUT[4]~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|Register_A:uReg_DataIn
+DD_IN[0] => DD_OUT[0]~reg0.DATAIN
+DD_IN[1] => DD_OUT[1]~reg0.DATAIN
+DD_IN[2] => DD_OUT[2]~reg0.DATAIN
+DD_IN[3] => DD_OUT[3]~reg0.DATAIN
+DD_IN[4] => DD_OUT[4]~reg0.DATAIN
+DD_IN[5] => DD_OUT[5]~reg0.DATAIN
+DD_IN[6] => DD_OUT[6]~reg0.DATAIN
+DD_IN[7] => DD_OUT[7]~reg0.DATAIN
+DD_OUT[0] <= DD_OUT[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[1] <= DD_OUT[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[2] <= DD_OUT[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[3] <= DD_OUT[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[4] <= DD_OUT[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[5] <= DD_OUT[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[6] <= DD_OUT[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+DD_OUT[7] <= DD_OUT[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Clk => DD_OUT[0]~reg0.CLK
+Clk => DD_OUT[1]~reg0.CLK
+Clk => DD_OUT[2]~reg0.CLK
+Clk => DD_OUT[3]~reg0.CLK
+Clk => DD_OUT[4]~reg0.CLK
+Clk => DD_OUT[5]~reg0.CLK
+Clk => DD_OUT[6]~reg0.CLK
+Clk => DD_OUT[7]~reg0.CLK
+
+
+|S2P_Tb|Data_Force:u2|MemBnk:uReg_Data
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Wr_En => r_memory.OUTPUTSELECT
+Rd_En => Data_Out[0]~reg0.ENA
+Rd_En => Data_Out[1]~reg0.ENA
+Rd_En => Data_Out[2]~reg0.ENA
+Rd_En => Data_Out[3]~reg0.ENA
+Rd_En => Data_Out[4]~reg0.ENA
+Rd_En => Data_Out[5]~reg0.ENA
+Rd_En => Data_Out[6]~reg0.ENA
+Rd_En => Data_Out[7]~reg0.ENA
+Rst => r_memory.DATAA
+Clk => r_memory~13.CLK
+Clk => r_memory~0.CLK
+Clk => r_memory~1.CLK
+Clk => r_memory~2.CLK
+Clk => r_memory~3.CLK
+Clk => r_memory~4.CLK
+Clk => r_memory~5.CLK
+Clk => r_memory~6.CLK
+Clk => r_memory~7.CLK
+Clk => r_memory~8.CLK
+Clk => r_memory~9.CLK
+Clk => r_memory~10.CLK
+Clk => r_memory~11.CLK
+Clk => r_memory~12.CLK
+Clk => Data_Out[0]~reg0.CLK
+Clk => Data_Out[1]~reg0.CLK
+Clk => Data_Out[2]~reg0.CLK
+Clk => Data_Out[3]~reg0.CLK
+Clk => Data_Out[4]~reg0.CLK
+Clk => Data_Out[5]~reg0.CLK
+Clk => Data_Out[6]~reg0.CLK
+Clk => Data_Out[7]~reg0.CLK
+Clk => r_memory.CLK0
+Addr_In[0] => r_memory~4.DATAIN
+Addr_In[0] => r_memory.WADDR
+Addr_In[1] => r_memory~3.DATAIN
+Addr_In[1] => r_memory.WADDR1
+Addr_In[2] => r_memory~2.DATAIN
+Addr_In[2] => r_memory.WADDR2
+Addr_In[3] => r_memory~1.DATAIN
+Addr_In[3] => r_memory.WADDR3
+Addr_In[4] => r_memory~0.DATAIN
+Addr_In[4] => r_memory.WADDR4
+Addr_Out[0] => r_memory.RADDR
+Addr_Out[1] => r_memory.RADDR1
+Addr_Out[2] => r_memory.RADDR2
+Addr_Out[3] => r_memory.RADDR3
+Addr_Out[4] => r_memory.RADDR4
+Data_in[0] => r_memory.DATAB
+Data_in[1] => r_memory.DATAB
+Data_in[2] => r_memory.DATAB
+Data_in[3] => r_memory.DATAB
+Data_in[4] => r_memory.DATAB
+Data_in[5] => r_memory.DATAB
+Data_in[6] => r_memory.DATAB
+Data_in[7] => r_memory.DATAB
+Data_Out[0] <= Data_Out[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[1] <= Data_Out[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[2] <= Data_Out[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[3] <= Data_Out[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[4] <= Data_Out[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[5] <= Data_Out[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[6] <= Data_Out[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Data_Out[7] <= Data_Out[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

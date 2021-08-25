@@ -4,6 +4,13 @@ use IEEE.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 
 entity S2P_Tb is 
+    port( 
+        D_OUT    : out std_logic_vector (7 downto 0);
+        Addr_OUT : in std_logic_vector  (4 downto 0);
+        Rd_En    : in std_logic;
+        Clk      : in STD_LOGIC := '0';
+        En_DF    : out std_logic
+    );
 end S2P_Tb;
 
 architecture RTL of S2P_Tb is
@@ -19,16 +26,16 @@ component S2P
 end component;
 component Data_Force
     port( 
-        clk            :in  std_logic;
-        DIn        :in  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        clk    :in  std_logic;
+        DIn    :in  STD_LOGIC_VECTOR(7 DOWNTO 0);
         --Ports for Data Generate
-        En_In          :in  std_logic;
+        En_In  :in  std_logic;
         --Ports for MemBnk Write
-        Data_Out       :out std_logic_vector (7 DOWNTO 0);
-        Addr_Rd        :in  std_logic_vector (4 DOWNTO 0);
-        Rd_En          :in  std_logic;
+        Data_Out :out std_logic_vector (7 DOWNTO 0);
+        Addr_Rd  :in  std_logic_vector (4 DOWNTO 0);
+        Rd_En    :in  std_logic;
         --Ports Of fininish 
-        En_Out      :out std_logic
+        En_Out  :out std_logic
     );
 end component;
 TYPE estado is (s0, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20);
@@ -36,18 +43,19 @@ SIGNAL presente:estado:=s0;
 
 signal  RSTn, SERIN, PERRn, DRDY : std_logic;
 signal  DOUT : std_logic_vector (7 downto 0);
-signal  D_OUT : std_logic_vector (7 downto 0);
-signal  Addr_OUT : std_logic_vector (4 downto 0);
-signal  Rd_En, En_DF : std_logic;
-signal 	Clk  : STD_LOGIC := '0';
+--signal  D_OUT : std_logic_vector (7 downto 0);
+--signal  Addr_OUT : std_logic_vector (4 downto 0);
+--signal  Rd_En, En_DF : std_logic;
+--signal  En_DF : std_logic;
+--signal 	Clk  : STD_LOGIC := '0';
 begin
-reloj:process
-    begin
-    clk <= '0';
-    wait for 12.5 ns;
-    clk <= '1';
-    wait for 12.5 ns;
-end process reloj;
+--reloj:process
+--   begin
+--   clk <= '0';
+--   wait for 12.5 ns;
+--  clk <= '1';
+--  wait for 12.5 ns;
+--end process reloj;
 u1: S2P 
     PORT MAP (
         RSTn 	=> RSTn,

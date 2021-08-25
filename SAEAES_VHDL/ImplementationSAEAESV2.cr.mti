@@ -1,4 +1,4 @@
-{C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/AesKey.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/AesKey.vhd}
+{C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/DG_Tb.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/DG_Tb.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -6,11 +6,8 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
 -- Loading package NUMERIC_STD
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Loading package Definitions
--- Compiling entity AesKey
--- Compiling architecture RTL of AesKey
+-- Compiling entity DG_Tb
+-- Compiling architecture RTL of DG_Tb
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MemBnk.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MemBnk.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -20,17 +17,6 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package NUMERIC_STD
 -- Compiling entity MemBnk
 -- Compiling architecture RTL of MemBnk
-
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Data_Generate.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Data_Generate.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package NUMERIC_STD
--- Compiling entity Data_Generate
--- Compiling architecture RTL of Data_Generate
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Hash.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Hash.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -45,6 +31,17 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity Hash
 -- Compiling architecture RTL of Hash
 
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Data_Generate.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Data_Generate.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity Data_Generate
+-- Compiling architecture RTL of Data_Generate
+
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Definitions.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Definitions.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
@@ -57,7 +54,7 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling package body Definitions
 -- Loading package Definitions
 
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/AesEnc.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/AesEnc.vhd}
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/SAEAES_Tb.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/SAEAES_Tb.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -65,11 +62,20 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
 -- Loading package NUMERIC_STD
+-- Compiling entity SAEAES_Tb
+-- Compiling architecture RTL of SAEAES_Tb
+
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MuxLogic.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MuxLogic.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
 -- Loading package ATTRIBUTES
 -- Loading package std_logic_misc
--- Loading package Definitions
--- Compiling entity AesEnc
--- Compiling architecture RTL of AesEnc
+-- Compiling entity MuxLogic
+-- Compiling architecture RTL of MuxLogic
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/SAEAES_Block_Encrypt.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/SAEAES_Block_Encrypt.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -96,18 +102,6 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package NUMERIC_STD
 -- Compiling entity Data_Force
 -- Compiling architecture RTL of Data_Force
-
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MuxLogic.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/MuxLogic.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity MuxLogic
--- Compiling architecture RTL of MuxLogic
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -154,18 +148,6 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity TestDefinitions
 -- Compiling architecture rtl of TestDefinitions
 
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_A.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_A.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity Register_A
--- Compiling architecture rtl of Register_A
-
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Encrypt.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Encrypt.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
@@ -178,5 +160,17 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_misc
 -- Compiling entity Encrypt
 -- Compiling architecture RTL of Encrypt
+
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_A.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_A.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity Register_A
+-- Compiling architecture rtl of Register_A
 
 } {} {}}

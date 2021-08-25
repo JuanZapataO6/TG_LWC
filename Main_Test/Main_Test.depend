@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1599167776 source:c:\users\juan pablo\desktop\test_codeblocks\main_test\main_test.cpp
+	<iostream>
+
+1621483464 source:c:\users\juan pablo\onedrive - correounivalle.edu.co\test_codeblocks\main_test\main_test.cpp
+	<iostream>
+	<stdio.h>
+	<string.h>
+	<sstream>
+

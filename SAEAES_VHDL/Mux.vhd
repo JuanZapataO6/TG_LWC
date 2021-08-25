@@ -26,5 +26,5 @@ begin
 	                In_1    when "01",
                     In_2    when "10",
 		            In_3    when "11",
-                    In_2    when others;
+                    In_3    when others;
 end architecture RTL;
