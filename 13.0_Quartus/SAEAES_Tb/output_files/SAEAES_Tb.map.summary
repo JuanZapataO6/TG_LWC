@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sun Aug 22 21:11:21 2021
+Analysis & Synthesis Status : Successful - Fri Aug 27 12:06:59 2021
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : SAEAES_Tb
 Top-level Entity Name : SAEAES_Tb
 Family : Cyclone II
-Total logic elements : 30,987
-    Total combinational functions : 29,027
-    Dedicated logic registers : 4,505
-Total registers : 4505
-Total pins : 112
+Total logic elements : 34,402
+    Total combinational functions : 31,047
+    Dedicated logic registers : 5,884
+Total registers : 5884
+Total pins : 86
 Total virtual pins : 0
 Total memory bits : 16,352
 Embedded Multiplier 9-bit elements : 0

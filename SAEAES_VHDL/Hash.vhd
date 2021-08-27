@@ -243,6 +243,7 @@ begin
                     En_Out_1<= '0';
                     Addr_eS_Aux:="00000";
                     Addr_aD_Aux:="00000";
+                    Rst_S    <= '1';
                 when others => null;
             end case;
         end if;

@@ -128,7 +128,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "Rd_En_Ct",
+					"name" : "Rd_En",
 					"strict" : false
 				},
 				{
@@ -153,10 +153,6 @@
 				},
 				{
 					"name" : "Addr_Rd_Ct[5]",
-					"strict" : false
-				},
-				{
-					"name" : "Rd_En",
 					"strict" : false
 				},
 				{

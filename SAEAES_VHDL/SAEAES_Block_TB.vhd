@@ -126,7 +126,10 @@ component Encrypt
     port(
         Addr_Rd_eS  : out std_logic_vector(3 downto 0);
         Data_Out_eS : in  std_logic_vector(7 downto 0);
-        Rd_En_eS    : out std_logic;       
+        Rd_En_eS    : out std_logic;
+        --Rd_En : in std_logic;
+        --Data_Out_T : out std_logic_vector (7 downto 0);
+        --Index_T    : in std_logic_vector (5 DOWNTO 0);       
         Addr_Rd_Bf  : out std_logic_vector(4 downto 0);
         Data_Out_Bf : in  std_logic_vector(7 downto 0);
         Rd_En_Bf    : out std_logic;
@@ -230,6 +233,8 @@ signal En_Hash_1 : std_logic;
 Signal En_Encrypt   : std_logic;
 Signal En_Encrypt_1 : std_logic;
 signal Rst_eS : std_logic := '1';
+signal rRst_eS : std_logic := '1';
+signal Rst_S : std_logic := '1';
 signal Rst : std_logic := '1';
 ----Signals for AesKey with memorybank in this script 
 --Data Generate Nonce, AddText, Key, BufferMesasagge
@@ -292,13 +297,13 @@ signal Data_Flag0_eK  : std_logic_vector(31 downto 0);
 signal Data_Flag1_eK  : std_logic_vector(31 downto 0);
 
 --Signals For Mux En_Wr_eS
-signal eS_Wr_AE         : std_logic;
-signal eS_Wr_Hash       : std_logic;
+signal eS_Wr_AE         : std_logic:='1';
+signal eS_Wr_Hash       : std_logic:='1';
 signal eS_Wr_Encrypt    : std_logic;
 --Signals For Mux Addr_Wr_eS
 signal eS_AddrWr_AE     : std_logic_vector(3 downto 0):=x"F";
 Signal eS_AddrWr_Hash   : std_logic_vector(3 downto 0);
-Signal eS_AddrWr_Encrypt: std_logic_vector(3 downto 0);
+Signal eS_AddrWr_Encrypt: std_logic_vector(3 downto 0):=x"F";
 --Signals For DeMux Data_In_eS
 signal DataIn_eS_AE     : std_logic_vector(7 downto 0);
 signal DataIn_eS_Hash   : std_logic_vector(7 downto 0);
@@ -333,7 +338,6 @@ uDF: Data_Force
         Rd_En    =>rRd_En_Bf,
         En_Out   =>En_DF
     );
-
 --Read Nonce value
 uReg_Rd_No : Register_Logic
     port map(
@@ -528,7 +532,7 @@ Reg_DataIn_eS :Register_A
 --Read Ct value
 uReg_Rd_Ct : Register_Logic
     port map(
-        DD_IN  => Rd_En_Ct,
+        DD_IN  => Rd_En,--Rd_En_Ct,
         DD_OUT => rRd_En_Ct,
         Clk    => clk
     );
@@ -576,12 +580,13 @@ Reg_DataIn_Ct :Register_A
         Clk    =>clk
     );
 --
+
 uMux_Rd_eS : MuxLogic
     port map(
         In_0    => eS_Rd_AE, --In for AesEnc
         In_1    => eS_Rd_Hash, --In for Hash 
-        In_2    => eS_Rd_Encrypt,
-        In_3    => Rd_En,-- Logic_Test,
+        In_2    => eS_Rd_Encrypt,-- Logic_Test, ---
+        In_3    => Rd_En,-- Logic_Test, ---
         Address => Addr_Control,
         Data_Out=> Rd_En_eS
     );
@@ -593,7 +598,7 @@ uMux_AddrRd_eS : Mux
         In_0     => eS_AddrRd_AE, --In for AesEnc
         In_1     => eS_AddrRd_Hash, --In for Hash 
         In_2     => eS_AddrRd_Encrypt,
-        In_3     => Addr_Rd,
+        In_3     => Addr_Rd,--Addr_Test,--
         Address  => Addr_Control,
         Data_Out => Addr_Rd_eS
     );
@@ -605,7 +610,7 @@ uDeMux_DOut_eS : DeMux
         Out_0   => DataOut_eS_AE,
         Out_1   => DataOut_eS_Hash,
         Out_2   => DataOut_eS_Encrypt,
-        Out_3   => Data_Out,
+        Out_3   => Data_Out,--Data_Test,--
         clk     => Clk,
         Address => Addr_Control,
         Data_In => Data_Out_eS
@@ -614,7 +619,7 @@ uMux_Wr_eS : MuxLogic
     port map(
         In_0     => Es_Wr_AE, --In for AesEnc
         In_1     => Es_Wr_Hash, --In for Hash 
-        In_2     => Es_Wr_Encrypt,
+        In_2     => Es_Wr_Encrypt,--Logic_Test,--
         In_3     => Logic_Test,
         Address  => Addr_Control,
         Data_Out => Wr_En_eS
@@ -690,7 +695,7 @@ uHash : Hash
     Addr_Rd_No  =>Addr_Rd_No,
     Data_Out_No =>Data_rOut_No,
     Rd_En_No    =>Rd_En_No,
-    Rst_S       =>Rst_eS,
+    Rst_S       =>Rst_S,
     En_In       =>Flag_Hash,
     En_Out      =>En_Hash,
     En_Out_1    =>En_Hash_1,
@@ -809,16 +814,11 @@ begin
                         Addr_Control <="00";
                         Flag_Hash <= '0';
                         Flag_AesEnc <= '1';
-                        --presente <= s20;
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
-
                     elsif En_Hash = '1' then --Finish Data Force
                         presente <= s2;
                         Addr_Control <="00";
                         Flag_Hash <= '0';
                         Flag_AesEnc <= '1';
-                        --presente <= s20;
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
                     else
                         presente <= s1;
                         Flag_AesEnc <= '0';
@@ -830,13 +830,10 @@ begin
                         Addr_Control <="01";
                         Flag_Hash <= '1';
                         Flag_AesEnc <= '0';
-                        --presente <= s20;
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
                     else
                         presente <= s2;
                         Flag_AesEnc <= '1';
                         Addr_Control <="00";
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
                     end if;
                 when s3 =>
                     if En_AE = '1' then --Finish Data Force
@@ -844,8 +841,6 @@ begin
                         Addr_Control <="01";
                         Flag_Hash <= '1';
                         Flag_AesEnc <= '0';
-                        --presente <= s20;
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
                     else
                         presente <= s3;
                         Flag_AesEnc <= '1';
@@ -857,8 +852,6 @@ begin
                         Addr_Control <="00";
                         Flag_AesEnc <= '1';
                         Flag_Hash <= '0';
-                        --presente <= s20;
-                        --Addr_Control <="11"; --Line for test, after first part Hash Component
                     else
                         presente <= s4;
                         Flag_AesEnc <= '0';
@@ -867,12 +860,10 @@ begin
                     end if;
                 when s5 =>
                     if En_AE = '1' then --Finish Data Force
-                        --presente <= s6;
-                        --Addr_Control <="10";
-                        --Flag_Encrypt <= '1';
+                        presente <= s6;
+                        --Addr_Control <="10"; 
+                        Flag_Encrypt <= '1';
                         Flag_AesEnc <= '0';
-                        presente <= s20;
-                        Addr_Control <="11"; --Line for test, after first part Hash Component
                     else
                         presente <= s5;
                         Flag_AesEnc <= '1';
@@ -884,11 +875,13 @@ begin
                         Addr_Control <="00";
                         Flag_Encrypt <= '0';
                         Flag_AesEnc  <= '1';
+                        --presente <= s20;
                     elsif En_Encrypt = '1' then --Finish Data Force
                         presente <= s5;
                         Addr_Control <="00";
-                        Flag_Encrypt <= '0';
                         Flag_AesEnc  <= '1';
+                        Flag_Encrypt <= '0';
+                        --presente <= s20;
                     else
                         presente <= s6;
                         Flag_AesEnc <= '0';
@@ -898,14 +891,35 @@ begin
                 when s7 =>
                     if En_AE = '1' then --Finish Data Force
                         presente <= s8;
-                        Addr_Control <="10";
+                        --Addr_Control <="10";
                         Flag_Encrypt <= '1';
                         Flag_AesEnc <= '0';
                     else
-                        presente <= s5;
+                        presente <= s7;
                         Flag_AesEnc <= '1';
                         Addr_Control <="00";
+                        Flag_Encrypt <= '0';
+                        --presente <= s20;
                     end if;
+                when s8 =>
+                    if En_Encrypt_1 = '1' then --Finish Data Force
+                        presente <= s20;
+                        Addr_Control <="11";
+                        Flag_Encrypt <= '0';
+                        Flag_AesEnc <= '0';
+                    else
+                        presente <= s8;
+                        Flag_AesEnc <= '0';
+                        Addr_Control <="10";
+                        Flag_Encrypt <= '1';
+                        --presente <= s20;
+                    end if;
+                when s20 =>
+                    Addr_Control <="11";
+                    Flag_Encrypt <= '0';
+                    Flag_AesEnc <= '0';
+                    Flag_Hash <= '0';
+                    Flag_AesKey <= '0';
 
                 when others => null;
             end case;

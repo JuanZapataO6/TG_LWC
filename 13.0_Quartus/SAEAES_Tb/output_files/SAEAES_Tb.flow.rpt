@@ -1,5 +1,5 @@
 Flow report for SAEAES_Tb
-Sun Aug 22 21:13:21 2021
+Fri Aug 27 12:09:52 2021
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,18 +40,18 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Sun Aug 22 21:13:14 2021           ;
+; Flow Status                        ; Successful - Fri Aug 27 12:09:43 2021           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; SAEAES_Tb                                       ;
 ; Top-level Entity Name              ; SAEAES_Tb                                       ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C70F896C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 30,545 / 68,416 ( 45 % )                        ;
-;     Total combinational functions  ; 29,034 / 68,416 ( 42 % )                        ;
-;     Dedicated logic registers      ; 4,505 / 68,416 ( 7 % )                          ;
-; Total registers                    ; 4505                                            ;
-; Total pins                         ; 112 / 622 ( 18 % )                              ;
+; Total logic elements               ; 32,542 / 68,416 ( 48 % )                        ;
+;     Total combinational functions  ; 31,054 / 68,416 ( 45 % )                        ;
+;     Dedicated logic registers      ; 5,884 / 68,416 ( 9 % )                          ;
+; Total registers                    ; 5884                                            ;
+; Total pins                         ; 86 / 622 ( 14 % )                               ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 16,352 / 1,152,000 ( 1 % )                      ;
 ; Embedded Multiplier 9-bit elements ; 0 / 300 ( 0 % )                                 ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/22/2021 21:06:31 ;
+; Start date & time ; 08/27/2021 12:01:28 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; SAEAES_Tb           ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+------------------+
 ; Assignment Name                     ; Value                                                                                                                                                                                                                                                                                                                                                                              ; Default Value ; Entity Name ; Section Id       ;
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+------------------+
-; COMPILER_SIGNATURE_ID               ; 228800458279778.162968438800984                                                                                                                                                                                                                                                                                                                                                    ; --            ; --          ; --               ;
+; COMPILER_SIGNATURE_ID               ; 228800458279778.163008368514824                                                                                                                                                                                                                                                                                                                                                    ; --            ; --          ; --               ;
 ; ENABLE_SIGNALTAP                    ; On                                                                                                                                                                                                                                                                                                                                                                                 ; --            ; --          ; --               ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                                                                                                                                                                                                                                                                                                                                                 ; --            ; --          ; --               ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                                                                                                                                                                                                                                                                                                                                  ; --            ; --          ; --               ;
@@ -116,11 +116,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:04:50     ; 1.0                     ; 4800 MB             ; 00:04:47                           ;
-; Fitter                    ; 00:01:38     ; 1.3                     ; 5291 MB             ; 00:02:09                           ;
-; Assembler                 ; 00:00:06     ; 1.0                     ; 4663 MB             ; 00:00:06                           ;
-; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 4846 MB             ; 00:00:05                           ;
-; Total                     ; 00:06:39     ; --                      ; --                  ; 00:07:07                           ;
+; Analysis & Synthesis      ; 00:05:29     ; 1.0                     ; 4792 MB             ; 00:05:18                           ;
+; Fitter                    ; 00:02:24     ; 1.4                     ; 5278 MB             ; 00:03:05                           ;
+; Assembler                 ; 00:00:07     ; 1.0                     ; 4669 MB             ; 00:00:07                           ;
+; TimeQuest Timing Analyzer ; 00:00:08     ; 1.0                     ; 4871 MB             ; 00:00:07                           ;
+; Total                     ; 00:08:08     ; --                      ; --                  ; 00:08:37                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
