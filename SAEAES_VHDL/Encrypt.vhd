@@ -244,11 +244,11 @@ begin
                     Addr_Bf_Aux:= Addr_Bf_Aux+1;
                     Addr_Wr_Ct <= Addr_Bf_Aux;
                     Data_In_Ct <= Ct(to_integer(unsigned(Addr_Bf_Aux)));
-                if  Addr_Bf_Aux = x"27" then 
-                    presente <= s21;
-                else 
-                    presente <= s20;
-                end if;
+                    if  Addr_Bf_Aux = x"27" then 
+                        presente <= s21;
+                    else 
+                        presente <= s20;
+                    end if;
                 when others => null;
             end case;
         end if;

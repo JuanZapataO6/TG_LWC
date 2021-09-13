@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sun Sep 12 17:46:38 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : Saturnin_Tb
+Top-level Entity Name : Saturnin_Tb
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 1608
+Total pins : 107
+Total virtual pins : 0
+Total block memory bits : 9,760
+Total DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

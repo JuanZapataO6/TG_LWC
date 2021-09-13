@@ -354,7 +354,7 @@ uReg_AddrRd_No :Register_A
         DD_OUT =>Addr_rRd_No,
         Clk    =>clk
     );
-Reg_DataOut_No :Register_A
+uReg_DataOut_No :Register_A
     generic map(
         w => 8--width of word
     )

@@ -144,18 +144,6 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity Data_Force
 -- Compiling architecture RTL of Data_Force
 
-} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity Mux
--- Compiling architecture RTL of Mux
-
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_Logic.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Register_Logic.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
@@ -167,6 +155,18 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package std_logic_misc
 -- Compiling entity Register_Logic
 -- Compiling architecture rtl of Register_Logic
+
+} {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/Mux.vhd}
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity Mux
+-- Compiling architecture RTL of Mux
 
 } {} {}} {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/DeMux.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/JUAN PABLO/OneDrive - correounivalle.edu.co/Universidad/ProyectoDeGrado/Implementation/SAEAES_VHDL/DeMux.vhd}
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012

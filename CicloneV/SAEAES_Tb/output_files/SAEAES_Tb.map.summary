@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Fri Aug 27 08:12:20 2021
+Analysis & Synthesis Status : Successful - Sun Sep 05 16:59:16 2021
 Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 Revision Name : SAEAES_Tb
 Top-level Entity Name : SAEAES_Tb
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 5736
+Total registers : 5738
 Total pins : 86
 Total virtual pins : 0
 Total block memory bits : 16,608
