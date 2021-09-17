@@ -10,6 +10,25 @@ add wave -noupdate /saturnin_tb/u1/uDF/presente
 add wave -noupdate /saturnin_tb/u1/uDF/Data_rIn_xK
 add wave -noupdate /saturnin_tb/u1/uDF/Data_rIn_xB
 add wave -noupdate /saturnin_tb/u1/uXorKey/presente
+add wave -noupdate /saturnin_tb/u1/uSBox/presente
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/A0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/A1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/B0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/B1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/C0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/C1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/D0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uSBox/D1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/A0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/A1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/B0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/B1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/C0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/C1
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/D0
+add wave -noupdate -radix hexadecimal /saturnin_tb/u1/D1
+
+
 add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uxB/r_memory
 add wave -noupdate -radix hexadecimal /saturnin_tb/u1/uxK/r_memory
 add wave -noupdate /saturnin_tb/SERIN
@@ -38,4 +57,4 @@ force -freeze sim:/saturnin_tb/Addr_Rd 1101 0
 run 700
 force -freeze sim:/saturnin_tb/Rd_En 0 0
 force -freeze sim:/saturnin_tb/Addr_Rd 1100 0
-run 700
+run 1000

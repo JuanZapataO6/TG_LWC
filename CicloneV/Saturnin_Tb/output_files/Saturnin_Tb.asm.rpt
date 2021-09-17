@@ -1,5 +1,5 @@
 Assembler report for Saturnin_Tb
-Sun Sep 12 17:48:38 2021
+Thu Sep 16 22:40:13 2021
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -39,7 +39,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Sep 12 17:48:38 2021 ;
+; Assembler Status      ; Successful - Thu Sep 16 22:40:13 2021 ;
 ; Revision Name         ; Saturnin_Tb                           ;
 ; Top-level Entity Name ; Saturnin_Tb                           ;
 ; Family                ; Cyclone V                             ;
@@ -78,8 +78,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Option         ; Setting                                                                                                                                                    ;
 +----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00EA3080                                                                                                                                                 ;
-; Checksum       ; 0x00EA3080                                                                                                                                                 ;
+; JTAG usercode  ; 0x010AA581                                                                                                                                                 ;
+; Checksum       ; 0x010AA581                                                                                                                                                 ;
 +----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -89,14 +89,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
-    Info: Processing started: Sun Sep 12 17:48:28 2021
+    Info: Processing started: Thu Sep 16 22:39:59 2021
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Saturnin_Tb -c Saturnin_Tb
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4848 megabytes
-    Info: Processing ended: Sun Sep 12 17:48:38 2021
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:10
+    Info: Peak virtual memory: 4865 megabytes
+    Info: Processing ended: Thu Sep 16 22:40:14 2021
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:14
 
 

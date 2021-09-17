@@ -53,6 +53,7 @@ if clk 'event and clk = '1' then
                         Rd_En_K <='0';
                         Wr_En_xK <='1';
                         Wr_En_xB <='1';
+                        Data_rIn_xB <= x"2929";
                         Addr_Rd_K <= Addr_Rd_K_Aux;
                         if Addr_Aux > x"7" then--0/0--2/1--4/2--6/3--8/4--A/5--C/6--E/7
                             Rd_En_B <= '0';------10/8--12/9--14/A--6/B--8/C--A/D--C/E--E/F

@@ -47,6 +47,23 @@ presente.s18 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 presente.s19 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 presente.s20 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 
+State Machine - |Saturnin_Tb|Saturnin_Block_EncryptV2:u1|S_Box:uSBox|presente
+Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2 presente.s1 presente.s0 presente.start 
+presente.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+presente.s1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+presente.s2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+presente.s3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+presente.s4 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+presente.s5 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+presente.s6 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+presente.s7 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+presente.s8 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+presente.s9 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+presente.s10 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+presente.s11 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+presente.s12 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
 State Machine - |Saturnin_Tb|Saturnin_Block_EncryptV2:u1|XOR_key:uXorKey|presente
 Name presente.s12 presente.s11 presente.s10 presente.s9 presente.s8 presente.s7 presente.s6 presente.s5 presente.s4 presente.s3 presente.s2_1 presente.s2_0 presente.s2 presente.s1 presente.s0 
 presente.s0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
