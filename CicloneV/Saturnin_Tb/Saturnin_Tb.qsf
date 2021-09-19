@@ -108,29 +108,6 @@ set_location_assignment PIN_AA30 -to Rd_En
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[13] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_location_assignment PIN_AJ4 -to En_Ad
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/XOR_key_Rotated.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/XOR_key.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Slice_Inv.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Slice.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Sheet_Inv.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Sheet.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Saturnin_Tb.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Saturnin_Block_EncryptV2.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SAEAES_Tb.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/S2P.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/S_Box.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Register_Logic.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Register_A.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MuxLogic.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Mux.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MemBnk.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MDS.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Make_Rounds.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/DeMux.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/DataS2P.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Data_Generate.vhd
-set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Data_Force.vhd
-set_global_assignment -name SIGNALTAP_FILE output_files/KeyDG.stp
 set_location_assignment PIN_Y19 -to Hex3[6]
 set_location_assignment PIN_W19 -to Hex3[5]
 set_location_assignment PIN_AD19 -to Hex3[4]
@@ -569,5 +546,28 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[21] -
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[22] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[27] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[31] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/S_Box.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MuxLogic.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Mux.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/XOR_key_Rotated.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/XOR_key.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Slice_Inv.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Slice.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Sheet_Inv.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SR_Sheet.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Saturnin_Tb.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Saturnin_Block_EncryptV2.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/SAEAES_Tb.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/S2P.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Register_Logic.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Register_A.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MemBnk.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/MDS.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Make_Rounds.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/DeMux.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/DataS2P.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Data_Generate.vhd
+set_global_assignment -name VHDL_FILE ../../SATURNIN_VHDL/Data_Force.vhd
+set_global_assignment -name SIGNALTAP_FILE output_files/KeyDG.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name SLD_FILE db/KeyDG_auto_stripped.stp

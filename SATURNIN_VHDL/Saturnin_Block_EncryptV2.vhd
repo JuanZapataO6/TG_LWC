@@ -13,14 +13,6 @@ entity Saturnin_Block_EncryptV2 is
         RSTn 	   : IN std_logic;
         clk 	   : IN std_logic;
         SERIN 	   : IN std_logic;
-        A0 : out std_logic_vector (15 downto 0);
-        B0 : out std_logic_vector (15 downto 0);
-        C0 : out std_logic_vector (15 downto 0);
-        D0 : out std_logic_vector (15 downto 0);
-        A1 : out std_logic_vector (15 downto 0);
-        B1 : out std_logic_vector (15 downto 0);
-        C1 : out std_logic_vector (15 downto 0);
-        D1 : out std_logic_vector (15 downto 0);
         Rd_En_Ct   : IN std_logic;
         Addr_Rd_Ct : IN std_logic_vector  (5 DOWNTO 0);
         Data_rOut_Ct: OUT std_logic_vector (15 downto 0));
@@ -146,7 +138,7 @@ component MuxLogic
         DOut : out std_logic);
 end component MuxLogic;
 component DeMux
-    generic(    
+    generic(
         w:integer --width of word
     );
     port( 
@@ -204,14 +196,6 @@ component S_Box is
         Data_Out_B  : in std_logic_vector (0 to 15);
         clk         : in std_logic; 
         En_In       : in std_logic;
-        A0 : out std_logic_vector (15 downto 0);
-        B0 : out std_logic_vector (15 downto 0);
-        C0 : out std_logic_vector (15 downto 0);
-        D0 : out std_logic_vector (15 downto 0);
-        A1 : out std_logic_vector (15 downto 0);
-        B1 : out std_logic_vector (15 downto 0);
-        C1 : out std_logic_vector (15 downto 0);
-        D1 : out std_logic_vector (15 downto 0);
         En_Out      : out std_logic);
 end component S_Box;
 component MDS is 
@@ -397,15 +381,18 @@ signal Rd_En_XKRK    : std_logic;
 signal En_XKR        : std_logic;
 signal En_XKR_Main   : std_logic;
 -----------------------------------------
-signal AddrWr_SB_xB : std_logic_vector (3 DOWNTO 0):=x"F";
+signal AddrWr_SB_xB : std_logic_vector (3 DOWNTO 0):=x"4";
 signal DataIn_SB_xB : std_logic_vector (15 DOWNTO 0):=x"1111";
+signal WrEn_SB_xB   : std_logic:='1';
+
 signal AddrRd_SB_xB : std_logic_vector (3 DOWNTO 0);
+signal DataOut_SB_xB: std_logic_vector (15 DOWNTO 0):=x"FEFE";
+signal RdEn_SB_xB   : std_logic;
+
 signal AddrWr_rSB_xB : std_logic_vector (3 DOWNTO 0):=x"F";
 signal DataIn_rSB_xB : std_logic_vector (15 DOWNTO 0):=x"1111";
 signal WrEn_rSB_xB   : std_logic;
-signal DataOut_SB_xB: std_logic_vector (15 DOWNTO 0):=x"FEFE";
-signal WrEn_SB_xB   : std_logic;
-signal RdEn_SB_xB   : std_logic;
+
 signal En_SB        : std_logic:='0';
 signal En_SB_Flag   : std_logic:='0';
 -----------------------------------------
@@ -726,22 +713,14 @@ uXorKey: XOR_key
 --
 uSBox: S_Box
     port map ( 
-        Addr_Wr_B   =>AddrWr_SB_xB,--Addr_Wr_xB,--
-        Data_rIn_B  =>DataIn_SB_xB,--Data_In_xB,--
-        Wr_En_B     =>WrEn_SB_xB,--Wr_En_xB,--
-        Addr_Rd_B   =>AddrRd_SB_xB,
-        Rd_En_B     =>RdEn_SB_xB,
-        Data_Out_B  =>DataOut_SB_xB,
+        Addr_Wr_B =>AddrWr_SB_xB,--Addr_Wr_xB,--
+        Data_rIn_B=>DataIn_SB_xB,--Data_In_xB,--
+        Wr_En_B   =>WrEn_SB_xB,--Wr_En_xB,--
+        Addr_Rd_B =>AddrRd_SB_xB,
+        Rd_En_B   =>RdEn_SB_xB,
+        Data_Out_B=>DataOut_SB_xB,
         clk =>clk,
         En_In =>En_SB_Flag,
-        A0 =>A0,
-        B0 =>B0,
-        C0 =>C0,
-        D0 =>D0,
-        A1 =>A1,
-        B1 =>B1,
-        C1 =>C1,
-        D1 =>D1,
         En_Out =>En_SB);
 --
 uxB: MemBnk 
@@ -777,9 +756,9 @@ uMux_DataIn_xB: Mux
             w => 16)
     Port Map( 
         In_0=>DataIn_DF_xB,
-        In_1=>DataIn_SB_xB,
+        In_1=>DataIn_rSB_xB,
         In_2=>DataIn_XK_xB,
-        In_3=>Test_Before_Data,
+        In_3=> Test_Before_Data,
         In_4=>Test_Before_Data,
         In_5=>Test_Before_Data,
         In_6=>Test_Before_Data,
@@ -795,7 +774,7 @@ uMuxAdrrWr_xB: Mux
         )
     Port Map( 
         In_0=>AddrWr_DF_xB,
-        In_1=>AddrWr_SB_xB,
+        In_1=>AddrWr_rSB_xB,
         In_2=>AddrWr_XK_xB,
         In_3=>Test_Before_Adrr,
         In_4=>Test_Before_Adrr,
@@ -811,7 +790,7 @@ uMuxAdrrWr_xB: Mux
 uMuxWr_xB: MuxLogic
     Port Map( 
         In_0=>WrEn_DF_xB,
-        In_1=>WrEn_SB_xB,
+        In_1=>WrEn_rSB_xB,
         In_2=>WrEn_XK_xB,
         In_3=>Test_Before_Logic,
         In_4=>Test_Before_Logic,
@@ -945,20 +924,17 @@ begin
                             En_XK_Flag <='1';
                             En_DF_Flag <='0';
                             presente <= S1;
-                            
-                            --Sel <= "0001";
                         else
                             En_DF_Flag <= '1';
                             presente <= s0;
                             Sel <="0000";
                         end if;
                     when  s1 =>
-                        if En_XK =  '1' then --Finish Data Force
-                            En_XK_Flag <='0';
+                        if En_XK =  '1' then 
                             En_SB_Flag <='1';
+                            En_XK_Flag <='0';
                             Load_MR <= '0'; 
                             presente <= s2;
-                            --Sel <="0001";
                         else
                             presente <= s1;
                             En_XK_Flag <='1';
@@ -973,19 +949,17 @@ begin
                             Sel <="1111";
                         else
                             presente <= s2;
-                            Sel <="0001";
-                            En_XK_Flag <='0';
                             En_SB_Flag <='1';
+                            En_XK_Flag <='0';
+                            En_DF_Flag <='0';
+                            Sel <= "0001";
                         end if;
                     when  s3  =>
                         if Enable_MDS = '1' then
                             En_SB_Flag <= '1'; 
                             presente <= s4;
-                            Addr_Control <="000";
                         else
-                            --En_MDS_Main <= '0';
                             presente <= s3;
-                            Addr_Control <="0011";
                         end if;
                     when  s4  =>
                         if En_SB = '1' then
@@ -1126,7 +1100,7 @@ begin
                             presente <= s15;
                             Addr_Control <="0111";
                         end if;
-                    when  s16  =>
+                    when s16  =>
                         if Enable_MDS = '1' then
                             En_MDS_Main <= '0'; 
                             En_SRSHI_Main <= '1';
@@ -1137,7 +1111,7 @@ begin
                             presente <= s16;
                             Addr_Control <="0011";
                         end if;
-                    when  s17  =>
+                    when s17  =>
                         if Enable_SRSHI = '1' then 
                             En_SRSHI_Main <= '0'; 
                             Addr_Rd_MR0  <= i_Control;
@@ -1151,7 +1125,7 @@ begin
                             presente <= s17;
                             Addr_Control <="1001";
                         end if;
-                    when  s18 =>
+                    when s18 =>
                         if En_XK = '1' then 
                             En_XK_Flag <= '0';
                             presente <= s14;
@@ -1161,11 +1135,11 @@ begin
                             Addr_Control <="0001";
                             En_XK_Flag <= '1';
                         end if;
-                    when  s20 =>
+                    when s20 =>
                         presente <= s20;
                         Addr_Control <="1111";
                         Sel_O<=Sel;
-                        Data_rOut_Ct <= Data_Out_xB;
+                        Data_rOut_Ct <= DataIn_SB_xB;
                     when others => null;
                 end case;
             end if;

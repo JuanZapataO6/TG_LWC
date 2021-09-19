@@ -10,14 +10,6 @@ entity Saturnin_Tb is
         Addr_Rd : IN std_logic_vector (3 DOWNTO 0);
         Sel_O      : Out  std_logic_vector (3 downto 0);
         Data_Out_T : Out std_logic_vector (15 downto 0);
-        A0 : out std_logic_vector (15 downto 0);
-        B0 : out std_logic_vector (15 downto 0);
-        C0 : out std_logic_vector (15 downto 0);
-        D0 : out std_logic_vector (15 downto 0);
-        A1 : out std_logic_vector (15 downto 0);
-        B1 : out std_logic_vector (15 downto 0);
-        C1 : out std_logic_vector (15 downto 0);
-        D1 : out std_logic_vector (15 downto 0);
         Hex0 :out std_logic_vector(6 downto 0);
         Hex1 :out std_logic_vector(6 downto 0);
         Hex2 :out std_logic_vector(6 downto 0);
@@ -43,14 +35,6 @@ component Saturnin_Block_EncryptV2
         RSTn  : IN std_logic;
         clk   : IN std_logic;
         SERIN : IN std_logic;
-        A0 : out std_logic_vector (15 downto 0);
-        B0 : out std_logic_vector (15 downto 0);
-        C0 : out std_logic_vector (15 downto 0);
-        D0 : out std_logic_vector (15 downto 0);
-        A1 : out std_logic_vector (15 downto 0);
-        B1 : out std_logic_vector (15 downto 0);
-        C1 : out std_logic_vector (15 downto 0);
-        D1 : out std_logic_vector (15 downto 0);
         Rd_En_Ct   : IN std_logic;
         Addr_Rd_Ct : IN std_logic_vector  (5 DOWNTO 0);
         Data_rOut_Ct: OUT std_logic_vector (15 downto 0));
@@ -103,14 +87,6 @@ u1: Saturnin_Block_EncryptV2
         RSTn  => RSTn,
         clk   => clk,
         SERIN => SERIN,
-        A0 =>A0,
-        B0 => B0,
-        C0 => C0,
-        D0 => D0,
-        A1 => A1,
-        B1 => B1,
-        C1 => C1,
-        D1 => D1,
         Rd_En_Ct   => Rd_En_Ct,
         Addr_Rd_Ct => Addr_Rd_Ct,
         Data_rOut_Ct=> Data_Out_Ct
