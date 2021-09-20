@@ -8,7 +8,6 @@ entity Saturnin_Tb is
         En_Ad    :in  std_logic;
         Rd_En : IN std_logic;
         Addr_Rd : IN std_logic_vector (3 DOWNTO 0);
-        Sel_O      : Out  std_logic_vector (3 downto 0);
         Data_Out_T : Out std_logic_vector (15 downto 0);
         Hex0 :out std_logic_vector(6 downto 0);
         Hex1 :out std_logic_vector(6 downto 0);
@@ -31,7 +30,6 @@ component Saturnin_Block_EncryptV2
         Rd_En : IN std_logic;
         Addr_Rd : IN std_logic_vector (3 DOWNTO 0);
         Data_Out_T : Out std_logic_vector (15 downto 0);
-        Sel_O      : Out  std_logic_vector (3 downto 0);
         RSTn  : IN std_logic;
         clk   : IN std_logic;
         SERIN : IN std_logic;
@@ -83,7 +81,6 @@ u1: Saturnin_Block_EncryptV2
         Rd_En   =>Rd_En,
         Addr_Rd => Addr_Rd,
         Data_Out_T=> Data_Out,
-        Sel_O => Sel_O,
         RSTn  => RSTn,
         clk   => clk,
         SERIN => SERIN,
