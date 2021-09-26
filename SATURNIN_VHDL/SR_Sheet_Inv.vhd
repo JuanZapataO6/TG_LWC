@@ -22,12 +22,7 @@ entity SR_Sheet_Inv is
     );
 end SR_Sheet_Inv;
 architecture Main of SR_Sheet_Inv is 
-signal Establish:std_logic_vector (4 DOWNTO 0):="00000";
 --
-signal x0: std_logic_vector (15 downto 0);
-signal x1: std_logic_vector (15 downto 0);
-signal x2: std_logic_vector (15 downto 0);
-signal x3: std_logic_vector (15 downto 0);
 signal x4: std_logic_vector (15 downto 0);
 signal x5: std_logic_vector (15 downto 0);
 signal x6: std_logic_vector (15 downto 0);
@@ -41,41 +36,61 @@ signal xc: std_logic_vector (15 downto 0);
 signal xd: std_logic_vector (15 downto 0);
 signal xe: std_logic_vector (15 downto 0);
 signal xf: std_logic_vector (15 downto 0);
-type estado is (start,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12);
+type estado is (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12);
 signal presente:estado:=s0;
 begin
 ASM: process (clk)
 variable Addr_Aux :std_logic_vector (4 DOWNTO 0):="00000";
 variable Flag_Aux :std_logic:='0';
+variable Establish:std_logic_vector (4 DOWNTO 0):="00000";
 begin
 if (CLK'event AND CLK = '1') then 
-    if En_In = '1' then  
+     if En_In = '1' then  
         if Addr_Aux <= "11111"  then 
             case presente is 
                 when s0 =>
                     presente  <= s1;
-                    Addr_Aux  := "00100";
-                    Addr_Rd_B <= Addr_Aux(3 downto 0);
-                    Rd_En_B   <= '0';
+                    Addr_Rd_B <= x"0";
                     Addr_Wr_B <= x"0";
-                    Wr_En_B   <= '1';                   
-                when s1 =>
-                    if Establish <= "00001" then 
-                        presente <= s1; 
-                        Addr_Aux  := Addr_Aux+1;
-                        Establish <= Establish+1;
-                        Addr_Rd_B <= Addr_Aux(3 downto 0);
-                        Rd_En_B   <= '0';
-                    else
-                        presente  <= s2; 
-                        Addr_Aux  := Addr_Aux+1;
-                        Establish <= "00000";
-                        Addr_Rd_B <= Addr_Aux(3 downto 0);
-                        Rd_En_B   <= '0';
-                    end if;
-                when s2 =>
+                    Addr_Aux  := "00100";
+                    Data_RIn_B <= x"8787";
+                    En_Out <= '0';
+                    Rd_En_B   <= '1';
+                    Wr_En_B   <= '1';                
+                when s1=>
+                    presente <= s2;
+                    Addr_Rd_B <=Addr_Aux(3 downto 0);
+                    Addr_Wr_B <=Addr_Aux(3 downto 0);
+                    Wr_En_B   <='1';
+                    Rd_En_B   <='0';
+                    En_Out    <='0';
+                when s2=>
+                    presente <= s3;
+                    Addr_Aux  := Addr_Aux+1;--1
+                    Addr_Rd_B <=Addr_Aux(3 downto 0);
+                    Addr_Wr_B <=Addr_Aux(3 downto 0);
+                    Wr_En_B   <='1';
+                    Rd_En_B   <='0';
+                    En_Out    <='0';
+                when s3=>
+                    presente <= s4;
+                    Addr_Aux  := Addr_Aux+1;--2
+                    Addr_Rd_B <=Addr_Aux(3 downto 0);
+                    Addr_Wr_B <=Addr_Aux(3 downto 0);
+                    Wr_En_B   <='1';
+                    Rd_En_B   <='0';
+                    En_Out    <='0';
+                when s4=>
+                    presente <= s5;
+                    Addr_Aux  := Addr_Aux+1;--3
+                    Addr_Rd_B <=Addr_Aux(3 downto 0);
+                    Addr_Wr_B <=Addr_Aux(3 downto 0);
+                    Wr_En_B   <='1';
+                    Rd_En_B   <='0';
+                    En_Out    <='0';
+                when s5 =>
                     if Establish <= "01011" then 
-                        presente <= s2;
+                        presente <= s5;
                         case Establish is
                             when "00000" => x4 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
                             when "00001" => x5 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
@@ -94,61 +109,60 @@ if (CLK'event AND CLK = '1') then
                         if Addr_Aux(3 downto 0) = "1111" then  
                             Addr_Aux  := Addr_Aux;
                         else                             
-                            Addr_Aux  := Addr_Aux+1;                                
+                            Addr_Aux  := Addr_Aux+1;
                         end if;
-                        Establish <= Establish+1;
+                        Establish := Establish+1;
                         Addr_Rd_B <= Addr_Aux(3 downto 0);
                         Rd_En_B   <= '0';
                     else
-                        presente  <= s3; 
+                        presente  <= s6; 
                         Addr_Aux  := "00100";
-                        Establish <= "00101";
+                        Establish := "00000";
                         Addr_Rd_B <= Addr_Aux(3 downto 0);
                         Rd_En_B   <= '1';
-                        Addr_Wr_B <= x"4";
+                        Addr_Wr_B <= Addr_Aux(3 downto 0);
                         Wr_En_B   <= '0';
                         Data_RIn_B <= x4;
                     end if;
-                when s3 =>
-                    presente  <= s4;
+                when s6 =>
+                    presente  <= s7;
+                    Addr_Aux  := Addr_Aux+1;
                     Rd_En_B   <= '1';
-                    Addr_Wr_B <= Establish (3 downto 0);
-                    Establish <= Establish +1;
+                    Addr_Wr_B <= Addr_Aux (3 downto 0);
+                    --Establish <= Establish +1;
                     Wr_En_B   <= '0';
                     Data_RIn_B <= x5;
-                when s4 => 
-                    if Establish < "10000" then 
-                        presente<= s4;
+                when s7 => 
+                    if Establish <= "01001" then 
+                        presente<= s7;
                         case Establish is 
-                            when "00100" => Data_RIn_B <= x4;
-                            when "00101" => Data_RIn_B <= x5;
-                            when "00110" => Data_RIn_B <= x6;
-                            when "00111" => Data_RIn_B <= x7;
-                            when "01000" => Data_RIn_B <= x8;
-                            when "01001" => Data_RIn_B <= x9;
-                            when "01010" => Data_RIn_B <= xa;
-                            when "01011" => Data_RIn_B <= xb;
-                            when "01100" => Data_RIn_B <= xc;
-                            when "01101" => Data_RIn_B <= xd;
-                            when "01110" => Data_RIn_B <= xe;
-                            when "01111" => Data_RIn_B <= xf;
+                            when "00000" => Data_RIn_B <= x6;
+                            when "00001" => Data_RIn_B <= x7;
+                            when "00010" => Data_RIn_B <= x8;
+                            when "00011" => Data_RIn_B <= x9;
+                            when "00100" => Data_RIn_B <= xa;
+                            when "00101" => Data_RIn_B <= xb;
+                            when "00110" => Data_RIn_B <= xc;
+                            when "00111" => Data_RIn_B <= xd;
+                            when "01000" => Data_RIn_B <= xe;
+                            when "01001" => Data_RIn_B <= xf;
                             when others => null;
                         end case; 
-                        --Addr_Aux  := Addr_Aux + 1;
-                        Establish <= Establish + 1;
+                        Addr_Aux  := Addr_Aux + 1;
+                        Establish := Establish + 1;
                         Addr_Rd_B <= x"8";
                         Rd_En_B   <= '1';
-                        Addr_Wr_B <= Establish(3 downto 0);
+                        Addr_Wr_B <= Addr_Aux (3 downto 0);
                         Wr_En_B   <= '0';
                     else
-                        presente  <= s5;
+                        presente  <= s8;
                         En_Out <= '1';
                         Wr_En_B   <= '1';
                     end if;
-                when s5 =>
+                when s8 =>
                     presente <= s0;
                     En_Out <= '0';
-                    Establish <="00000";
+                    Establish :="00000";
                 when others => null;
             end case;
         end if;

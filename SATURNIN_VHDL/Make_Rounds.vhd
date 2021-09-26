@@ -17,7 +17,6 @@ entity Make_Rounds is
         Addr_rRd_1  : in std_logic_vector (4 downto 0);
         rRd_En_0    : in std_logic;
         rRd_En_1    : in std_logic;
-        Load        : in std_logic;
         clk         : in std_logic
     );
     end Make_Rounds;
@@ -205,7 +204,6 @@ variable i_0, i_1 : natural range 0 to 16 := 0;
 variable nAux_0, nAux_1 : natural range 0 to 31 := 0;
 begin
 if (clk'event AND clk = '1') then    
-    if Load = '1'then --El valor de Load se remplaza por el de n
         case presenteX0 is
             when s0 =>
                 R_x0 <= "11111110"& R(3 downto 0) & D(3 downto 0);
@@ -242,7 +240,6 @@ if (clk'event AND clk = '1') then
                 Wr_REn_0 <='1';
             when s4 => 
                 presenteX0 <= s5;
-                --Rn_0 <= Rn_0 + 1;
             when others => null;
         end case;
         case presenteX1 is
@@ -281,10 +278,8 @@ if (clk'event AND clk = '1') then
                 Wr_REn_1 <='1';
             when s4 => 
                 presenteX1 <= s5;
-                --Rn_1 <= Rn_1 + 1;
             when others => null;
         end case;
     end if;
-end if;
 end process;
 end Main;

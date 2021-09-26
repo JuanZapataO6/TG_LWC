@@ -108,8 +108,8 @@ begin
             Out_3 <= (others=>'1');
             Out_4 <= (others=>'1');
             Out_5 <= (others=>'1');
-            Out_6 <= (others=>'1');
-            Out_7 <= DIn;
+            Out_6 <= DIn;
+            Out_7 <= (others=>'1');
             Out_8 <= (others=>'1');
             Out_9 <= (others=>'1');
             Out_A <= (others=>'1');
