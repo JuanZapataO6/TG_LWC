@@ -440,15 +440,6 @@ signal En_SRSHI_Flag   : std_logic:='0';
 signal Data_Out_Sk   :std_logic_vector (15 DOWNTO 0);
 signal Test_Before_Data   : std_logic_vector (15 DOWNTO 0):=x"5555";
 signal Test_Before_Data_0   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_1   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_2   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_3   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_4   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_5   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_6   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_7   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_8   : std_logic_vector (15 DOWNTO 0):=x"3333";
-signal Test_Before_Data_9   : std_logic_vector (15 DOWNTO 0):=x"3333";
 signal Test_Before_Data_A   : std_logic_vector (15 DOWNTO 0):=x"3333";
 signal Test_Before_Data_B   : std_logic_vector (15 DOWNTO 0):=x"3333";
 signal Test_Before_Data_C   : std_logic_vector (15 DOWNTO 0):=x"3333";
@@ -985,7 +976,7 @@ begin
                         if En_XK =  '1' then 
                             En_SB_Flag <='0';
                             En_XK_Flag <='0';
-                            presente <= s20;
+                            presente <= s2;
                         else
                             presente <= s1;
                             En_XK_Flag <='1';
@@ -1197,7 +1188,7 @@ begin
                         if En_XK = '1' then
                             En_XK_Flag <= '0'; 
                             i_Control <= i_Control+1;
-                            presente <= s20;
+                            presente <= s10;
                         else
                             En_XK_Flag <= '0'; 
                             En_RC_Flag <='0';

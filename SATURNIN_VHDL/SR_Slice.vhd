@@ -93,19 +93,6 @@ if (CLK'event AND CLK = '1') then
                     if Establish <= "01011" then 
                         presente <= s5;
                         case Establish is
-                            --when "00000" => x4 := Data_Out_B(7 downto 0) & Data_Out_B(15 downto 8);-- x"4455";
-                            --when "00001" => x5 := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"5566";
-                            --when "00010" => x6 := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"6677";
-                            --when "00011" => x7 := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"7788";
-                            --when "00100" => x8 := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"8899";
-                            --when "00101" => x9 := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"99aa";
-                            --when "00110" => xa := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"aabb";
-                            --when "00111" => xb := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"bbcc";
-                            --when "01000" => xc := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"ccdd";
-                            --when "01001" => xd := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"ddee";
-                            --when "01010" => xe := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"eeff";
-                            --when "01011" => xf := Data_Out_B(7 downto 0)&Data_Out_B(15 downto 8);-- x"ff00";
-
                             when "00000" => x4 := Data_Out_B(14 downto 12)& Data_Out_B(15)&
                                     Data_Out_B(10 downto 8)& Data_Out_B(11)&
                                     Data_Out_B(6 downto 4)& Data_Out_B(7)&

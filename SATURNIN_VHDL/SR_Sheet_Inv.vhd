@@ -23,19 +23,7 @@ entity SR_Sheet_Inv is
 end SR_Sheet_Inv;
 architecture Main of SR_Sheet_Inv is 
 --
-signal x4: std_logic_vector (15 downto 0);
-signal x5: std_logic_vector (15 downto 0);
-signal x6: std_logic_vector (15 downto 0);
-signal x7: std_logic_vector (15 downto 0);
---
-signal x8: std_logic_vector (15 downto 0);
-signal x9: std_logic_vector (15 downto 0);
-signal xa: std_logic_vector (15 downto 0);
-signal xb: std_logic_vector (15 downto 0);
-signal xc: std_logic_vector (15 downto 0);
-signal xd: std_logic_vector (15 downto 0);
-signal xe: std_logic_vector (15 downto 0);
-signal xf: std_logic_vector (15 downto 0);
+
 type estado is (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12);
 signal presente:estado:=s0;
 begin
@@ -43,6 +31,19 @@ ASM: process (clk)
 variable Addr_Aux :std_logic_vector (4 DOWNTO 0):="00000";
 variable Flag_Aux :std_logic:='0';
 variable Establish:std_logic_vector (4 DOWNTO 0):="00000";
+Variable x4: std_logic_vector (15 downto 0);
+Variable x5: std_logic_vector (15 downto 0);
+Variable x6: std_logic_vector (15 downto 0);
+Variable x7: std_logic_vector (15 downto 0);
+--
+Variable x8: std_logic_vector (15 downto 0);
+Variable x9: std_logic_vector (15 downto 0);
+Variable xa: std_logic_vector (15 downto 0);
+Variable xb: std_logic_vector (15 downto 0);
+Variable xc: std_logic_vector (15 downto 0);
+Variable xd: std_logic_vector (15 downto 0);
+Variable xe: std_logic_vector (15 downto 0);
+Variable xf: std_logic_vector (15 downto 0);
 begin
 if (CLK'event AND CLK = '1') then 
      if En_In = '1' then  
@@ -92,18 +93,18 @@ if (CLK'event AND CLK = '1') then
                     if Establish <= "01011" then 
                         presente <= s5;
                         case Establish is
-                            when "00000" => x4 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
-                            when "00001" => x5 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
-                            when "00010" => x6 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
-                            when "00011" => x7 <= Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
-                            when "00100" => x8 <= Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
-                            when "00101" => x9 <= Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
-                            when "00110" => xa <= Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
-                            when "00111" => xb <= Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
-                            when "01000" => xc <= Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
-                            when "01001" => xd <= Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
-                            when "01010" => xe <= Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
-                            when "01011" => xf <= Data_Out_B(11 downto 0) & Data_Out_B(15 downto 12 );
+                            when "00000" => x4 := Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
+                            when "00001" => x5 := Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
+                            when "00010" => x6 := Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
+                            when "00011" => x7 := Data_Out_B(3 downto 0 )& Data_Out_B(15 downto  4);
+                            when "00100" => x8 := Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
+                            when "00101" => x9 := Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
+                            when "00110" => xa := Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
+                            when "00111" => xb := Data_Out_B(7 downto 0 )& Data_Out_B(15 downto 8 );
+                            when "01000" => xc := Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
+                            when "01001" => xd := Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
+                            when "01010" => xe := Data_Out_B(11 downto 0 )& Data_Out_B(15 downto 12 );
+                            when "01011" => xf := Data_Out_B(11 downto 0) & Data_Out_B(15 downto 12 );
                             when others => null;
                         end case;
                         if Addr_Aux(3 downto 0) = "1111" then  

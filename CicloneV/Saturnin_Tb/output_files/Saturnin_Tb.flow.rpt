@@ -1,5 +1,5 @@
 Flow report for Saturnin_Tb
-Sun Sep 26 00:53:32 2021
+Sun Sep 26 09:05:30 2021
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Sun Sep 26 00:53:01 2021       ;
+; Flow Status                     ; Successful - Sun Sep 26 09:05:04 2021       ;
 ; Quartus Prime Version           ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                   ; Saturnin_Tb                                 ;
 ; Top-level Entity Name           ; Saturnin_Tb                                 ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CSXFC6D6F31C6                              ;
 ; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 1,795 / 41,910 ( 4 % )                      ;
-; Total registers                 ; 3256                                        ;
+; Logic utilization (in ALMs)     ; 1,936 / 41,910 ( 5 % )                      ;
+; Total registers                 ; 3488                                        ;
 ; Total pins                      ; 75 / 499 ( 15 % )                           ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 9,248 / 5,662,720 ( < 1 % )                 ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/26/2021 00:48:05 ;
+; Start date & time ; 09/26/2021 09:01:10 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Saturnin_Tb         ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+------------------+
 ; Assignment Name                     ; Value                                                                                                                                                                                                                  ; Default Value ; Entity Name ; Section Id       ;
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+------------------+
-; COMPILER_SIGNATURE_ID               ; 228800458279778.163263528411164                                                                                                                                                                                        ; --            ; --          ; --               ;
+; COMPILER_SIGNATURE_ID               ; 228800458279778.163266487005600                                                                                                                                                                                        ; --            ; --          ; --               ;
 ; ENABLE_SIGNALTAP                    ; On                                                                                                                                                                                                                     ; --            ; --          ; --               ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                                                                                                                                                                                     ; --            ; --          ; --               ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                                                                                                                                                                      ; --            ; --          ; --               ;
@@ -126,11 +126,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:58     ; 1.0                     ; 4950 MB             ; 00:01:35                           ;
-; Fitter               ; 00:03:35     ; 1.1                     ; 6317 MB             ; 00:05:42                           ;
-; Assembler            ; 00:00:15     ; 1.0                     ; 4875 MB             ; 00:00:15                           ;
-; Timing Analyzer      ; 00:00:30     ; 1.4                     ; 5205 MB             ; 00:00:38                           ;
-; Total                ; 00:05:18     ; --                      ; --                  ; 00:08:10                           ;
+; Analysis & Synthesis ; 00:00:47     ; 1.0                     ; 4962 MB             ; 00:01:21                           ;
+; Fitter               ; 00:02:48     ; 1.1                     ; 6320 MB             ; 00:05:07                           ;
+; Assembler            ; 00:00:12     ; 1.0                     ; 4874 MB             ; 00:00:12                           ;
+; Timing Analyzer      ; 00:00:24     ; 1.4                     ; 5209 MB             ; 00:00:33                           ;
+; Total                ; 00:04:11     ; --                      ; --                  ; 00:07:13                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
